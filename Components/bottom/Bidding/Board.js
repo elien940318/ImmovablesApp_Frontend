@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Modal from "react-native-modal";
 import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import { Icon, Container, Header, Button } from 'native-base'; 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -8,7 +7,6 @@ import http from "../../../http-common";
 import Loading from "./BiddingAlgorithm/Loading"
 //import PurchaseHope from "./BiddingAlgorithm/PurchaseHope"
 import DetailPostModal from './DetailPostModal'
-import WriteModal from './WriteModal'
 import BoardHeader from './BiddingAlgorithm/BoardHeader'
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -72,6 +70,12 @@ export default class Board extends Component {
     http.get(`/board/getPost2`)
     .then(response => {
       this.state.DBdata2 = response.data
+      this.setState({loading:true}),
+      setTimeout(()=>{
+        this.setState({
+          loading:false
+        })
+      }, 3000)
       this.renderSection()
     })
     .catch(error => {
@@ -127,10 +131,7 @@ export default class Board extends Component {
       )
     }else{
       return (        
-        <Container style={styles.container}>
-          <Modal isVisible={this.state.isModalVisible} animationIn='bounceInDown' animationInTiming={1000} animationOut='slideOutDown' animationOutTiming={1000}>
-            <WriteModal toggle={() => this.toggle()}/>
-          </Modal>          
+        <Container style={styles.container}>         
           <BoardHeader/>     
           <View style={styles.category}>
             <TouchableOpacity style={[ this.state.activeIndex === 0 ? {height:40,borderBottomWidth:2} :{height:40}], { padding: 15, backgroundColor:'string', flexDirection: 'row'}}
