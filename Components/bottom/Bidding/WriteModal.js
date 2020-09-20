@@ -388,14 +388,14 @@ ThirdSection=()=>{
                   <View style={styles.iteminformation}>
                     {/* {
                       selectImg != null ?
-                      (
+                      ( 한번 해볼래?? 네엥
                         <Image
                         style = {styles.image}
                         source={{uri:(selectImg.localUri !=null) ? selectImg.localUri :'' }}/>
                       ) : <Icon name='ios-camera' style={{margin:10, fontSize: 100}} />
                       
                     } */}
-                    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                    {image && <Image source={{ uri: image }} style={{ width: 100, height: 100 }} />}
                     <View>
                       <Text>매물이름</Text>
                       <Text>가격</Text>

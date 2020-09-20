@@ -5,8 +5,11 @@ import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, G, Grid } f
 import { scrollInterpolator, animatedStyles } from '../../Util/HomeUtil/animation'
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
+// const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+// const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
+
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH *0.9);
+const ITEM_HEIGHT = Math.round(ITEM_WIDTH/0.9*0.7 * 3 / 4);
 
 const DATA = [];
 for (let i = 0; i < 10; i++) {
@@ -26,19 +29,22 @@ export default class ColumnCardComponent extends Component {
       _renderItem({ item }) {
         return (
           <View style={styles.itemContainer}>
+            <View style={{margin:10}}>
             <Text style={styles.itemLabel}>{item.title}</Text>
-            <Text>{item.author}</Text>
             {
                 item.content.replace(/\n/g,' ').slice(0, 15).length>=11 ?
-                    <Text> 
+                    <Text style={{color:"black"}}> 
                     {item.content.replace(/\n/g,' ').slice(0, 15) }...
                     </Text> 
                 : <Text> 
                     {item.content.replace(/\n/g,' ').slice(0, 11) }
                  </Text>
+                 
             }
             <Text></Text>
-            <Text>{item.price}</Text>
+            <Text style={{fontSize:12}}>[{item.author}]</Text>
+            <Text style={{color:'#FC510C'}}>월세 {item.price/10000}(만원)</Text>
+            </View>
           </View>
         );
       }
@@ -71,13 +77,13 @@ export default class ColumnCardComponent extends Component {
     itemContainer: {
       width: ITEM_WIDTH,
       height: ITEM_HEIGHT,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'white'
+      alignItems: 'flex-start',
+      justifyContent: 'flex-end',
+      backgroundColor:'whitesmoke'
     },
     itemLabel: {
       color: 'black',
-      fontSize: 24
+      fontSize: 20,
     },
     counter: {
       marginTop: 25,
