@@ -30,7 +30,7 @@ export default class ColumnCardComponent extends Component {
         return (
           <View style={styles.itemContainer}>
             <ImageBackground
-              style={{ width: "100%", height: "100%", alignItems: 'flex-start',justifyContent: 'flex-end', }}
+              style={{ width: "100%", height: "100%", alignItems: 'flex-start',justifyContent: 'flex-end'}}
               source={require("../../../assets/testhouse.png")}  //이미지경로
               resizeMode="cover" 
               >
@@ -83,9 +83,7 @@ export default class ColumnCardComponent extends Component {
     itemContainer: {
       width: ITEM_WIDTH,
       height: ITEM_HEIGHT,
-  
-      backgroundColor:'whitesmoke'
-    },
+      },
     itemLabel: {
       color: 'black',
       fontSize: 20,

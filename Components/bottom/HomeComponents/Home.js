@@ -75,7 +75,7 @@ export default class home extends Component {
                 <ScrollView style={{flex:1, padding:'3%', backgroundColor:'white'}} >   
       
                   <View>               
-                  <View><Text style={{margin:5,fontSize:12}}>새로운 부동산 NOW!</Text></View>
+                  <View style={{flexDirection:'row', margin:5}}><Text style={{fontSize:12}}>새로운 부동산 </Text><Text style={{fontSize:12, color:"#FC510C"}}>NOW!</Text></View>
                   
                     <ColumnCardComponent data={ this.state.jsonD } />
                   </View>   
@@ -83,13 +83,13 @@ export default class home extends Component {
                   <View style={styles.br}/>               
                 
                   <View>     
-                  <View><Text style={{fontSize:15, margin : 5}}>추천 새소식</Text></View>              
+                  <View><Text style={{fontSize:12, margin : 5}}>추천 새소식</Text></View>              
                     <Carousel2 data={ this.state.jsonD }/>         
                   </View>                 
 
                   <View style={styles.br}/>
 
-                  <View><Text style={{fontSize:15, margin:5}}>추천 제휴사</Text></View>
+                  <View><Text style={{fontSize:12, margin:5}}>추천 제휴사</Text></View>
                   <View>                                              
                     {                                      
                       this.state.jsonD.map((feed, index) => (

@@ -5,7 +5,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack'
 import { Icon } from 'native-base';
 import CustomButton from '../Util/LoginUtil/CustomButton';
+import GoogleButton from '../Util/LoginUtil/GoogleLogin';
 import http from '../../http-common'
+import GoogleButton2 from '../Util/LoginUtil/GoogleLogin2';
 import Main from './../MainScreen'
 import Signup from '../Signup/Signup'
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -67,12 +69,10 @@ export default class Login extends Component {
           </ImageBackground> */}
           {/* <View style={styles.header}></View> */}
           <View style={styles.title}>
-          <Image style={{height:'50%',width:'50%', resizeMode:'contain'}} source={require('./../../assets/house1.png')}/>
+          <Image style={{height:'80%',width:'80%', resizeMode:'contain'}} source={require('./../../assets/logo1.png')}/>
         
           </View>
-          {/* <View style={styles.content}></View> */}
-            <View style={styles.searchSection}>
-              {/* <Text style={{color:"rosybrown"}}>아이디</Text> */}
+            {/* <View style={styles.searchSection}>
                 <Image style={{height:15,width:'20%', resizeMode:'contain'}} source={require('./../../assets/person.png')}/>
               <TextInput  
                     style={{width:'80%',height: 40, fontSize: 20, margin:-5}}  
@@ -85,7 +85,6 @@ export default class Login extends Component {
             </View>
             <View style={{height:20}}/>
             <View style={styles.searchSection}>
-              {/* <Text style={{color:"rosybrown"}}>비밀번호</Text> */}
               <Image style={{height:20,width:'20%', resizeMode:'contain'}} source={require('./../../assets/person.png')}/>
               <TextInput  
                   style={{width:'80%',height: 40, fontSize: 20, margin:-5}}  
@@ -95,8 +94,23 @@ export default class Login extends Component {
                   value={this.state.pw}
               />
               <View/>
-            </View>
-          {/* <View style={styles.footer}></View> */}
+            </View> */}
+          <View style={{alignItems:"center",height:50, width:'100%'}}>
+            <GoogleButton
+                buttonColor={'#FF765B'}
+                title={'  SIGN IN WITH GOOGLE'}
+                titleColor={'white'}
+                
+                />
+          </View>
+          {/* <View style={{alignItems:"center",height:150, width:'100%'}}>
+            <GoogleButton2
+                buttonColor={'#FF765B'}
+                title={'  SIGN IN WITH GOOGLE'}
+                titleColor={'white'}
+                
+                />
+          </View> */}
           <View style={{height :30}}></View>
           <View style={{height :50, flexDirection:'row'}}>
             <CustomButton
@@ -126,7 +140,7 @@ export default class Login extends Component {
       flex: 1,
       backgroundColor: 'white',
       alignItems:'center',
-      backgroundColor:'#d7e1e9'
+      backgroundColor:'#FFFBE1'
     },
     header: {
       width:'100%',
