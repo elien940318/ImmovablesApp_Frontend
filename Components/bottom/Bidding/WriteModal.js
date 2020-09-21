@@ -10,27 +10,6 @@ const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
 const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
-// const [selectImg, setSelectedImg] = React.useState(null)
-// let openImage = async () =>{
-//   let permission = await ImagePicker.requestCameraRollPermissionsAsync();
-
-//   if(permission.granted == false){
-//     return;
-//   }
-//   let picker = await ImagePicker.launchImageLibraryAsync()
-
-//   if(picker.cancelled === true){
-//     return;
-
-//   }
-//   setSelectedImg({localUri:picker.uri})
-//   console.log(picker)
-// }
-
-//   console.log(picker)
-//   console.log('ㅗㅑㅗㅑ')
-  
-// }
 
 export default class WriteModal extends Component {
 
@@ -58,7 +37,7 @@ export default class WriteModal extends Component {
     if (Platform.OS !== 'web') {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+        alert('카메라 권한이 없습니다.');
       }
     }
   };
@@ -74,9 +53,9 @@ export default class WriteModal extends Component {
         this.setState({ image: result.uri });
       }
 
-      console.log(result);
+      //console.log(result);
     } catch (E) {
-      console.log(E);
+      //console.log(E);
     }
   }; 
 
@@ -125,7 +104,7 @@ DetailSection=()=>{
     return(
       <TouchableOpacity style={styles.button} onPress={()=>this.setModalShown(true)}>
         <Text style={{margin:5}}>세부정보</Text>
-        <Text style={{margin:5}}>></Text>
+        <Text style={{margin:5}}> &gt; </Text>
       </TouchableOpacity>
     )
     }  
@@ -133,7 +112,7 @@ DetailSection=()=>{
     return(
       <TouchableOpacity style={styles.button} onPress={()=>this.SetConModalShown(true)}>
         <Text style={{margin:5}}>편의시설</Text>
-        <Text style={{margin:5}}>></Text>
+        <Text style={{margin:5}}> &lt; </Text>
       </TouchableOpacity>
     )  
   }
