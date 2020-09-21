@@ -15,7 +15,7 @@ export default class home extends Component {
 
     static navigationOptions = {
         tabBarIcon: ({tintColor}) => (
-            <Icon name='ios-home' style={{color: tintColor}}/>
+            <Icon name='ios-home' style={{ color: tintColor}}/>
         )
     }   
 
@@ -59,9 +59,7 @@ export default class home extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>               
-              
-                <Header style={styles.header}><Text>어디살래?</Text></Header>
-                
+                              
                 <View style={{height:10}}></View>
                
                 <View style={styles.title}>
@@ -74,23 +72,24 @@ export default class home extends Component {
                     <Icon name='ios-search'/>
                     <Text>검색</Text>
                 </View>        
-                <ScrollView style={{flex:1, padding:'3%'}} >   
+                <ScrollView style={{flex:1, padding:'3%', backgroundColor:'white'}} >   
       
                   <View>               
-                  <View><Text style={{fontSize:24}}>'어디살래?'가 추천하는 어디살래!?</Text></View>
+                  <View><Text style={{margin:5,fontSize:12}}>새로운 부동산 NOW!</Text></View>
+                  
                     <ColumnCardComponent data={ this.state.jsonD } />
                   </View>   
 
                   <View style={styles.br}/>               
                 
                   <View>     
-                  <View><Text style={{fontSize:24}}>어디살래? 새소식</Text></View>              
+                  <View><Text style={{fontSize:15, margin : 5}}>추천 새소식</Text></View>              
                     <Carousel2 data={ this.state.jsonD }/>         
                   </View>                 
 
                   <View style={styles.br}/>
 
-                  <View><Text style={{fontSize:24}}>어디살래? 와 함께하는 제휴사</Text></View>
+                  <View><Text style={{fontSize:15, margin:5}}>추천 제휴사</Text></View>
                   <View>                                              
                     {                                      
                       this.state.jsonD.map((feed, index) => (

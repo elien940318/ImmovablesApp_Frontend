@@ -9,8 +9,8 @@ import Carousel from 'react-native-snap-carousel';
 
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
+const ITEM_HEIGHT = Math.round(ITEM_WIDTH /0.9*0.7* 3 / 4);
 
 export default class Carousel2 extends React.Component {
 
@@ -26,7 +26,7 @@ export default class Carousel2 extends React.Component {
     _renderItem({item,index}){
         return (
           <View style={{
-              backgroundColor:'floralwhite',
+              backgroundColor:'whitesmoke',
               borderRadius: 5,
               height: ITEM_HEIGHT,
               padding: 50,
@@ -48,7 +48,7 @@ export default class Carousel2 extends React.Component {
                   ref={ref => this.carousel = ref}
                   data={this.state.carouselItems}
                   sliderWidth={SLIDER_WIDTH}
-                  itemWidth={300}
+                  itemWidth={ITEM_WIDTH}
                   renderItem={this._renderItem}
                   onSnapToItem = { index => this.setState({activeIndex:index}) } />
             </View>

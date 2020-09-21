@@ -30,13 +30,16 @@ const AppTabNavigator = createMaterialTopTabNavigator({
         }
       })*/
       backgroundColor:'white',
+      height:50
+      
     },
-    iconStyle: {height:30},
+    iconStyle: {height:30, alignItems:'center', justifyContent:'center', margin:-6} ,
     activeTintColor:'#000',
     inactiveTintColor:'#d1cece',
-    upperCaseLabel: false,
+    //upperCaseLabel: false,
     showLabel: true,
     showIcon:true,
+    labelStyle:{fontSize:10}
   }
 });
 
