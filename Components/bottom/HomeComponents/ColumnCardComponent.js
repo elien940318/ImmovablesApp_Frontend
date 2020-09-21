@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Carousel from 'react-native-snap-carousel';
-import { View, Image, Text, Dimensions, StyleSheet } from 'react-native';
+import { View, Image, Text, Dimensions, StyleSheet,ImageBackground} from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, G, Grid } from 'native-base';
 import { scrollInterpolator, animatedStyles } from '../../Util/HomeUtil/animation'
 
@@ -29,6 +29,11 @@ export default class ColumnCardComponent extends Component {
       _renderItem({ item }) {
         return (
           <View style={styles.itemContainer}>
+            <ImageBackground
+              style={{ width: "100%", height: "100%", alignItems: 'flex-start',justifyContent: 'flex-end', }}
+              source={require("../../../assets/testhouse.png")}  //이미지경로
+              resizeMode="cover" 
+              >
             <View style={{margin:10}}>
             <Text style={styles.itemLabel}>{item.title}</Text>
             {
@@ -45,6 +50,7 @@ export default class ColumnCardComponent extends Component {
             <Text style={{fontSize:12}}>[{item.author}]</Text>
             <Text style={{color:'#FC510C'}}>월세 {item.price/10000}(만원)</Text>
             </View>
+            </ImageBackground>
           </View>
         );
       }
@@ -77,8 +83,7 @@ export default class ColumnCardComponent extends Component {
     itemContainer: {
       width: ITEM_WIDTH,
       height: ITEM_HEIGHT,
-      alignItems: 'flex-start',
-      justifyContent: 'flex-end',
+  
       backgroundColor:'whitesmoke'
     },
     itemLabel: {
