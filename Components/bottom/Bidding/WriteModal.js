@@ -27,7 +27,7 @@ export default class WriteModal extends Component {
         secondIndex:1,
         thirdIndex:1,
         sellbuy:null,
-        image: null
+        imageArray: []
       };  
   }
   componentDidMount() {
@@ -50,7 +50,10 @@ export default class WriteModal extends Component {
         quality: 1,
       });
       if (!result.cancelled) {
-        this.setState({ image: result.uri });
+        
+        let lst = this.state.imageArray
+        lst.push(result.uri)
+        this.setState({imageArray:lst})
       }
 
       //console.log(result);
@@ -345,9 +348,11 @@ ThirdSection=()=>{
   updateText = () => {
     this.setState({myText: 'My Changed Text'})
  }
-
+  updateIMG = (e) => {
+    return<Image source={{ uri: e }} style={{ width: 100, height: 100 }} />
+  }
   render() {
-      let { image } = this.state;
+      let { imageArray } = this.state
       return (
               <Container style={styles.container}>
               <ScrollView>
@@ -365,16 +370,6 @@ ThirdSection=()=>{
                 {this.Conmodal()}
                 <View style={{alignItems:'center'}}>
                   <View style={styles.iteminformation}>
-                    {/* {
-                      selectImg != null ?
-                      ( 한번 해볼래?? 네엥
-                        <Image
-                        style = {styles.image}
-                        source={{uri:(selectImg.localUri !=null) ? selectImg.localUri :'' }}/>
-                      ) : <Icon name='ios-camera' style={{margin:10, fontSize: 100}} />
-                      
-                    } */}
-                    {image && <Image source={{ uri: image }} style={{ width: 100, height: 100 }} />}
                     <View>
                       <Text>매물이름</Text>
                       <Text>가격</Text>
@@ -382,7 +377,7 @@ ThirdSection=()=>{
                   </View>
                   <TouchableOpacity style={styles.button} onPress={()=>this.setModalVisible(true)}>
                     <Text style={{margin:5}}>{this.state.category}</Text>
-                    <Text style={{margin:5}}>></Text>
+                    <Text style={{margin:5}}> &lt; </Text>
                   </TouchableOpacity>
                   {this.DetailSection()}
                   <TextInput
@@ -394,12 +389,20 @@ ThirdSection=()=>{
                       style={styles.mcontent} placeholder="게시글을 작성해주세요." >
                       
                     </TextInput>
-                      <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
-                        <View style={{flexDirection:'row'}}>
-                          <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
-                          <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
-                        </View>
-                      </TouchableOpacity>
+                    <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
+                      <View style={{flexDirection:'row'}}>
+                        <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
+                        <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <View>
+                    {
+                      imageArray.length > 0?
+                      imageArray.map(e=>
+                      this.updateIMG(e))
+                      :<Text>image</Text>
+                    }
+                    </View>
                   </View> 
                   <View style={{flexDirection:'row'}}>
                     <TouchableOpacity style={styles.bottombutton} onPress={this.props.toggle}> 
