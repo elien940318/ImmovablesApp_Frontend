@@ -3,7 +3,7 @@ import Modal from "react-native-modal";
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import DetailPostModal from './DetailPostModal'
+import DetailPostModal from './Write/DetailPostModal'
 
 export default class RawCardComponent extends Component {
 

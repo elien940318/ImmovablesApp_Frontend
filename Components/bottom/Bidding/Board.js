@@ -9,6 +9,7 @@ import * as DAO from './BiddingAlgorithm/BiddingGetDB'
 // import DetailPostModal from './DetailPostModal'
 import BoardHeader from './BiddingAlgorithm/BoardHeader'
 import styles from '../../css/bottom/Bidding/BoardCSS.js'
+
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
@@ -63,7 +64,7 @@ export default class Board extends Component {
       this.setState({DBdata:response.data})
     })
     .catch(error => {
-      console.log(error);
+      //console.log(error); 
     })
   }
 
@@ -73,7 +74,7 @@ export default class Board extends Component {
       this.setState({DBdata2: response.data})
     })
     .catch(error => {
-      console.log(error);
+      //console.log(error);
     })
   }
 
