@@ -6,6 +6,7 @@ import SettingInfo from './Setting/Setting'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import ImgComponet from './WriteModalImage';
+import styles from '../../css/bottom/Bidding/WriteModal.js' 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
@@ -481,44 +482,3 @@ const styles = StyleSheet.create({
       borderBottomWidth:1,
       borderColor:'#b7b7b7',
   },
-
-    mcontent:{
-      height:ITEM_HEIGHT,
-      width:'95%',
-      justifyContent:'center',
-      alignItems: 'center',
-      borderWidth:1,
-      borderColor:'#a7a7a7',      
-    },
-    bottomimage:{
-      width:'95%',
-      flexDirection:'row',
-      justifyContent:'flex-start',
-      alignItems: 'center',
-      borderWidth:1,
-      borderColor:'#a7a7a7',      
-    },
-    bottombutton:{
-      width:'46%',
-      height: ITEM_HEIGHT/7,
-      margin:5,
-      flexDirection:'row',
-      justifyContent:'center',
-      alignItems: 'center',
-      borderWidth:1,
-      borderColor:'#a7a7a7',      
-    },
-    bottombutton1:{
-      width:'46%',
-      height: ITEM_HEIGHT/7,
-      margin:5,
-      flexDirection:'row',
-      justifyContent:'center',
-      alignItems: 'center',
-      borderWidth:1,
-      borderColor:'#a7a7a7',   
-      backgroundColor:'#004aff'   
-    },
-    image: { width: 300, height: 300, backgroundColor: 'gray' },
-    imageZone:{flexDirection:'row'}
-});
