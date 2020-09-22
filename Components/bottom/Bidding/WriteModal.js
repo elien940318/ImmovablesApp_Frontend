@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {Image,touchablehilight,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
@@ -112,7 +111,7 @@ DetailSection=()=>{
     return(
       <TouchableOpacity style={styles.button} onPress={()=>this.setModalShown(true)}>
         <Text style={{margin:5}}>세부정보</Text>
-        <Text style={{margin:5}}> &gt; </Text>
+        <Text style={{margin:5}}> &lt; </Text>
       </TouchableOpacity>
     )
     }  
@@ -120,7 +119,7 @@ DetailSection=()=>{
     return(
       <TouchableOpacity style={styles.button} onPress={()=>this.SetConModalShown(true)}>
         <Text style={{margin:5}}>편의시설</Text>
-        <Text style={{margin:5}}> &lt; </Text>
+        <Text style={{margin:5}}> &gt; </Text>
       </TouchableOpacity>
     )  
   }
@@ -380,7 +379,7 @@ ThirdSection=()=>{
                   </View>
                   <TouchableOpacity style={styles.button} onPress={()=>this.setModalVisible(true)}>
                     <Text style={{margin:5}}>{this.state.category}</Text>
-                    <Text style={{margin:5}}> &lt; </Text>
+                    <Text style={{margin:5}}> &gt; </Text>
                   </TouchableOpacity>
                   {this.DetailSection()}
                   <TextInput
