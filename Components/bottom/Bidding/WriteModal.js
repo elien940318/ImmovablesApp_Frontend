@@ -28,7 +28,7 @@ export default class WriteModal extends Component {
         secondIndex:1,
         thirdIndex:1,
         sellbuy:null,
-        imageArray: []
+        imageArray: [],
       };  
   }
   componentDidMount() {
@@ -42,6 +42,10 @@ export default class WriteModal extends Component {
       }
     }
   };
+  noUpdate = () => {
+    alert('5장까지 업로드 가능합니다!')
+  }
+
   _pickImage = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -388,19 +392,30 @@ ThirdSection=()=>{
                       style={styles.mcontent} placeholder="게시글을 작성해주세요." >
                       
                     </TextInput>
+                    {imageArray.length < 5 ?
                     <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
                       <View style={{flexDirection:'row'}}>
                         <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
                         <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
                       </View>
                     </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.bottomimage} onPress={this.noUpdate} >
+                      <View style={{flexDirection:'row'}}>
+                        <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
+                        <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
+                      </View>
+                    </TouchableOpacity>
+                    }
+                      
+                    
                     <ScrollView horizontal={true}>
                     {
                       imageArray.length > 0?
                       imageArray.map((e, index)=>(
                         <ImgComponet data={e} key={index}/>
                       ))
-                      :<Text>image</Text>
+                      :<Text>이미지를 업로드 하세요!</Text>
                     }
                     </ScrollView>
                   </View> 
