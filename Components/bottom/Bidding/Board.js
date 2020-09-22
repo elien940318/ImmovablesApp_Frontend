@@ -4,8 +4,9 @@ import { Icon, Container, Header, Button } from 'native-base';
 import RowCardComponent  from './RowCardComponent'; 
 import http from "../../../http-common";
 import Loading from "./BiddingAlgorithm/Loading"
+import * as DAO from './BiddingAlgorithm/BiddingGetDB'
 //import PurchaseHope from "./BiddingAlgorithm/PurchaseHope"
-import DetailPostModal from './DetailPostModal'
+// import DetailPostModal from './DetailPostModal'
 import BoardHeader from './BiddingAlgorithm/BoardHeader'
 import styles from '../../css/bottom/Bidding/Board.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;

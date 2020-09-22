@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Image,touchablehilight,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
+import {Image,touchablehilight,TouchableWithoutFeedback,TouchableOpacity,TextInput, 
+  StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
 import Setting from './Setting/Setting'
 import SettingInfo from './Setting/Setting'
@@ -373,12 +374,7 @@ ThirdSection=()=>{
                 {this.Settingmodal()}
                 {this.Conmodal()}
                 <View style={{alignItems:'center'}}>
-                  <View style={styles.iteminformation}>
-                    <View>
-                      <Text>매물이름</Text>
-                      <Text>가격</Text>
-                    </View>
-                  </View>
+                  
                   <TouchableOpacity style={styles.button} onPress={()=>this.setModalVisible(true)}>
                     <Text style={{margin:5}}>{this.state.category}</Text>
                     <Text style={{margin:5}}> &gt; </Text>
