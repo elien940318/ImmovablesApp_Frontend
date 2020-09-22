@@ -51,7 +51,7 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
                             <Text>{this.state.getValue}</Text>
                             <Text>e-mail</Text>
                             <Button style ={styles.chimpormation} onPress={()=>this.ahekf()}>
-                                <Text style ={{color : '#FF5C3B'}}>정보수정</Text>
+                                <Text style ={{color : 'blue'}}>정보수정</Text>
                             </Button>
                         </View>
                         <View style={{flex:1,flexDirection: 'row'}}>
