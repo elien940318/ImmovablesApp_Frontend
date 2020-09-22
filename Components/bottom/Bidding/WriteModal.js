@@ -6,7 +6,7 @@ import Setting from './Setting/Setting'
 import SettingInfo from './Setting/Setting'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import styles from '../../css/bottom/Bidding/WriteModal.js'
+import ImgComponet from './WriteModalImage';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
@@ -28,7 +28,7 @@ export default class WriteModal extends Component {
         secondIndex:1,
         thirdIndex:1,
         sellbuy:null,
-        imageArray: []
+        imageArray: [],
       };  
   }
   componentDidMount() {
@@ -42,6 +42,10 @@ export default class WriteModal extends Component {
       }
     }
   };
+  noUpdate = () => {
+    alert('5장까지 업로드 가능합니다!')
+  }
+
   _pickImage = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -349,9 +353,7 @@ ThirdSection=()=>{
   updateText = () => {
     this.setState({myText: 'My Changed Text'})
  }
-  updateIMG = (e) => {
-    return<Image source={{ uri: e }} style={{ width: 100, height: 100 }} />
-  }
+  
   render() {
       let { imageArray } = this.state
       return (
@@ -390,20 +392,32 @@ ThirdSection=()=>{
                       style={styles.mcontent} placeholder="게시글을 작성해주세요." >
                       
                     </TextInput>
+                    {imageArray.length < 5 ?
                     <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
                       <View style={{flexDirection:'row'}}>
                         <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
                         <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
                       </View>
                     </TouchableOpacity>
-                    <View>
+                    :
+                    <TouchableOpacity style={styles.bottomimage} onPress={this.noUpdate} >
+                      <View style={{flexDirection:'row'}}>
+                        <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
+                        <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
+                      </View>
+                    </TouchableOpacity>
+                    }
+                      
+                    
+                    <ScrollView horizontal={true}>
                     {
                       imageArray.length > 0?
-                      imageArray.map(e=>
-                      this.updateIMG(e))
-                      :<Text>image</Text>
+                      imageArray.map((e, index)=>(
+                        <ImgComponet data={e} key={index}/>
+                      ))
+                      :<Text>이미지를 업로드 하세요!</Text>
                     }
-                    </View>
+                    </ScrollView>
                   </View> 
                   <View style={{flexDirection:'row'}}>
                     <TouchableOpacity style={styles.bottombutton} onPress={this.props.toggle}> 
@@ -425,3 +439,87 @@ const Buttton = ({ onPress, children }) => (
     <Text style={styles.text}>{children}</Text>
   </TouchableOpacity>
 );
+const styles = StyleSheet.create({
+    container: {
+        margin:-20,
+        backgroundColor: 'whitesmoke'
+      },
+      modalheader:{
+        backgroundColor: 'whitesmoke',
+        alignItems:'center',
+        justifyContent: 'space-between',
+
+      },
+      button1:{
+        width:'95%',
+        justifyContent:'space-around',
+        alignItems: 'center',
+        borderWidth:1,
+        borderColor:'#a7a7a7',
+        backgroundColor:'whitesmoke'    
+    },
+
+    button:{
+        margin:5,
+        width:'95%',
+        height:40,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems: 'center',
+        borderWidth:1,
+        borderColor:'#a7a7a7',
+        borderRadius:5,
+        backgroundColor:'whitesmoke'
+        
+    },
+    iteminformation:{
+      flex:1,
+      height:100,
+      width:'100%',
+      flexDirection:'row',
+      justifyContent:'flex-start',
+      alignItems: 'center',
+      borderBottomWidth:1,
+      borderColor:'#b7b7b7',
+  },
+
+    mcontent:{
+      height:ITEM_HEIGHT,
+      width:'95%',
+      justifyContent:'center',
+      alignItems: 'center',
+      borderWidth:1,
+      borderColor:'#a7a7a7',      
+    },
+    bottomimage:{
+      width:'95%',
+      flexDirection:'row',
+      justifyContent:'flex-start',
+      alignItems: 'center',
+      borderWidth:1,
+      borderColor:'#a7a7a7',      
+    },
+    bottombutton:{
+      width:'46%',
+      height: ITEM_HEIGHT/7,
+      margin:5,
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems: 'center',
+      borderWidth:1,
+      borderColor:'#a7a7a7',      
+    },
+    bottombutton1:{
+      width:'46%',
+      height: ITEM_HEIGHT/7,
+      margin:5,
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems: 'center',
+      borderWidth:1,
+      borderColor:'#a7a7a7',   
+      backgroundColor:'#004aff'   
+    },
+    image: { width: 300, height: 300, backgroundColor: 'gray' },
+    imageZone:{flexDirection:'row'}
+});
