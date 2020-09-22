@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Modal, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
+import Txt from './ConvenienceChd.js'
 
 class ConvenienceModal extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class ConvenienceModal extends Component {
                 </View>
                 {
                   this.state.lst.length > 0?
-                  this.state.lst.map(e => (<Text>{e}</Text>)):
+                  this.state.lst.map((e, index) => <Txt data={e} key={index}/>):
                   null
                 }
               </View>

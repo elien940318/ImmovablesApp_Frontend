@@ -28,7 +28,7 @@ export default class WriteModal extends Component {
         category:'카테고리',
         sellbuy:null,
         imageArray: [],
-        lst:[],
+        lst:[], // 편의시설 배열
       };  
   }
 
@@ -75,13 +75,17 @@ export default class WriteModal extends Component {
     }
   }
   convModalToggle(){
+    
     this.setState({convModalShown: !this.state.convModalShown})
+    if(!this.state.convModalShown)
+      this.state.lst =[]
+    
   }
   convModal=()=>{  
     return(
       <Modal animationType="fade" transparent={true} visible={this.state.convModalShown} 
       onRequestClose={() => {this.convModalToggle();}} backdrop={true}>
-        <ConvModal toggle={()=>this.convModalToggle()} conv={this.selectionConv}/>
+        <ConvModal toggle={()=>this.convModalToggle()} conv={this.selectionConv} lst={this.state.lst}/>
       </Modal>
     )
   }
