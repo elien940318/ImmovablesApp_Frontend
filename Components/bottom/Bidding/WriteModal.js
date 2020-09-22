@@ -6,6 +6,7 @@ import Setting from './Setting/Setting'
 import SettingInfo from './Setting/Setting'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import ImgComponet from './WriteModalImage';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
@@ -348,9 +349,7 @@ ThirdSection=()=>{
   updateText = () => {
     this.setState({myText: 'My Changed Text'})
  }
-  updateIMG = (e) => {
-    return<Image source={{ uri: e }} style={{ width: 100, height: 100 }} />
-  }
+  
   render() {
       let { imageArray } = this.state
       return (
@@ -395,14 +394,15 @@ ThirdSection=()=>{
                         <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
                       </View>
                     </TouchableOpacity>
-                    <View>
+                    <ScrollView horizontal={true}>
                     {
                       imageArray.length > 0?
-                      imageArray.map(e=>
-                      this.updateIMG(e))
+                      imageArray.map((e, index)=>(
+                        <ImgComponet data={e} key={index}/>
+                      ))
                       :<Text>image</Text>
                     }
-                    </View>
+                    </ScrollView>
                   </View> 
                   <View style={{flexDirection:'row'}}>
                     <TouchableOpacity style={styles.bottombutton} onPress={this.props.toggle}> 
@@ -506,6 +506,5 @@ const styles = StyleSheet.create({
       backgroundColor:'#004aff'   
     },
     image: { width: 300, height: 300, backgroundColor: 'gray' },
-
-
+    imageZone:{flexDirection:'row'}
 });
