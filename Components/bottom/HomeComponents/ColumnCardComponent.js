@@ -3,7 +3,7 @@ import Carousel from 'react-native-snap-carousel';
 import { View, Image, Text, Dimensions, StyleSheet,ImageBackground} from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon, G, Grid } from 'native-base';
 import { scrollInterpolator, animatedStyles } from '../../Util/HomeUtil/animation'
-import styles from'../../css/bottom/HomComponents/ColumnCardComponent2.js';
+import styles from'../../css/bottom/HomComponents/ColumnCardComponent2CSS.js';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 // const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 // const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);

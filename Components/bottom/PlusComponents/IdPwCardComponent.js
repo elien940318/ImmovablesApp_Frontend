@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Carousel from 'react-native-snap-carousel';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
-import styles from '../../css/bottom/PlusComponents/IdPwCardComponent.js'
+import styles from '../../css/bottom/PlusComponents/IdPwCardComponentCSS.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);

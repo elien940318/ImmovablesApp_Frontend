@@ -4,7 +4,7 @@ import { Icon, Container, Header } from 'native-base';
 import MapView,{Marker, AnimatedRegion, Animated} from 'react-native-maps';
 import http from '../../http-common'
 import { getAppLoadingLifecycleEmitter } from 'expo/build/launch/AppLoading';
-import styles from '../css/bottom/Map.js'
+import styles from '../css/bottom/MapCSS.js'
 export default class mymap extends Component {
 
   constructor(props){

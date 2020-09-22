@@ -4,7 +4,7 @@ import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
 import RowCardComponent  from '../../../../CityRowCardComponent'; 
 import http from "../../../../../../../http-common"
-import styles from '../../../../../../css/bottom/Bidding/Setting/CityFind/DoFind.js'
+import styles from '../../../../../../css/bottom/Bidding/Setting/CityFind/DoFindCSS.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );

@@ -11,7 +11,7 @@ import GoogleButton2 from '../Util/LoginUtil/GoogleLogin2';
 import Main from './../MainScreen'
 import Signup from '../Signup/Signup'
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import styles from "../css/Login.js";
+import styles from "../css/LoginCSS.js";
 export default class Login extends Component {
     // navigationOptions 코드 추가
     static navigationOptions = {

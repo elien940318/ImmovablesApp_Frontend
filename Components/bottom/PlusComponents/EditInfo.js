@@ -3,7 +3,7 @@ import {AsyncStorage,TextInput,View, Text } from 'react-native';
 import {Container} from 'native-base';
 import Modal from "react-native-modal";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import styles from '../../css/bottom/PlusComponents/EditInfo.js';
+import styles from '../../css/bottom/PlusComponents/EditInfoCSS.js';
 export default class EditInfo extends Component {
   constructor(props) {
     super(props);
