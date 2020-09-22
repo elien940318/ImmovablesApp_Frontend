@@ -1,6 +1,6 @@
 import http from "../../../../http-common";
 
-export default {
+export default class getDB {
 
     get1(){
         http.get(`/board/getPost`)
