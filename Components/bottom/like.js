@@ -11,7 +11,7 @@ import RecentT from '../LikeTab/RecentT';
 import ContectedO from '../LikeTab/ContectedO';
 import SubsT from '../LikeTab/SubsT';
 import SubsR from '../LikeTab/SubsR';
-import styles from '../css/bottom/Like.js'
+import styles from '../css/bottom/LikeCSS.js'
 /*const AppTabNavigator = createMaterialTopTabNavigator({
   본방 : {screen: RecentR},
   본단지: {screen: RecentT},

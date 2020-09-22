@@ -6,7 +6,7 @@ import {  Container, Content,Icon, Button, } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import http from '../../../http-common';
 import EditInfo from './EditInfo';
-import styles from '../../css/bottom/PlusComponents/Plus.js'
+import styles from '../../css/bottom/PlusComponents/PlusCSS.js'
 //import myData from '.././Util/idpw.json';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);

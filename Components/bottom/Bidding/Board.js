@@ -7,7 +7,7 @@ import Loading from "./BiddingAlgorithm/Loading"
 //import PurchaseHope from "./BiddingAlgorithm/PurchaseHope"
 import DetailPostModal from './DetailPostModal'
 import BoardHeader from './BiddingAlgorithm/BoardHeader'
-import styles from '../../css/bottom/Bidding/Board.js'
+import styles from '../../css/bottom/Bidding/BoardCSS.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);

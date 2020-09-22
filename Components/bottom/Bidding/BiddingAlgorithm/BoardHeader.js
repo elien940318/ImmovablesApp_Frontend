@@ -4,7 +4,7 @@ import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollV
 import { Icon, Container, Header, Button } from 'native-base'; 
 import RowCardComponent  from '../RowCardComponent'; 
 import WriteModal from '../WriteModal'
-import styles from '../../../css/bottom/Bidding/BoardHeader.js'
+import styles from '../../../css/bottom/Bidding/BoardHeaderCSS.js'
 export default class BoardHeader extends Component {
   constructor(props) {
     super(props);

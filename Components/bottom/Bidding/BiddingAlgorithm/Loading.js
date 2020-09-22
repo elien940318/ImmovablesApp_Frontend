@@ -3,7 +3,7 @@ import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollV
 import { Icon, Container, Header, Button } from 'native-base'; 
 import RowCardComponent  from '../RowCardComponent'; 
 import BoardHeader from "./BoardHeader"
-import styles from '../../../css/bottom/Bidding/Loading.js'
+import styles from '../../../css/bottom/Bidding/LoadingCSS.js'
 export default class Loading extends Component {
   constructor(props) {
     super(props);

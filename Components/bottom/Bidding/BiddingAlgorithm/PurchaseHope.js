@@ -7,7 +7,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Board from "../Board"
 import WriteModal from '../WriteModal'
 import http from "../../../../http-common";
-import styels from '../../../css/bottom/Bidding/PurchaseHope.js'
+import styles from '../../../css/bottom/Bidding/PurchaseHopeCSS.js'
 export default class PurchaseHope extends Component {
   constructor(props) {
     super(props);

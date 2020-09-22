@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import styles from '../../css/bottom/Bidding/Post.js'
+import styles from '../../css/bottom/Bidding/PostCSS.js'
 export default class Post extends Component {
   constructor(props) {
     super(props);

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {TextInput,TouchableOpacity, View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import {Container, Icon,Header} from 'native-base';
 import { ThemeContext } from 'react-navigation';
-import styles from '../../../../css/bottom/Bidding/Setting/DefaultScreen.js'
+import styles from '../../../../css/bottom/Bidding/Setting/DefaultScreenCSS.js'
 export default class DefaultScreen extends PureComponent {
   constructor(props) {
     super(props);
