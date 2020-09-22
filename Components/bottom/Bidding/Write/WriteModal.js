@@ -153,8 +153,6 @@ ThirdSection=()=>{
  }
 }
 
-
-  
 setModalShown(visible) {
   this.setState({modalShown: visible});
 }
@@ -283,9 +281,6 @@ Settingmodal=()=>{
       </Modal>
     )
   }
-  updateText = () => {
-    this.setState({myText: 'My Changed Text'})
- }
  /* ########## main  ########## */ 
   render() {
       let { imageArray } = this.state // 이미지 배열 지역변수
@@ -301,7 +296,10 @@ Settingmodal=()=>{
               </Text>
               <Text></Text>           
             </Header>
-            <ScrollView horizontal={true}>
+            <View style={{flexDirection:'row', margin:10}}>
+              <Text style={{fontSize:20, fontWeight:'bold'}}> 방 내놓기 </Text>
+            </View>
+            <ScrollView style={{margin:10}} horizontal={true}>
               {
                 imageArray.length > 0?
                 imageArray.map((e, index)=>(
