@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
-
+import styles from '../../css/bottom/Bidding/CityDetailPostModal.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4)
@@ -39,33 +39,3 @@ export default class DetailPostModal extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-      margin:-20,
-      backgroundColor: 'whitesmoke'
-    },
-  header:{
-    backgroundColor: 'whitesmoke',
-    alignItems:'center',
-    justifyContent: 'center',
-    flexDirection:'row'
-  },
-  img:{
-    alignItems:'center',
-    justifyContent: 'center',
-  },
-  price:{
-    alignItems:'center',
-    justifyContent: 'center',
-  },
-  info:{
-    alignItems:'center',
-    justifyContent: 'center',
-  },
-  br: {
-    height: '10%',
-    backgroundColor: 'whitesmoke'
-  }
-
-
-});

@@ -11,7 +11,7 @@ import RecentT from '../LikeTab/RecentT';
 import ContectedO from '../LikeTab/ContectedO';
 import SubsT from '../LikeTab/SubsT';
 import SubsR from '../LikeTab/SubsR';
-
+import styles from '../css/bottom/Like.js'
 /*const AppTabNavigator = createMaterialTopTabNavigator({
   본방 : {screen: RecentR},
   본단지: {screen: RecentT},
@@ -100,7 +100,7 @@ export default class home extends Component {
           //tabbar에 스크롤 제거, touchableopacity클릭시 하단부 밑줄, 안드로이드 작동 확인
     render() {
         return (          
-          <Container style={style.container }>
+          <Container style={styles.container }>
               <Header style ={{ height:100, flexDirection: 'column', backgroundColor: 'white' }}>
                 <View style={{ height:45, alignItems: 'center', justifyContent: 'center'}} >
                   <Text style={{ alignItems:'center' }}>관심목록</Text>
@@ -149,16 +149,3 @@ export default class home extends Component {
       }
 }
  
-const style = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white'
-        
-     //   alignItems: 'center', //글자 수직 정렬
-     //   justifyContent: 'center', //글자 수평 정렬
-    },
-    TextStyle: {
-      textDecorationLine: 'underline',
-      //line-through is the trick
-    },
-});

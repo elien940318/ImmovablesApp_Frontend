@@ -4,7 +4,7 @@ import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
 import RowCardComponent  from '../../../../CityRowCardComponent'; 
 import http from "../../../../../../../http-common"
-
+import styles from '../../../../../../css/bottom/Bidding/Setting/CityFind/GunFind.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
@@ -98,32 +98,3 @@ export default class GunFind extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        
-    },
-    gridView: {
-      marginTop: 0,
-      marginBottom: 50,
-      flex: 1,
-    },
-    itemContainer: {
-      justifyContent: 'center',
-      alignItems:'center',
-      padding: 10,
-      height: 50,
-      borderColor:'black',
-      borderWidth:0.5
-    },
-    itemName: {
-      fontSize: 16,
-      color: 'black',
-      fontWeight: '600',
-    },
-    itemCode: {
-      fontWeight: '600',
-      fontSize: 12,
-      color: '#fff',
-    },
-});

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Carousel from 'react-native-snap-carousel';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
-
+import styles from '../../css/bottom/PlusComponents/IdPwCardComponent.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
@@ -41,28 +41,4 @@ export default class ColumnCardComponent extends Component {
         );
       }
   }
-  
-  
-  const styles = StyleSheet.create({
-    carouselContainer: {
-      marginTop: 10
-    },
-    itemContainer: {
-      width: ITEM_WIDTH,
-      height: ITEM_HEIGHT,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'white'
-    },
-    itemLabel: {
-      color: 'black',
-      fontSize: 24
-    },
-    counter: {
-      marginTop: 25,
-      fontSize: 30,
-      fontWeight: 'bold',
-      textAlign: 'center'
-    }
-  });
   

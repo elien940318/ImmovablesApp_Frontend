@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import {TextInput,TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {TextInput,TouchableOpacity, View, Text} from 'react-native';
 import {Container, Icon} from 'native-base';
-
+import styles from '../../../../css/bottom/Bidding/Setting/DescScreen.js'
 export default class DescScreen extends PureComponent {
   constructor(props) {
     super(props);
@@ -93,29 +93,3 @@ export default class DescScreen extends PureComponent {
     );
     }
 }
-
-const styles = StyleSheet.create({
-    container:{
-      flex:1,
-      justifyContent:'center',
-      alignItems:'center'
-    },
-    onbutton:{
-      height:50,
-      width:95,
-      borderRadius:10,
-      justifyContent:'center',
-      alignItems:'center',
-      borderWidth:0.5,
-      backgroundColor:'#004aff'
-    },
-    offbutton:{
-      height:50,
-      width:95,
-      borderRadius:10,
-      justifyContent:'center',
-      alignItems:'center',
-      borderWidth:0.5,
-    }
-   
-  });

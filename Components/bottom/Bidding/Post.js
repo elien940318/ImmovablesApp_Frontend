@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
+import styles from '../../css/bottom/Bidding/Post.js'
 export default class Post extends Component {
   constructor(props) {
     super(props);
@@ -49,43 +49,3 @@ export default class Post extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      backgroundColor: 'whitesmoke'
-    },
-    header: {
-      backgroundColor: 'white',
-      alignItems:'center',
-      justifyContent: 'space-around',
-      flexDirection:'row'
-    },
-    search: {
-      width:'100%',
-      height: 50,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'white',
-    },
-    category: {
-      width:'100%',
-      height: 50,
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      backgroundColor: 'white',
-    },
-    content: {
- 
-      width:'100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#EFE4B0',
-    },
-    
-    br: {
-      height: '3%'
-    }
-});
