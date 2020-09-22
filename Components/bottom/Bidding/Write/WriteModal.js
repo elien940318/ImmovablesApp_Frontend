@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {Image,touchablehilight,TouchableWithoutFeedback,TouchableOpacity,TextInput, 
-  StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
-import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
-
+import {TouchableOpacity,TextInput, Text, View, Dimensions, Modal, ScrollView} from 'react-native';
+import { Icon, Container, Header } from 'native-base'; 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import DetailSection from './DetailSection.js'
 import ImgComponet from './WriteModalImage';
 import ConvModal from './DetailModal/ConvenienceModal.js'
 import SellBuyCategoryModal from './DetailModal/SellBuyModal.js'
@@ -18,7 +17,6 @@ const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
 
 export default class WriteModal extends Component {
 
-
     constructor(props) {  
       super(props);  
       this.state = {
@@ -30,8 +28,10 @@ export default class WriteModal extends Component {
         category:'카테고리',
         sellbuy:null,
         imageArray: [],
+        lst:[],
       };  
   }
+
   componentDidMount() {
     this.getPermissionAsync();
   }
@@ -63,31 +63,18 @@ export default class WriteModal extends Component {
         lst.push(result.uri)
         this.setState({imageArray:lst})
       }
-    } catch (E) {
-      //console.log(E);
-    }
+    } catch (E) {}
   }; 
-
-  DetailSection=()=>{
-    if(this.state.sellbuy === 1){
-      return(
-        <TouchableOpacity style={styles.button} onPress={()=>this.detailModalToggle()}>
-          <Text style={{margin:5}}>세부정보</Text>
-          <Text style={{margin:5}}> &gt; </Text>
-        </TouchableOpacity>
-      )
-    }  
-    else if(this.state.sellbuy === 0){
-      return(
-        <TouchableOpacity style={styles.button} onPress={()=>this.convModalToggle()}>
-          <Text style={{margin:5}}>편의시설</Text>
-          <Text style={{margin:5}}> &gt; </Text>
-        </TouchableOpacity>
-      )  
+  /* ########## 편의 시설 모달 함수 ########## */
+  selectionConv=(text)=>{
+    if(!this.state.lst.includes(text)){
+      this.state.lst.push(text)
+    }
+    else{
+      let idx = this.state.lst.indexOf(text)
+      this.state.lst.splice(idx, 1)
     }
   }
-
-  /* ########## 편의 시설 모달 함수 ########## */
   convModalToggle(){
     this.setState({convModalShown: !this.state.convModalShown})
   }
@@ -95,7 +82,7 @@ export default class WriteModal extends Component {
     return(
       <Modal animationType="fade" transparent={true} visible={this.state.convModalShown} 
       onRequestClose={() => {this.convModalToggle();}} backdrop={true}>
-        <ConvModal toggle={()=>this.convModalToggle()}/>
+        <ConvModal toggle={()=>this.convModalToggle()} conv={this.selectionConv}/>
       </Modal>
     )
   }
@@ -107,7 +94,7 @@ export default class WriteModal extends Component {
     return (
       <Modal animationType="slide" transparent={false} visible={this.state.detailModalShown}
         onRequestClose={() => {this.detailModalToggle();}} backdrop={true}>
-        <DetailSettingModal toggle={()=>this.detailModalToggle()}/>
+        <DetailSettingModal toggle={()=>this.detailModalToggle()} />
       </Modal>
     )
   }
@@ -174,7 +161,8 @@ export default class WriteModal extends Component {
                 <Text style={{margin:5}}>{this.state.category}</Text>
                 <Text style={{margin:5}}> &gt; </Text>
               </TouchableOpacity>
-              {this.DetailSection()}
+              <DetailSection detailToggle={()=>this.detailModalToggle()} convToggle={()=>this.convModalToggle()}
+                sellbuy={this.state.sellbuy} lst={this.state.lst} /* 세부사항, 편의시설 컴포넌트 분리 *//>
               <TextInput
                 style={styles.button}  
                 placeholder="제목" onChangeText={(title) => this.setState({title})} value={this.state.title}>  
