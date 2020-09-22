@@ -68,12 +68,6 @@ export default class WriteModal extends Component {
     }
   }; 
 
-sellbuyClicked = (sellbuy) => {
-  this.setState({ 
-    sellbuy 
-  });
-  
-}  
 segmentClicked = (activeIndex) => {
   this.setState({ 
     activeIndex 
@@ -113,7 +107,7 @@ DetailSection=()=>{
     return(
       <TouchableOpacity style={styles.button} onPress={()=>this.setModalShown(true)}>
         <Text style={{margin:5}}>세부정보</Text>
-        <Text style={{margin:5}}> &lt; </Text>
+        <Text style={{margin:5}}> &gt; </Text>
       </TouchableOpacity>
     )
     }  
@@ -164,20 +158,14 @@ ThirdSection=()=>{
 setModalShown(visible) {
   this.setState({modalShown: visible});
 }
+/* ########## 편의 시설 모달 함수 ########## */
 convModalToggle(){
   this.setState({convModalShown: !this.state.convModalShown})
 }
-convModal=()=>{  // 편의 시설 모달 함수
+convModal=()=>{  
   return(
-    <Modal
-        animationType="fade"
-        transparent={true}
-        visible={this.state.convModalShown}
-        onRequestClose={() => {
-          this.convModalToggle();
-        }}
-        backdrop={true}
-        >
+    <Modal animationType="fade" transparent={true} visible={this.state.convModalShown} 
+    onRequestClose={() => {this.convModalToggle();}} backdrop={true}>
       <ConvModal toggle={()=>this.convModalToggle()}/>
     </Modal>
   )
