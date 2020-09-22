@@ -6,6 +6,8 @@ import SettingInfo from './Setting/Setting'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import ImgComponet from './WriteModalImage';
+import styles from '../../css/bottom/Bidding/WriteModal.js'
+
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
