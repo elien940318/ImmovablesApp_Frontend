@@ -30,7 +30,6 @@ export default class Board extends Component {
 
   //로딩 구현(Life cycle (constructor-> static getDerivedStateFromProps() -> render() -> ))
   componentDidMount(){
-    //this.getDB()
     this.getDB()
     this.getDB2()
     setTimeout(()=>{
@@ -46,21 +45,22 @@ export default class Board extends Component {
       )
   }
   
+  toggle(){
+    this.setState({isModalVisible: !this.state.isModalVisible});
+  }
+
   segmentClicked = (activeIndex)=>{
     this.setState({activeIndex});
-    this.renderSection()
   }
 
   segmentClicked2 = (activeIndex2)=>{
     this.setState({activeIndex2});
-    this.renderSection()
   }
 
   getDB(){
     http.get(`/board/getPost`)
     .then(response => {
-      this.state.DBdata = response.data
-      this.renderSection()
+      this.setState({DBdata:response.data})
     })
     .catch(error => {
       console.log(error);
@@ -70,8 +70,7 @@ export default class Board extends Component {
   getDB2(){
     http.get(`/board/getPost2`)
     .then(response => {
-      this.state.DBdata2 = response.data
-      this.renderSection()
+      this.setState({DBdata2: response.data})
     })
     .catch(error => {
       console.log(error);
@@ -118,10 +117,7 @@ export default class Board extends Component {
       )
     }
   }
-
-  toggle(){
-    this.setState({isModalVisible: !this.state.isModalVisible});
-  }
+  
   //Main Render @@구매 & 거래
   render() {
     if(this.state.loading){

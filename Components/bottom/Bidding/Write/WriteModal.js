@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import {Image,touchablehilight,TouchableWithoutFeedback,TouchableOpacity,TextInput, 
   StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
-import Setting from './Setting/Setting'
-import SettingInfo from './Setting/Setting'
+import SettingInfo from '../Setting/Setting'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import ImgComponet from './WriteModalImage';
-import styles from '../../css/bottom/Bidding/WriteModalCSS.js' 
+import styles from '../../../css/bottom/Bidding/WriteModalCSS.js' 
+
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
