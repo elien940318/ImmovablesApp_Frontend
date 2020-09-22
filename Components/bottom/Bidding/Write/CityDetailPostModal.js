@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
-import styles from '../../css/bottom/Bidding/CityDetailPostModalCSS.js'
+import styles from '../../../css/bottom/Bidding/CityDetailPostModalCSS.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4)
