@@ -10,7 +10,6 @@ import ConvModal from './DetailModal/ConvenienceModal.js'
 import SellBuyCategoryModal from './DetailModal/SellBuyModal.js'
 import styles from '../../../css/bottom/Bidding/WriteModalCSS.js' 
 
-
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
@@ -160,9 +159,7 @@ ThirdSection=()=>{
  }
 }
 
-sellBuyModalToggle() {
-  this.setState({sellBuyModalShown: !this.state.sellBuyModalShown});
-}
+
   
 setModalShown(visible) {
   this.setState({modalShown: visible});
@@ -266,106 +263,114 @@ Settingmodal=()=>{
     </Modal>
 
   }
-  categoryChanger = (name) => {
-    this.setState({category: name}) 
-    
-  }
-  sellBuyCategoryModal =() =>{    /* 방 구하기, 내놓기 대분류 모달 */
-  return( 
-  <Modal
-    animationType="fade"
-    transparent={true}
-    visible={this.state.sellBuyModalShown}
-    onRequestClose={() => {
-      this.sellBuyModalToggle();
-    }}
-    backdrop={true}
-    >
-    <SellBuyCategoryModal 
-    toggle={()=>this.sellBuyModalToggle()} 
-    categoryChanger1={()=>this.categoryChanger()}
-    categoryChanger2 = {()=>this.sellbuyClicked()}/>
 
-  </Modal>
-  )
+  /* ########## 방 구하기 / 방 내놓기 모달  ########## */
+  sellBuyModalToggle() {
+    this.setState({sellBuyModalShown: !this.state.sellBuyModalShown});
+  }
+  categoryBuyChanger=()=>{
+    this.setState({category: '방 구하기'}) 
+  }
+  categorySellChanger=()=>{
+    this.setState({category: '방 내놓기'}) 
+  }
+  buyClicker=()=>{
+    this.setState({sellbuy:0})
+    this.sellBuyModalToggle()
+  }
+  sellClicker=()=>{
+    this.setState({sellbuy:1})
+    this.sellBuyModalToggle()
+  }
+  sellBuyCategoryModal =() =>{
+    return( 
+      <Modal animationType="fade" transparent={true} visible={this.state.sellBuyModalShown}
+        onRequestClose={() => {this.sellBuyModalToggle();}} backdrop={true}>
+        <SellBuyCategoryModal 
+        //toggle={()=>this.sellBuyModalToggle()} 
+        categoryBuyChanger={()=>this.categoryBuyChanger()}
+        categorySellChanger={()=> this.categorySellChanger()}
+        buyClicker = {()=>this.buyClicker()}
+        sellClicker = {()=>this.sellClicker()} />
+      </Modal>
+    )
   }
   updateText = () => {
     this.setState({myText: 'My Changed Text'})
  }
-  
+ /* ########## main  ########## */ 
   render() {
-    console.log(this.state.category)
       let { imageArray } = this.state // 이미지 배열 지역변수
       return (
-              <Container style={styles.container}>
-              <ScrollView>
-                <Header style={styles.modalheader}>    
-                  <TouchableOpacity onPress={this.props.toggle}>
-                    <Text>X</Text>
-                  </TouchableOpacity> 
-                  <Text style={{fontSize:15 }}>
-                    게시판 글쓰기
-                  </Text>
-                  <Text></Text>           
-                </Header>
-                <ScrollView horizontal={true}>
-                  {
-                    imageArray.length > 0?
-                    imageArray.map((e, index)=>(
-                      <ImgComponet data={e} key={index}/>
-                    ))
-                    :<Text>이미지를 업로드 하세요!</Text>
-                  }
-                </ScrollView>
-                {this.sellBuyCategoryModal() /* 방 구하기, 팔기 대분류 모달 */}
-                {this.Settingmodal()}
-                {this.convModal()/* 편의 시설 모달 함수 */} 
-                <View style={{alignItems:'center'}}>
+        <Container style={styles.container}>
+          <ScrollView>
+            <Header style={styles.modalheader}>    
+              <TouchableOpacity onPress={this.props.toggle}>
+                <Text>X</Text>
+              </TouchableOpacity> 
+              <Text style={{fontSize:15 }}>
+                게시판 글쓰기
+              </Text>
+              <Text></Text>           
+            </Header>
+            <ScrollView horizontal={true}>
+              {
+                imageArray.length > 0?
+                imageArray.map((e, index)=>(
+                  <ImgComponet data={e} key={index}/>
+                ))
+                :<Text>이미지를 업로드 하세요!</Text>
+              }
+            </ScrollView>
+            {this.sellBuyCategoryModal() /* 방 구하기, 팔기 대분류 모달 */}
+            {this.Settingmodal()}
+            {this.convModal()/* 편의 시설 모달 함수 */} 
+            <View style={{alignItems:'center'}}>
+              
+              <TouchableOpacity style={styles.button} onPress={()=>this.sellBuyModalToggle()}>
+                <Text style={{margin:5}}>{this.state.category}</Text>
+                <Text style={{margin:5}}> &gt; </Text>
+              </TouchableOpacity>
+              {this.DetailSection()}
+              <TextInput
+                style={styles.button}  
+                placeholder="제목" onChangeText={(title) => this.setState({title})} value={this.state.title}>  
+              </TextInput>
+              <View style={{margin:5, width:'100%', alignItems:'center'}}>
+                <TextInput 
+                  style={styles.mcontent} placeholder="게시글을 작성해주세요." >
                   
-                  <TouchableOpacity style={styles.button} onPress={()=>this.sellBuyModalToggle()}>
-                    <Text style={{margin:5}}>{this.state.category}</Text>
-                    <Text style={{margin:5}}> &gt; </Text>
-                  </TouchableOpacity>
-                  {this.DetailSection()}
-                  <TextInput
-                    style={styles.button}  
-                    placeholder="제목" onChangeText={(title) => this.setState({title})} value={this.state.title}>  
-                  </TextInput>
-                  <View style={{margin:5, width:'100%', alignItems:'center'}}>
-                    <TextInput 
-                      style={styles.mcontent} placeholder="게시글을 작성해주세요." >
-                      
-                    </TextInput>
-                    {imageArray.length < 5 ?
-                    <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
-                      <View style={{flexDirection:'row'}}>
-                        <Icon name='md-image' style={{margin:5, color:'#FF5C3B'}}/>
-                        <Text style={{margin:5, color:'#FF5C3B'}}>사진 추가하기</Text>
-                      </View>
-                    </TouchableOpacity>
-                    :
-                    <TouchableOpacity style={styles.bottomimage} onPress={this.noUpdate} >
-                      <View style={{flexDirection:'row'}}>
-                        <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
-                        <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
-                      </View>
-                    </TouchableOpacity>
-                    }
-                      
-                    
-                    
-                  </View> 
+                </TextInput>
+                {imageArray.length < 5 ?
+                <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
                   <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.bottombutton} onPress={this.props.toggle}> 
-                      <Text>취소</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.bottombutton1}>
-                      <Text style={{color:'white'}}>작성하기</Text>
-                    </TouchableOpacity>
+                    <Icon name='md-image' style={{margin:5, color:'#FF5C3B'}}/>
+                    <Text style={{margin:5, color:'#FF5C3B'}}>사진 추가하기</Text>
                   </View>
-                </View>
-              </ScrollView>
-              </Container >
+                </TouchableOpacity>
+                :
+                <TouchableOpacity style={styles.bottomimage} onPress={this.noUpdate} >
+                  <View style={{flexDirection:'row'}}>
+                    <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
+                    <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
+                  </View>
+                </TouchableOpacity>
+                }
+                  
+                
+                
+              </View> 
+              <View style={{flexDirection:'row'}}>
+                <TouchableOpacity style={styles.bottombutton} onPress={this.props.toggle}> 
+                  <Text>취소</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.bottombutton1}>
+                  <Text style={{color:'white'}}>작성하기</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
+        </Container >
               
       );
   }

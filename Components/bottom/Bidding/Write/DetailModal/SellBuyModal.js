@@ -7,7 +7,12 @@ class SellBuyModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        name: ''
     };
+  }
+
+  categoryName=()=>{
+      this.props.categoryChanger1('방 구하기')
   }
 
   render() {
@@ -22,18 +27,17 @@ class SellBuyModal extends Component {
           <TouchableWithoutFeedback>
             <View style={{justifyContent:'center', alignItems:'center',width: 300, height: 150, borderWidth:1, borderColor:'#a7a7a7', borderRadius:5, backgroundColor:'#c0c0c0'}}>
               <Text style={{color:'#004aff',margin:5}}>카테고리를 선택하시오.</Text>
-              <TouchableOpacity style={styles.button} onPress={() => {
-                this.props.toggle;
-                this.props.categoryChanger1('방 구하기');
-                this.props.categoryChanger2(0);
-              }}> 
+              <TouchableOpacity style={styles.button} onPress={
+                this.props.categoryBuyChanger,
+                this.props.buyClicker
+                
+              }> 
               <Text style={{color:'#004aff'}}>방 구하기</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => {
-                this.props.toggle;
-                this.props.categoryChanger1('방 내놓기');
-                this.props.categoryChanger2(1);
-              }}> 
+              <TouchableOpacity style={styles.button} onPress={
+                this.props.categorySellChanger,
+                this.props.sellClicker
+              }> 
                 <Text style={{color:'#004aff'}}>방 내놓기</Text>
               </TouchableOpacity>
             </View>
