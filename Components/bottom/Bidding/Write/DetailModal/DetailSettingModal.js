@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text ,TouchableOpacity, Modal} from 'react-native';
-import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
+import { Icon, Container, Header, Button, CheckBox, ListItem, Body } from 'native-base'; 
 import SettingInfo from '../../Setting/Setting'
 
 class DetailSettingModal extends Component {
@@ -10,21 +10,44 @@ class DetailSettingModal extends Component {
         firstSectionVisible: false,
         secondSectionVisible: false,
         thirdSectionVisible: false,
-        SettingInfoVisible: false
+        SettingInfoVisible: false,
+        firstSectionCheckList: [false, false, false, false],
+        secondSectionCheckList: [false, false, false, false],
+        thirdSectionCheckList: [false, false, false, false]
     };
   }
+  checkController=(sectionNum, idx, bool)=>{
+    if(sectionNum === 1){
+        let lst = this.state.firstSectionCheckList
+        lst[idx] = bool
+        this.setState({firstSectionCheckList:lst})
+    }
+    else if(sectionNum === 2){
+        let lst = this.state.secondSectionCheckList
+        lst[idx] = bool
+        this.setState({secondSectionCheckList:lst})
+    }else{
+        let lst = this.state.thirdSectionCheckList
+        lst[idx] = bool
+        this.setState({thirdSectionCheckList:lst})
+    }
+  }
 
-  renderSection=()=>{
+  firstSection=()=>{
     if(this.state.firstSectionVisible){
      return(
          <View style={{width:'100%', flexDirection:'row'}}>
            <View style={{width:'50%'}}>
-             <View style={{flexDirection:'row'}}><CheckBox/><Text>     단독주택</Text></View>
-             <View style={{flexDirection:'row'}}><CheckBox></CheckBox><Text>     다가구주택</Text></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.firstSectionCheckList[0]} color="green" 
+             onPress={()=>this.checkController(1,0,!this.state.firstSectionCheckList[0])} /><Text>     단독주택</Text></ListItem></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.firstSectionCheckList[1]} color="green" 
+             onPress={()=>this.checkController(1,1,!this.state.firstSectionCheckList[1])}/><Text>     다가구주택</Text></ListItem></View>
            </View>
            <View style={{width:'50%'}}>
-             <View style={{flexDirection:'row'}}><CheckBox/><Text>     다가구주택</Text></View>
-             <View style={{flexDirection:'row'}}><CheckBox></CheckBox><Text>     상가주택</Text></View>
+            <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.firstSectionCheckList[2]} color="green" 
+             onPress={()=>this.checkController(1,2,!this.state.firstSectionCheckList[2])}/><Text>     다가구주택</Text></ListItem></View>
+            <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.firstSectionCheckList[3]} color="green" 
+             onPress={()=>this.checkController(1,3,!this.state.firstSectionCheckList[3])}/><Text>     상가주택</Text></ListItem></View>
            </View>
          </View>
      )
@@ -35,12 +58,16 @@ class DetailSettingModal extends Component {
      return(
          <View style={{width:'100%', flexDirection:'row'}}>
            <View style={{width:'50%'}}>
-             <View style={{flexDirection:'row'}}><CheckBox/><Text>     단독주택</Text></View>
-             <View style={{flexDirection:'row'}}><CheckBox></CheckBox><Text>     다가구주택</Text></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.secondSectionCheckList[0]} color="green" 
+             onPress={()=>this.checkController(2,0,!this.state.secondSectionCheckList[0])} /><Text>     단독주택</Text></ListItem></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.secondSectionCheckList[1]} color="green" 
+             onPress={()=>this.checkController(2,1,!this.state.secondSectionCheckList[1])} /><Text>     다가구주택</Text></ListItem></View>
            </View>
            <View style={{width:'50%'}}>
-             <View style={{flexDirection:'row'}}><CheckBox/><Text>     다가구주택</Text></View>
-             <View style={{flexDirection:'row'}}><CheckBox></CheckBox><Text>     상가주택</Text></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.secondSectionCheckList[2]} color="green" 
+             onPress={()=>this.checkController(2,2,!this.state.secondSectionCheckList[2])} /><Text>     다가구주택</Text></ListItem></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.secondSectionCheckList[3]} color="green" 
+             onPress={()=>this.checkController(2,3,!this.state.secondSectionCheckList[3])} /><Text>     상가주택</Text></ListItem></View>
            </View>
          </View>
      )
@@ -51,12 +78,16 @@ class DetailSettingModal extends Component {
      return(
          <View style={{width:'100%', flexDirection:'row'}}>
            <View style={{width:'50%'}}>
-             <View style={{flexDirection:'row'}}><CheckBox/><Text>     단독주택</Text></View>
-             <View style={{flexDirection:'row'}}><CheckBox></CheckBox><Text>     다가구주택</Text></View>
+           <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[0]} color="green" 
+             onPress={()=>this.checkController(3,0,!this.state.secondSectionCheckList[0])} /><Text>     단독주택</Text></ListItem></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[1]} color="green" 
+             onPress={()=>this.checkController(3,1,!this.state.secondSectionCheckList[1])} /><Text>     다가구주택</Text></ListItem></View>
            </View>
            <View style={{width:'50%'}}>
-             <View style={{flexDirection:'row'}}><CheckBox/><Text>     다가구주택</Text></View>
-             <View style={{flexDirection:'row'}}><CheckBox></CheckBox><Text>     상가주택</Text></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[2]} color="green" 
+             onPress={()=>this.checkController(3,2,!this.state.secondSectionCheckList[2])} /><Text>     다가구주택</Text></ListItem></View>
+             <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[3]} color="green" 
+             onPress={()=>this.checkController(3,3,!this.state.secondSectionCheckList[3])} /><Text>     상가주택</Text></ListItem></View>
            </View>
          </View>
      )
@@ -102,7 +133,7 @@ class DetailSettingModal extends Component {
                     </View>
                     <Icon name='ios-arrow-down' style={{margin:5}}/>
                 </TouchableOpacity>
-                {this.renderSection()}
+                {this.firstSection()}
                 <TouchableOpacity style={{width:'100%', height:50, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', borderWidth:0.5, borderColor:'#a7a7a7', backgroundColor:'whitesmoke'}}
                 onPress={() => this.setState({secondSectionVisible: !this.state.secondSectionVisible})}>
                     <View style={{flexDirection:'row'}}>

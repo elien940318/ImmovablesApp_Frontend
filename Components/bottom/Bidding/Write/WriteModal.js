@@ -58,7 +58,6 @@ export default class WriteModal extends Component {
         quality: 1,
       });
       if (!result.cancelled) {
-        
         let lst = this.state.imageArray
         lst.push(result.uri)
         this.setState({imageArray:lst})
@@ -143,7 +142,7 @@ export default class WriteModal extends Component {
             <View style={{flexDirection:'row', margin:10}}>
               <Text style={{fontSize:20, fontWeight:'bold'}}> 방 내놓기 </Text>
             </View>
-            <ScrollView style={{margin:10}} horizontal={true}>
+            <ScrollView style={{margin:10}} horizontal={true} /* 이미지 미리보기 */>
               {
                 imageArray.length > 0?
                 imageArray.map((e, index)=>(
@@ -172,7 +171,7 @@ export default class WriteModal extends Component {
                   style={styles.mcontent} placeholder="게시글을 작성해주세요." >
                   
                 </TextInput>
-                {imageArray.length < 5 ?
+                {imageArray.length < 5 ? /* 이미지 선택 (5장 까지 가능하도록 구현) */
                 <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
                   <View style={{flexDirection:'row'}}>
                     <Icon name='md-image' style={{margin:5, color:'#FF5C3B'}}/>
