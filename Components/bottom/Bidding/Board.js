@@ -4,7 +4,7 @@ import { Icon, Container, Header, Button } from 'native-base';
 import RowCardComponent  from './RowCardComponent'; 
 import http from "../../../http-common";
 import Loading from "./BiddingAlgorithm/Loading"
-import * as DAO from './BiddingAlgorithm/BiddingGetDB'
+//import {get1} from './BiddingAlgorithm/BiddingGetDB'
 //import PurchaseHope from "./BiddingAlgorithm/PurchaseHope"
 // import DetailPostModal from './DetailPostModal'
 import BoardHeader from './BiddingAlgorithm/BoardHeader'
