@@ -15,7 +15,7 @@ import styles from "../css/LoginCSS.js";
 export default class Login extends Component {
     // navigationOptions 코드 추가
     static navigationOptions = {
-      header : null
+      headerShown : false
       // title: <Text>어디 살래?</Text>,
     }
     
