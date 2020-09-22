@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         height: 30,
         justifyContent: 'center',
         backgroundColor:'white',
-        borderColor: 'blue',
+        borderColor: '#FF5C3B',
         borderWidth: 1
     },
     topbutton: {
