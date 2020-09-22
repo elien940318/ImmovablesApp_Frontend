@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
-
+import styles from '../../css/bottom/Bidding/DetailPostModal'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4)
@@ -66,56 +66,3 @@ export default class DetailPostModal extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-      margin:-20,
-      backgroundColor: 'whitesmoke'
-    },
-  header:{
-    backgroundColor: 'whitesmoke',
-    alignItems:'center',
-    justifyContent: 'center',
-    flexDirection:'row'
-  },
-  img:{
-    height: 300,
-    alignItems:'center',
-    justifyContent: 'center',
-    backgroundColor: 'white'
-  },
-  price:{
-    alignItems:'center',
-    justifyContent: 'center',
-    height:'10%',
-    backgroundColor: 'white'
-  },
-  content:{
-    alignItems:'center',
-    justifyContent: 'center',
-    height:'10%',
-    backgroundColor: 'white'
-  },
-  category: {
-    width:'100%',
-    height: 70,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  info:{
-    alignItems:'center',
-    justifyContent: 'center',
-    margin:15,
-  },
-  hr:{    
-    margin:10,
-    borderBottomColor: 'gainsboro',
-    borderBottomWidth: 1,
-  },
-  br: {
-    height: '10%',
-    backgroundColor: 'whitesmoke'
-  }
-});

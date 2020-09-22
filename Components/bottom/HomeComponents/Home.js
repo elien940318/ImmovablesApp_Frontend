@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {TextInput, StyleSheet, Text, View, SafeAreaView, ScrollView, Dimensions } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Icon, Header, Content, Footer } from 'native-base'; 
 import RowCardComponent  from './RowCardComponent'; 
 import ColumnCardComponent  from './ColumnCardComponent'; 
 import Carousel2 from './Carousel2'
 import myData from '../../Util/test.json';
-
+import styles from '../../css/bottom/HomComponents/Home.js';
 //const SLIDER_WIDTH = Dimensions.get('window').width;
 //const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
@@ -107,38 +106,3 @@ export default class home extends Component {
     }
 }
  
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'whitesmoke'
-      },
-      header: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      },
-      title: {
-        width:'100%',
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      },
-      content: {
-   
-        width:'100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#EFE4B0',
-      },
-      footer: {
-        flex: 1,
-        width: '100%',
-        height: hp('10%'),
-        backgroundColor: '#EFE4B0',
-      },
-      br: {
-        height: '3%'
-      }
-});

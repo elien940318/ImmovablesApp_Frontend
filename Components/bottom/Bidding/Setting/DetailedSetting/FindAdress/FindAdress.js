@@ -5,6 +5,7 @@ import Modal from "react-native-modal";
 import DetailAdress from './DetailAdress'
 import Dofind from './CityFind/DoFind'
 import Gunfind from './CityFind/GunFind'
+import styles from '../../../../../css/bottom/Bidding/Setting/CityFind/FindAdress.js'
 class FindAdress extends Component {
   constructor(props) {
     super(props);
@@ -88,32 +89,3 @@ class FindAdress extends Component {
 }
 
 export default FindAdress;
-
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        margin:-18,
-    },
-    bottombutton:{
-        padding : 10,
-        height:'80%',
-        width:'46%',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems: 'center',
-        borderWidth:1,
-        borderRadius : 5,
-        borderColor:'#a7a7a7',      
-      },
-      bottombutton1:{
-        padding : 10,
-        height:'80%',
-        width:'92%',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems: 'center',
-        borderWidth:1,
-        borderRadius:5,
-        borderColor:'#a7a7a7',      
-      },
-});

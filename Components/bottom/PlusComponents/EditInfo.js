@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {AsyncStorage,TextInput,View, Text, StyleSheet } from 'react-native';
+import {AsyncStorage,TextInput,View, Text } from 'react-native';
 import {Container} from 'native-base';
 import Modal from "react-native-modal";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import styles from '../../css/bottom/PlusComponents/EditInfo.js';
 export default class EditInfo extends Component {
   constructor(props) {
     super(props);
@@ -41,29 +42,3 @@ export default class EditInfo extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1
-    },
-    background:{
-        justifyContent:'center', 
-        alignItems:'center',
-        width: 300, 
-        height: 150, 
-        borderWidth:2, 
-        borderColor:'#a7a7a7', 
-        borderRadius:5, 
-        backgroundColor:'#c0c0c0'
-    },
-    pw:{
-        justifyContent:'center', 
-        alignItems:'center',
-        width: 250, 
-        height: 30, 
-        borderWidth:2, 
-        borderColor:'#a7a7a7', 
-        borderRadius:5,   
-    }
-
-});
