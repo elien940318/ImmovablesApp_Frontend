@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {TextInput,TouchableOpacity, View, Text, StyleSheet, Modal} from 'react-native';
 import {Container, Icon, Header} from 'native-base';
-import styles from '../../../../css/bottom/Bidding/Setting/AddiScreenCSS.js'
+import styles from '../../../../../../css/bottom/Bidding/Setting/AddiScreenCSS.js'
 export default class AddiScreen extends PureComponent {
   constructor(props) {
       super(props);

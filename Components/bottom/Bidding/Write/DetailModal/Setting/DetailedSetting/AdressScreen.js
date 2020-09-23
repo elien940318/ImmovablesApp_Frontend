@@ -3,7 +3,7 @@ import {TextInput,TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import {Container, Icon} from 'native-base';
 import Modal from "react-native-modal";
 import FindAdress from './FindAdress/FindAdress'
-import styles from '../../../../css/bottom/Bidding/Setting/AdressScreenCSS.js'
+import styles from '../../../../../../css/bottom/Bidding/Setting/AdressScreenCSS.js'
 export default class AdressScreen extends PureComponent {
   constructor(props) {
     super(props);

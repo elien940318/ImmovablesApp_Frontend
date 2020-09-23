@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text ,TouchableOpacity, Modal} from 'react-native';
 import { Icon, Container, Header, Button, CheckBox, ListItem, Body } from 'native-base'; 
-import SettingInfo from '../../Setting/Setting'
+import SettingInfo from './Setting/Setting'
 
 class DetailSettingModal extends Component {
   constructor(props) {

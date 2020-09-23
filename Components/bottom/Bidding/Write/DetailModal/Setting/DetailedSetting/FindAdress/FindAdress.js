@@ -5,7 +5,7 @@ import Modal from "react-native-modal";
 import DetailAdress from './DetailAdress'
 import Dofind from './CityFind/DoFind'
 import Gunfind from './CityFind/GunFind'
-import styles from '../../../../../css/bottom/Bidding/Setting/CityFind/FindAdressCSS.js'
+import styles from '../../../../../../../css/bottom/Bidding/Setting/CityFind/FindAdressCSS.js'
 class FindAdress extends Component {
   constructor(props) {
     super(props);

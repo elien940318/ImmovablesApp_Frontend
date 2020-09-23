@@ -4,12 +4,12 @@ import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
 import RowCardComponent  from '../../../../Write/CityRowCardComponent'; 
 import http from "../../../../../../../http-common"
-import styles from '../../../../../../css/bottom/Bidding/Setting/CityFind/GunFindCSS.js'
+import styles from '../../../../../../../../css/bottom/Bidding/Setting/CityFind/DoFindCSS.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
 const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
-export default class GunFind extends Component {
+export default class DoFind extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -75,7 +75,7 @@ export default class GunFind extends Component {
         return (
             <Container style={styles.container}>
                 <Header style ={{justifyContent:'space-between', alignItems:'center'}}> 
-                <Icon name='ios-arrow-back' onPress={()=>{this.props.Guntoggle()}}/>
+                <Icon name='ios-arrow-back' onPress={()=>{this.props.Dotoggle()}}/>
                 <Text>시/도 선택</Text>
                 <Text/>
                 </Header>
@@ -84,11 +84,12 @@ export default class GunFind extends Component {
                 </View>
                 <View style={{height:"8%", flexDirection:'row', justifyContent: 'center', borderWidth:0.5}}>
                   <TouchableOpacity 
-
+                    onPress={()=>{this.props.Dotoggle()}}
                     style={{height:'100%',width:'50%', alignItems:'center', justifyContent:'center', borderEndWidth:0.5}}>
                     <Text>취소</Text>
                   </TouchableOpacity>
                   <TouchableOpacity 
+                    onPress={()=>{this.props.Dotoggle(); this.props.Doshow()}}
                     style={{width:'50%', alignItems:'center', justifyContent:'center'}}>
                     <Text>저장</Text>
                   </TouchableOpacity>
@@ -97,4 +98,4 @@ export default class GunFind extends Component {
         );
     }
 }
-
+;
