@@ -38,6 +38,18 @@ const styles = StyleSheet.create({
         backgroundColor:'white'
         
     },
+
+    facilityButton:{
+      margin:5,
+      width:'95%',
+      height:40,
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems: 'center',
+      borderWidth:1,
+      borderColor:'#a7a7a7',
+      backgroundColor:'white'
+    },
     iteminformation:{
       flex:1,
       height:100,

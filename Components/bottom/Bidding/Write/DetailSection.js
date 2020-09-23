@@ -16,15 +16,13 @@ class DetailSection extends Component {
         return(
           <TouchableOpacity style={styles.button} onPress={this.props.detailToggle}>
             <Text style={{margin:5}}>세부정보</Text>
-            <Text style={{margin:5}}> &gt; </Text>
           </TouchableOpacity>
         )
       }  
       else if(sellbuy === 0){
         return(
             <TouchableOpacity style={styles.button} onPress={this.props.convToggle}>
-              <Text style={{margin:5}}>편의시설</Text>
-              <Text style={{margin:5}}> &gt; </Text>
+              {lst.includes('음식점'||'카페'||'편의점'||'병원')?null:<Text style={{margin:5}}>편의시설</Text>}
               <View style={{flex:1, flexDirection:'row'}}>
               {lst.includes('음식점')?
                 (<TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#fd6059'}}>
