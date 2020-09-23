@@ -12,6 +12,8 @@ import plus from './bottom/PlusComponents/plus'
 //import write from './bottom/Write/Write'
 //import EditInfo from './bottom/PlusComponents/EditInfo'
 
+import firebase from 'firebase';
+
 const AppTabNavigator = createMaterialTopTabNavigator({
     홈 : {screen: home},
     관심목록: {screen:like},
@@ -46,7 +48,13 @@ const AppTabNavigator = createMaterialTopTabNavigator({
 const AppTabContainet = createAppContainer(AppTabNavigator);
 
 export default class MainScreen extends Component {
-
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        this.setState({user: user});
+      }
+    })
+  }
   // navigationOptions 코드 추가
   static navigationOptions = {
     //headerLeft: <Icon name='ios-camera' style={{ paddingLeft:10 }}/>,

@@ -2,74 +2,27 @@ import React, { Component, useState } from 'react';
 import {TouchableOpacity,AsyncStorage, StyleSheet,   Alert,  Button,   Image,  TextInput,   Text,   View, ImageBackground} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack';
 import { Icon } from 'native-base';
 import CustomButton from '../Util/LoginUtil/CustomButton';
 import GoogleButton from '../Util/LoginUtil/GoogleLogin';
-import GithubButton from '../Util/LoginUtil/GithubButton';
 import http from '../../http-common'
 import Main from './../MainScreen'
 import Signup from '../Signup/Signup'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import styles from "../css/LoginCSS.js";
+
+import * as GoogleSignIn from 'expo-google-sign-in'
 import * as firebase from 'firebase';
 import "firebase/auth";
+// import 'firebase/firestore';
+import GithubButton from '../Util/LoginUtil/GithubButton';
 import getGithubTokenAsync from './getGithubTokenAsync';
 
-// const GithubStorageKey = '@Expo:GithubToken'; //lolz whatever you want.
-const GithubStorageKey = '@Expo:5e6f2bd685f996a68410bb3d4ae10689046246e1'; //lolz whatever you want.
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDjzVZ2HFNoBW2BhNXnvHOOuU9tWMjOOuI",
-  authDomain: "jipsa-f922c.firebaseapp.com",
-  databaseURL: "https://jipsa-f922c.firebaseio.com",
-  projectId: "jipsa-f922c",
-  storageBucket: "jipsa-f922c.appspot.com",
-  messagingSenderId: "356463774004",
-  appId: "1:356463774004:android:9331967b00e7263e89bd61"
-};
 
-function initializeFirebase() {
-  // Prevent reinitializing the app in snack.
-  if (!firebase.apps.length) {
-    return firebase.initializeApp(firebaseConfig);
-  }
-}
-
-async function signInAsync(token) {
-  try {
-    if (!token) {
-      const token = await getGithubTokenAsync();
-      if (token) {
-        await AsyncStorage.setItem(GithubStorageKey, token);
-        return signInAsync(token);
-      } else {
-        return;
-      }
-    }
-    const credential = firebase.auth.GithubAuthProvider.credential(token);
-    return firebase.auth().signInAndRetrieveDataWithCredential(credential);
-  } catch ({ message }) {
-    alert(message);
-  }
-}
-
-async function signOutAsync() {
-  try {
-    await AsyncStorage.removeItem(GithubStorageKey);
-    await firebase.auth().signOut();
-  } catch ({ message }) {
-    alert('Error: ' + message);
-  }
-}
-
-async function attemptToRestoreAuthAsync() {
-  let token = await AsyncStorage.getItem(GithubStorageKey);
-  if (token) {
-    console.log('Sign in with token', token);
-    return signInAsync(token);
-  }
-}
+// key 생성
+// expo credentials:manager -p android
 
 export default class Login extends Component {
     // navigationOptions 코드 추가
@@ -89,26 +42,64 @@ export default class Login extends Component {
       };  
     }  
 
-//////
-    state = { isSignedIn: false };
+// //////
+//     state = { isSignedIn: false };
   
-    componentDidMount() {
-      this.setupFirebaseAsync();
-    }
+//     componentDidMount() {
+//       this.setupFirebaseAsync();
+//     }
   
-    setupFirebaseAsync = async () => {
-      initializeFirebase();
+//     setupFirebaseAsync = async () => {
+//       initializeFirebase();
   
-      firebase.auth().onAuthStateChanged(async auth => {
-        const isSignedIn = !!auth;
-        this.setState({ isSignedIn });
-        if (!isSignedIn) {
-          attemptToRestoreAuthAsync();
-        }
-      });
-    };
+//       firebase.auth().onAuthStateChanged(async auth => {
+//         const isSignedIn = !!auth;
+//         this.setState({ isSignedIn });
+//         if (!isSignedIn) {
+//           attemptToRestoreAuthAsync();
+//         }
+//       });
+//     };
 
-//////
+// //////
+
+    state = { displayName: '', email: '', password: '', errorMessage: '', loading: false };
+    
+    onLoginSuccess() {
+      this.props.navigation.replace('next');
+    }
+
+    async signInWithGoogle() {
+      try {
+        await GoogleSignIn.askForPlayServicesAsync();
+        const { type, user } = await GoogleSignIn.signInAsync();
+        if (type === 'success') {
+          await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          const credential = firebase.auth.GoogleAuthProvider.credential(user.auth.idToken, user.auth.accessToken,);
+          const googleProfileData = await firebase.auth().signInWithCredential(credential);
+          this.onLoginSuccess.bind(this);
+        }
+      } catch ({ message }) {
+        alert('login: Error:' + message);
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      klikPost(){
       http.post('/login/chinfo', {
         id: this.state.id,
@@ -138,10 +129,6 @@ export default class Login extends Component {
     }   */
 
     render() {    
-      if(this.state.isSignedIn)
-      {
-        console.log(firebase.auth().currentUser);
-      }
       return (
         <View style={styles.container}>
           {/* <ImageBackground 
@@ -183,12 +170,12 @@ export default class Login extends Component {
                 buttonColor={'#FF765B'}
                 title={'  SIGN IN WITH GOOGLE'}
                 titleColor={'white'}
-                
+                onPress={()=>this.signInWithGoogle()}
                 />
           </View>
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             <GithubButton onPress={() => signInAsync()} />
-          </View>
+          </View> */}
           {/* <View style={{alignItems:"center",height:150, width:'100%'}}>
             <GoogleButton2
                 buttonColor={'#FF765B'}
@@ -220,3 +207,5 @@ export default class Login extends Component {
     }
     
   }
+  
+  

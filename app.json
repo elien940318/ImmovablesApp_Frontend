@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "jipsa",
     "slug": "ImmovablesApp",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -25,7 +25,13 @@
     ],
     "android": {
       "package": "com.gmc.jipsa_android",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "config": {
+          "googleSignIn" : {
+            "apiKey": "AIzaSyDOJTGQuJT8xajsASNFI3gqLZqZ0mxog0A",
+            "certificateHash": "aad239a547d6a5af104cb4e9216fae2d583ce843"
+          }
+      }
     },
     "ios": {
       "supportsTablet": true

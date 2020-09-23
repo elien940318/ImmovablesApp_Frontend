@@ -15,23 +15,22 @@
       },
       "oauth_client": [
         {
-          "client_id": "356463774004-7542u0vb44eeh4bk6f08lsnvvb3j8vh7.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "356463774004-limr8n30ft2dvgm1l992eul2nes2s8l5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmc.jipsa_android",
+            "certificate_hash": "aad239a547d6a5af104cb4e9216fae2d583ce843"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDjzVZ2HFNoBW2BhNXnvHOOuU9tWMjOOuI"
+          "current_key": "AIzaSyDOJTGQuJT8xajsASNFI3gqLZqZ0mxog0A"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "356463774004-7542u0vb44eeh4bk6f08lsnvvb3j8vh7.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

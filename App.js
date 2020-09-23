@@ -7,6 +7,13 @@ import test  from './Components/Login/test';
 import MainScreen from  './Components/MainScreen'
 import Signup from './Components/Signup/Signup'
 import Wishlist from './Components/Util/WriteUtil/Wishlist'
+import * as firebase from 'firebase';
+
+import { firebaseConfig } from './config/firebase';
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const AppStackNavigator = createStackNavigator({
   
