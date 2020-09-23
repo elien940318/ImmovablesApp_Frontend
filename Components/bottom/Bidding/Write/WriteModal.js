@@ -162,7 +162,6 @@ export default class WriteModal extends Component {
               
               <TouchableOpacity style={styles.button} onPress={()=>this.sellBuyModalToggle()}>
                 <Text style={{margin:5}}>{this.state.category}</Text>
-                <Text style={{margin:5}}> &gt; </Text>
               </TouchableOpacity>
               <DetailSection detailToggle={()=>this.detailModalToggle()} convToggle={()=>this.convModalToggle()}
                 sellbuy={this.state.sellbuy} lst={this.state.lst} /* 세부사항, 편의시설 컴포넌트 분리 *//>
@@ -177,14 +176,14 @@ export default class WriteModal extends Component {
                 </TextInput>
                 {imageArray.length < 5 ? /* 이미지 선택 (5장 까지 가능하도록 구현) */
                 <TouchableOpacity style={styles.bottomimage} onPress={this._pickImage} >
-                  <View style={{flexDirection:'row'}}>
+                  <View style={{flexDirection:'row', alignItems:'center'}}>
                     <Icon name='md-image' style={{margin:5, color:'#FF5C3B'}}/>
                     <Text style={{margin:5, color:'#FF5C3B'}}>사진 추가하기</Text>
                   </View>
                 </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.bottomimage} onPress={this.noUpdate} >
-                  <View style={{flexDirection:'row'}}>
+                  <View style={{flexDirection:'row', alignItems:'center'}}>
                     <Icon name='md-image' style={{margin:5, color:'#004aff'}}/>
                     <Text style={{margin:5, color:'#004aff'}}>사진 추가하기</Text>
                   </View>

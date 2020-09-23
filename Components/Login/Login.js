@@ -11,7 +11,7 @@ import http from '../../http-common'
 import Main from './../MainScreen'
 import Signup from '../Signup/Signup'
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import styles from "../css/Login.js";
+import styles from "../css/LoginCSS.js";
 import * as firebase from 'firebase';
 import "firebase/auth";
 import getGithubTokenAsync from './getGithubTokenAsync';
@@ -220,5 +220,3 @@ export default class Login extends Component {
     }
     
   }
-  
-  
