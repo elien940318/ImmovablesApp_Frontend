@@ -6,7 +6,7 @@ import SettingInfo from '../../Setting/Setting'
 class DetailSettingModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { /* first, second, third Section 반드시 데이터 정리 */
         firstSectionVisible: false,
         secondSectionVisible: false,
         thirdSectionVisible: false,
@@ -31,6 +31,10 @@ class DetailSettingModal extends Component {
         lst[idx] = bool
         this.setState({thirdSectionCheckList:lst})
     }
+  }
+
+  switch=(section)=>{
+    
   }
 
   firstSection=()=>{
@@ -79,15 +83,15 @@ class DetailSettingModal extends Component {
          <View style={{width:'100%', flexDirection:'row'}}>
            <View style={{width:'50%'}}>
            <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[0]} color="green" 
-             onPress={()=>this.checkController(3,0,!this.state.secondSectionCheckList[0])} /><Text>     단독주택</Text></ListItem></View>
+             onPress={()=>this.checkController(3,0,!this.state.thirdSectionCheckList[0])} /><Text>     단독주택</Text></ListItem></View>
              <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[1]} color="green" 
-             onPress={()=>this.checkController(3,1,!this.state.secondSectionCheckList[1])} /><Text>     다가구주택</Text></ListItem></View>
+             onPress={()=>this.checkController(3,1,!this.state.thirdSectionCheckList[1])} /><Text>     다가구주택</Text></ListItem></View>
            </View>
            <View style={{width:'50%'}}>
              <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[2]} color="green" 
-             onPress={()=>this.checkController(3,2,!this.state.secondSectionCheckList[2])} /><Text>     다가구주택</Text></ListItem></View>
+             onPress={()=>this.checkController(3,2,!this.state.thirdSectionCheckList[2])} /><Text>     다가구주택</Text></ListItem></View>
              <View style={{flexDirection:'row'}}><ListItem><CheckBox checked={this.state.thirdSectionCheckList[3]} color="green" 
-             onPress={()=>this.checkController(3,3,!this.state.secondSectionCheckList[3])} /><Text>     상가주택</Text></ListItem></View>
+             onPress={()=>this.checkController(3,3,!this.state.thirdSectionCheckList[3])} /><Text>     상가주택</Text></ListItem></View>
            </View>
          </View>
      )
@@ -98,18 +102,11 @@ class DetailSettingModal extends Component {
     this.setState({SettingInfoVisible:!this.state.SettingInfoVisible});
   }
   SettingInfoModal=()=>{
-    return <Modal
-    animationType="slide"
-    transparent={false}
-    visible={this.state.SettingInfoVisible}
-    onRequestClose={() => {
-      this.SettingInfoVisible1();
-    }}
-    backdrop={true}
-    >
+    return( <Modal animationType="slide" transparent={false} visible={this.state.SettingInfoVisible}
+    onRequestClose={() => { this.SettingInfoVisible1(); }} backdrop={true} >
       <SettingInfo SettingInfoVisible1={()=>this.SettingInfoVisible1()}/>
     </Modal>
-
+    )
   }
 
   render() {
@@ -123,8 +120,7 @@ class DetailSettingModal extends Component {
             <View style={{flexDirection:'column', alignItems:'center'}}>
                 <TouchableOpacity style={{width:'100%',height:50,flexDirection:'row',justifyContent:'space-between',alignItems: 'center',borderWidth:0.5,borderColor:'#a7a7a7',backgroundColor:'whitesmoke'}}
                     onPress={() => {
-                    this.setState({firstSectionVisible: !this.state.firstSectionVisible});
-                    this.setState.press=true;
+                    this.setState({firstSectionVisible: !this.state.firstSectionVisible, secondSectionVisible: false, thirdSectionVisible: false});
                     } }>
                     <View style={{flexDirection:'row'}}>
                         <Text>  </Text>
@@ -135,7 +131,7 @@ class DetailSettingModal extends Component {
                 </TouchableOpacity>
                 {this.firstSection()}
                 <TouchableOpacity style={{width:'100%', height:50, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', borderWidth:0.5, borderColor:'#a7a7a7', backgroundColor:'whitesmoke'}}
-                onPress={() => this.setState({secondSectionVisible: !this.state.secondSectionVisible})}>
+                onPress={() => this.setState({firstSectionVisible: false, secondSectionVisible: !this.state.secondSectionVisible, thirdSectionVisible: false})}>
                     <View style={{flexDirection:'row'}}>
                         <Text>  </Text>
                         <Icon name='ios-watch'/>
@@ -145,7 +141,7 @@ class DetailSettingModal extends Component {
                 </TouchableOpacity>
                 {this.SecondSection()}
                 <TouchableOpacity style={{width:'100%', height:50, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', borderWidth:0.5, borderColor:'#a7a7a7', backgroundColor:'whitesmoke'}}
-                onPress={() => this.setState({thirdSectionVisible: !this.state.thirdSectionVisible})}>
+                onPress={() => this.setState({firstSectionVisible:false,secondSectionVisible:false,thirdSectionVisible: !this.state.thirdSectionVisible})}>
                     <View style={{flexDirection:'row'}}>
                         <Text>  </Text>
                         <Icon name='md-browsers'/>
