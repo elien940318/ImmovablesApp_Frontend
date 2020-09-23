@@ -23,6 +23,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.gmc.jipsa_android",
+      "googleServicesFile": "./google-services.json"
+    },
     "ios": {
       "supportsTablet": true
     }    

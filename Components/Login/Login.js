@@ -6,12 +6,71 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { Icon } from 'native-base';
 import CustomButton from '../Util/LoginUtil/CustomButton';
 import GoogleButton from '../Util/LoginUtil/GoogleLogin';
+import GithubButton from '../Util/LoginUtil/GithubButton';
 import http from '../../http-common'
-import GoogleButton2 from '../Util/LoginUtil/GoogleLogin2';
 import Main from './../MainScreen'
 import Signup from '../Signup/Signup'
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import styles from "../css/Login.js";
+import * as firebase from 'firebase';
+import "firebase/auth";
+import getGithubTokenAsync from './getGithubTokenAsync';
+
+// const GithubStorageKey = '@Expo:GithubToken'; //lolz whatever you want.
+const GithubStorageKey = '@Expo:5e6f2bd685f996a68410bb3d4ae10689046246e1'; //lolz whatever you want.
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDjzVZ2HFNoBW2BhNXnvHOOuU9tWMjOOuI",
+  authDomain: "jipsa-f922c.firebaseapp.com",
+  databaseURL: "https://jipsa-f922c.firebaseio.com",
+  projectId: "jipsa-f922c",
+  storageBucket: "jipsa-f922c.appspot.com",
+  messagingSenderId: "356463774004",
+  appId: "1:356463774004:android:9331967b00e7263e89bd61"
+};
+
+function initializeFirebase() {
+  // Prevent reinitializing the app in snack.
+  if (!firebase.apps.length) {
+    return firebase.initializeApp(firebaseConfig);
+  }
+}
+
+async function signInAsync(token) {
+  try {
+    if (!token) {
+      const token = await getGithubTokenAsync();
+      if (token) {
+        await AsyncStorage.setItem(GithubStorageKey, token);
+        return signInAsync(token);
+      } else {
+        return;
+      }
+    }
+    const credential = firebase.auth.GithubAuthProvider.credential(token);
+    return firebase.auth().signInAndRetrieveDataWithCredential(credential);
+  } catch ({ message }) {
+    alert(message);
+  }
+}
+
+async function signOutAsync() {
+  try {
+    await AsyncStorage.removeItem(GithubStorageKey);
+    await firebase.auth().signOut();
+  } catch ({ message }) {
+    alert('Error: ' + message);
+  }
+}
+
+async function attemptToRestoreAuthAsync() {
+  let token = await AsyncStorage.getItem(GithubStorageKey);
+  if (token) {
+    console.log('Sign in with token', token);
+    return signInAsync(token);
+  }
+}
+
 export default class Login extends Component {
     // navigationOptions 코드 추가
     static navigationOptions = {
@@ -30,6 +89,26 @@ export default class Login extends Component {
       };  
     }  
 
+//////
+    state = { isSignedIn: false };
+  
+    componentDidMount() {
+      this.setupFirebaseAsync();
+    }
+  
+    setupFirebaseAsync = async () => {
+      initializeFirebase();
+  
+      firebase.auth().onAuthStateChanged(async auth => {
+        const isSignedIn = !!auth;
+        this.setState({ isSignedIn });
+        if (!isSignedIn) {
+          attemptToRestoreAuthAsync();
+        }
+      });
+    };
+
+//////
      klikPost(){
       http.post('/login/chinfo', {
         id: this.state.id,
@@ -59,6 +138,10 @@ export default class Login extends Component {
     }   */
 
     render() {    
+      if(this.state.isSignedIn)
+      {
+        console.log(firebase.auth().currentUser);
+      }
       return (
         <View style={styles.container}>
           {/* <ImageBackground 
@@ -102,6 +185,9 @@ export default class Login extends Component {
                 titleColor={'white'}
                 
                 />
+          </View>
+          <View style={styles.container}>
+            <GithubButton onPress={() => signInAsync()} />
           </View>
           {/* <View style={{alignItems:"center",height:150, width:'100%'}}>
             <GoogleButton2

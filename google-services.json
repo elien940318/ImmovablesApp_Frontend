@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "356463774004",
+    "firebase_url": "https://jipsa-f922c.firebaseio.com",
+    "project_id": "jipsa-f922c",
+    "storage_bucket": "jipsa-f922c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356463774004:android:9331967b00e7263e89bd61",
+        "android_client_info": {
+          "package_name": "com.gmc.jipsa_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356463774004-7542u0vb44eeh4bk6f08lsnvvb3j8vh7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjzVZ2HFNoBW2BhNXnvHOOuU9tWMjOOuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356463774004-7542u0vb44eeh4bk6f08lsnvvb3j8vh7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
