@@ -1,47 +1,41 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput} from 'react-native';
 import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
-import RowCardComponent  from '../../../../../CityRowCardComponent.js';
 import http from "../../../../../../../../../http-common.js"
-import styles from '../../../../../../../../css/bottom/Bidding/Setting/CityFind/GunFindCSS.js'
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
-const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
-export default class GunFind extends Component {
+import styles from '../../../../../../../../css/bottom/Bidding/Setting/CityFind/DoFindCSS.js'
+
+export default class DoFind extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalVisible: false,
             loading:true,
             DBdata:null,
-            city:'',
             cityArr:[]
         };
       }
     componentDidMount(){
-    this.getDB()
-    setTimeout(()=>{
-        this.setState({
-        loading:false
-        })
-    }, 1000)
+      this.getDB()
+      setTimeout(()=>{
+          this.setState({
+          loading:false
+          })
+      }, 1000)
     }
     getDB(){
-        http.get(`/city/getCity`)
+        http.get(`/Address/getCity`)
           .then(response => {
-            this.state.DBdata = response.data
-            this.renderSection()
+            this.setState({DBdata:response.data})
           })
           .catch(error => {
             console.log(error);
           })
     }
     renderSection() {  
+      
         if(this.state.DBdata != null && this.state.loading==false){
-              this.state.DBdata.map((feed, index) => (
-                this.state.cityArr.push({name:feed.name})
+            this.state.DBdata.map((feed, index) => (
+              this.state.cityArr.push({name:feed.name, code:feed.code})
             ))
             return (
               <FlatGrid
@@ -52,8 +46,8 @@ export default class GunFind extends Component {
                 renderItem={({item})=>(
                   <TouchableOpacity 
                     onPress={()=>{
-                      this.state.city=item.name;
-                      AsyncStorage.setItem('Doch', this.state.city);
+                      this.props.citySetting(item.name, item.code);
+                      this.props.cityToggle();
                     }}
                     style={styles.itemContainer}>
                     <Text style={styles.itemName}>{item.name}</Text>
@@ -68,33 +62,26 @@ export default class GunFind extends Component {
           )
         }
     }
-    setnum=(a)=>{
-      this.setState({city:a})
-    }
+    
     render() {
         return (
             <Container style={styles.container}>
                 <Header style ={{justifyContent:'space-between', alignItems:'center'}}> 
-                <Icon name='ios-arrow-back' onPress={()=>{this.props.Guntoggle()}}/>
-                <Text>시/도 선택</Text>
-                <Text/>
+                  <Icon name='ios-arrow-back' onPress={()=>{this.props.cityToggle()}}/>
+                  <Text>시/도 선택</Text>
+                  <Text/>
                 </Header>
                 <View style={{height:'82%'}}>                  
                   {this.renderSection()}
                 </View>
                 <View style={{height:"8%", flexDirection:'row', justifyContent: 'center', borderWidth:0.5}}>
                   <TouchableOpacity 
-
+                    onPress={()=>{this.props.cityToggle()}}
                     style={{height:'100%',width:'50%', alignItems:'center', justifyContent:'center', borderEndWidth:0.5}}>
                     <Text>취소</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity 
-                    style={{width:'50%', alignItems:'center', justifyContent:'center'}}>
-                    <Text>저장</Text>
                   </TouchableOpacity>
                 </View>
             </Container>
         );
     }
-}
-
+};

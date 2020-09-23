@@ -7,15 +7,17 @@ class DetailSettingModal extends Component {
   constructor(props) {
     super(props);
     this.state = { /* first, second, third Section 반드시 데이터 정리 */
-        firstSectionVisible: false,
+        firstSectionVisible: true,
         secondSectionVisible: false,
         thirdSectionVisible: false,
         SettingInfoVisible: false,
         firstSectionCheckList: [false, false, false, false],
         secondSectionCheckList: [false, false, false, false],
-        thirdSectionCheckList: [false, false, false, false]
+        thirdSectionCheckList: [false, false, false, false],
+        propsName: '주택',
     };
   }
+  /* 체크 박스 스위치 메소드 */
   checkController=(sectionNum, idx, bool)=>{
     if(sectionNum === 1){
         let lst = this.state.firstSectionCheckList
@@ -31,10 +33,6 @@ class DetailSettingModal extends Component {
         lst[idx] = bool
         this.setState({thirdSectionCheckList:lst})
     }
-  }
-
-  switch=(section)=>{
-    
   }
 
   firstSection=()=>{
@@ -98,18 +96,54 @@ class DetailSettingModal extends Component {
    }
   }
 
+  checkPropsName=()=>{
+    if(this.state.firstSectionVisible){
+      // this.setState({propsName:'주택'})
+      this.state.propsName = '주택'
+    }else if(this.state.secondSectionVisible){
+      //this.setState({propsName:'오피스텔'})
+      this.state.propsName = '오피스텔'
+    }else if(this.state.thirdSectionVisible){
+      // this.setState({propsName:'아파트'})
+      this.state.propsName = '아파트'
+    }
+    console.log(this.state.propsName)
+  }
+
+  checkSwitcher=(num)=>{
+    if(num == 1){
+      this.state.firstSectionVisible = !this.state.firstSectionVisible;
+      this.state.secondSectionVisible = false;
+      this.state.thirdSectionVisible = false;
+      this.setState({secondSectionVisible: false})
+    }else if(num == 2){
+      this.state.firstSectionVisible = false;
+      this.state.secondSectionVisible = !this.state.secondSectionVisible;
+      this.state.thirdSectionVisible = false;
+      this.setState({firstSectionVisible: false})
+    }else if(num == 3){
+      this.state.firstSectionVisible = false;
+      this.state.secondSectionVisible = false;
+      this.state.thirdSectionVisible = !this.state.thirdSectionVisible;
+      this.setState({firstSectionVisible: false})
+    }
+    
+  }
+
+  /* 세부 설정 모달 on/off 메소드 */
   SettingInfoVisible1() {
     this.setState({SettingInfoVisible:!this.state.SettingInfoVisible});
   }
   SettingInfoModal=()=>{
     return( <Modal animationType="slide" transparent={false} visible={this.state.SettingInfoVisible}
     onRequestClose={() => { this.SettingInfoVisible1(); }} backdrop={true} >
-      <SettingInfo SettingInfoVisible1={()=>this.SettingInfoVisible1()}/>
+      <SettingInfo SettingInfoVisible1={()=>this.SettingInfoVisible1()} name={this.state.propsName}/>
     </Modal>
     )
   }
 
   render() {
+    
     return (
         <View style={{flex:1}}>
             <Header style ={{justifyContent:'space-between'}}>
@@ -119,9 +153,7 @@ class DetailSettingModal extends Component {
             </Header>
             <View style={{flexDirection:'column', alignItems:'center'}}>
                 <TouchableOpacity style={{width:'100%',height:50,flexDirection:'row',justifyContent:'space-between',alignItems: 'center',borderWidth:0.5,borderColor:'#a7a7a7',backgroundColor:'whitesmoke'}}
-                    onPress={() => {
-                    this.setState({firstSectionVisible: !this.state.firstSectionVisible, secondSectionVisible: false, thirdSectionVisible: false});
-                    } }>
+                    onPress={() => {this.checkSwitcher(1);this.checkPropsName()}}>
                     <View style={{flexDirection:'row'}}>
                         <Text>  </Text>
                         <Icon name='md-square-outline' />
@@ -131,7 +163,7 @@ class DetailSettingModal extends Component {
                 </TouchableOpacity>
                 {this.firstSection()}
                 <TouchableOpacity style={{width:'100%', height:50, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', borderWidth:0.5, borderColor:'#a7a7a7', backgroundColor:'whitesmoke'}}
-                onPress={() => this.setState({firstSectionVisible: false, secondSectionVisible: !this.state.secondSectionVisible, thirdSectionVisible: false})}>
+                onPress={() => {this.checkSwitcher(2);this.checkPropsName()}}>
                     <View style={{flexDirection:'row'}}>
                         <Text>  </Text>
                         <Icon name='ios-watch'/>
@@ -141,7 +173,7 @@ class DetailSettingModal extends Component {
                 </TouchableOpacity>
                 {this.SecondSection()}
                 <TouchableOpacity style={{width:'100%', height:50, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', borderWidth:0.5, borderColor:'#a7a7a7', backgroundColor:'whitesmoke'}}
-                onPress={() => this.setState({firstSectionVisible:false,secondSectionVisible:false,thirdSectionVisible: !this.state.thirdSectionVisible})}>
+                onPress={() => {this.checkSwitcher(3);this.checkPropsName()}}>
                     <View style={{flexDirection:'row'}}>
                         <Text>  </Text>
                         <Icon name='md-browsers'/>
@@ -158,7 +190,6 @@ class DetailSettingModal extends Component {
             </View>
             {this.SettingInfoModal()}
         </View>
-      
     );
   }
 }

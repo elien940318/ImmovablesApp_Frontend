@@ -1,43 +1,83 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { Container, Header, Icon  } from 'native-base';
 import Modal from "react-native-modal";
 import DetailAdress from './DetailAdress'
-import Dofind from './CityFind/DoFind'
-import Gunfind from './CityFind/GunFind'
+import CityFinder from './CityFind/CityFinder'
+import ContryFinder from './CityFind/ContryFinder'
+import TownFinder from './CityFind/TownFinder'
 import styles from '../../../../../../../css/bottom/Bidding/Setting/CityFind/FindAdressCSS.js'
+import { ScrollView } from 'react-native';
+import httpCommon from '../../../../../../../../http-common';
 class FindAdress extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        isGunVisible: false,
-        isModalVisible: false,
-        DoNum:'',
-        CityName:'시/도 선택'
+        cityModalVisible: false,
+        contryModalVisible: false,
+        townModalVisible: false,
+        cityData:['시/도 선택',null],
+        contryData:['시/군/구 선택',null],
+        townData:['동/면/읍 선택',null],
     };
   }
-  Doshow(){
-    AsyncStorage.getItem('Doch').then(value =>
-      this.setState({ getValue: value, CityName:value }),
-      
-      );
+  /* 변경 데이터 저장 메소드 */
+  citySetting=(cityName, cityCode)=>{
+    this.setState({cityData:[cityName,cityCode],contryData:['시/군/구 선택',null],townData:['동/면/읍 선택',null]})
   }
-  Dotoggle() {
-    this.setState({isModalVisible:!this.state.isModalVisible});
+  contrySetting=(contryName, contryCode)=>{
+    this.setState({contryData:[contryName,contryCode],townData:['동/면/읍 선택',null]})
+  }
+  townSetting=(townName, townCode)=>{
+    this.setState({townData:[townName,townCode]})
+  }
+  /* 모달 on/off 메소드 */
+  cityToggle() {
+    this.setState({cityModalVisible:!this.state.cityModalVisible});
+  }
+  contryToggle(){
+    this.setState({contryModalVisible:!this.state.contryModalVisible});
+  }
+  townToggle(){
+    this.setState({townModalVisible:!this.state.townModalVisible});
+  }
+  /* 검색 메소드 */
+  villaSearch=()=>{ // 빌라 검색
+    http.get(`/Address/getApart/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.cityData/* <-- 삭제 후 검색어 */}`)
+      .then(response=>{
+        //response.data
+      }).catch(e=>{
+        console.log(e)
+      })
+  }
+  officetelSearch=()=>{ // 아파트 검색
+    http.get(`/Address/getOfficetel/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.cityData/* <-- 삭제 후 검색어 */}`)
+      .then(response=>{
+        //response.data
+      }).catch(e=>{
+        console.log(e)
+      })
+  }
+  apartSearch=()=>{ // 아파트 검색
+    http.get(`/Address/getVilla/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.cityData/* <-- 삭제 후 검색어 */}`)
+      .then(response=>{
+        //response.data
+      }).catch(e=>{
+        console.log(e)
+      })
+  }
 
-  }
-  Guntoggle(){
-    this.setState({isGunVisible:!this.state.isGunVisible});
-  }
-  
   render() {
     return (
       <Container style={styles.container}>
-          <Modal isVisible={this.state.isModalVisible}>
-            <Dofind Dotoggle={()=>this.Dotoggle()} Doshow={()=>this.Doshow()} />
+          <Modal isVisible={this.state.cityModalVisible}>
+            <CityFinder cityToggle={()=>this.cityToggle()} citySetting={this.citySetting} />
           </Modal>
-          <Modal isVisible={this.state.isGunVisible}>
-            <Gunfind Guntoggle={()=>this.Guntoggle()} Gun={()=>this.Doshow()} />
+          <Modal isVisible={this.state.contryModalVisible}>
+            <ContryFinder contryToggle={()=>this.contryToggle()} contrySetting={this.contrySetting} cityNum={this.state.cityData[1]}/>
+          </Modal>
+          <Modal isVisible={this.state.townModalVisible}>
+            <TownFinder townToggle={()=>this.townToggle()} townSetting={this.townSetting} contryNum={this.state.contryData[1]}/>
           </Modal>
           <Header style ={{justifyContent:'space-between', alignItems:'center'}}> 
             <Icon name='ios-arrow-back' onPress={()=>{this.props.toggle()}}/>
@@ -51,21 +91,23 @@ class FindAdress extends Component {
             <View style={{height:'50%'}}>
                 <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', height:'25%'}}>
                     <TouchableOpacity 
-                      onPress={()=>{this.Dotoggle();}}
+                      onPress={()=>{this.cityToggle();}}
                       style={styles.bottombutton}>
-                        <Text>{this.state.CityName}</Text>
+                        <Text>{this.state.cityData[0]}</Text>
                         <Icon name='ios-arrow-forward'/>
                     </TouchableOpacity>
                     <TouchableOpacity 
-                      onPress={()=>{this.Guntoggle();}}
+                      onPress={()=>{this.state.cityData[1] !== null?this.contryToggle():alert('시/도를 먼저 선택하여 주세요.')}}
                       style={styles.bottombutton}>
-                        <Text>시/군/구 선택</Text>
+                        <Text>{this.state.contryData[0]}</Text>
                         <Icon name='ios-arrow-forward'/>
                     </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', height:'25%'}}>
-                    <TouchableOpacity style={styles.bottombutton1}>
-                        <Text>동/면/읍 선택</Text>
+                    <TouchableOpacity 
+                      onPress={()=>{this.state.contryData[1] !== null?this.townToggle():alert('시/군/구 를 먼저 선택하여 주세요.')}}
+                      style={styles.bottombutton1}>
+                        <Text>{this.state.townData[0]}</Text>
                         <Icon name='ios-arrow-forward'/>
                     </TouchableOpacity>
                 </View>
@@ -81,7 +123,15 @@ class FindAdress extends Component {
                         <Text/>
                     </TouchableOpacity>
                 </View>
+                <ScrollView>
+
+                </ScrollView>
             </View>
+          </View>
+          <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
+            <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} onPress={()=>{this.props.toggle()}}>
+                <Text style={{fontSize:20, color:'white'}}>완료 후 돌아가기</Text>
+            </TouchableOpacity>
           </View>
       </Container>
     );

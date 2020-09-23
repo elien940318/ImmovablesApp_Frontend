@@ -17,6 +17,8 @@ export default class AdressScreen extends PureComponent {
   }
  
   render() {
+    // console.log(this.props.navigation.state.params)
+    console.log(this.props)
     return (
         <Container style={styles.container}>
           <Modal isVisible={this.state.isModalVisible}>
