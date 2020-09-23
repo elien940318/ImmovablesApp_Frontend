@@ -68,7 +68,7 @@ export default class DescScreen extends PureComponent {
                     style={this.state.num===3? styles.onbutton : styles.offbutton}>
                     <Icon name='md-basket'/>
                     <Text>
-                      편의점
+                      편의점\\
                     </Text>
                   </TouchableOpacity>
                 </View>
