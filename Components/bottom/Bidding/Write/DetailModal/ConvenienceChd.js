@@ -8,7 +8,7 @@ class ConvenienceChd extends Component {
 
   render() {
     return (
-        <Text>{this.props.data}</Text>
+        <Text>{this.props.data} </Text>
     );
   }
 }

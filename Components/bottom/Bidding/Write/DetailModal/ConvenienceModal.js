@@ -95,11 +95,13 @@ class ConvenienceModal extends Component {
                     </Text>
                   </TouchableOpacity>
                 </View>
+                <View style={{margin:20, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 {
                   this.state.lst.length > 0?
                   this.state.lst.map((e, index) => <Txt data={e} key={index}/>):
                   null
                 }
+                </View>
               </View>
             </TouchableWithoutFeedback>
             
