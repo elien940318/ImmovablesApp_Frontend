@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput} from 'react-native';
 import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
-import RowCardComponent  from '../../../../Write/CityRowCardComponent'; 
-import http from "../../../../../../../http-common"
+import RowCardComponent  from '../../../../../CityRowCardComponent.js'; 
+import http from "../../../../../../../../../http-common.js"
 import styles from '../../../../../../../../css/bottom/Bidding/Setting/CityFind/DoFindCSS.js'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
