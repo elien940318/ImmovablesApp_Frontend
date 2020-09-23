@@ -20,7 +20,7 @@ const TabNavigator = createMaterialTopTabNavigator({
         backgroundColor:'whitesmoke',
       },
       iconStyle: {height:'20%'},
-      activeTintColor:'#004aff',
+      activeTintColor:'#FF5C3B',
       inactiveTintColor:'#9c9a9a',
       upperCaseLabel: false,
       indicatorStyle: {

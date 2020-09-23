@@ -156,7 +156,7 @@ class DetailSettingModal extends Component {
                 {this.ThirdSection()}
             </View>
             <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
-                <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#004aff', justifyContent:'center', alignItems:'center' }} onPress={()=>this.SettingInfoVisible1()}>
+                <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} onPress={()=>this.SettingInfoVisible1()}>
                     <Text style={{fontSize:20, color:'white'}}>다음</Text>
                 </TouchableOpacity>
             </View>

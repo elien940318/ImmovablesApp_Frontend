@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       borderWidth:0.5,
-      backgroundColor:'#004aff'
+      backgroundColor:'#F88262'
     },
     offbutton:{
       height:50,

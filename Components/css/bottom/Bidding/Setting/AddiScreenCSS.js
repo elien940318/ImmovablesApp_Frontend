@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     red: {
-        backgroundColor: '#004aff',
+        backgroundColor: '#F88262',
         alignItems: 'center',
         padding: 10,
       },

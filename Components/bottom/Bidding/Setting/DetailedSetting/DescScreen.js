@@ -22,7 +22,7 @@ export default class DescScreen extends PureComponent {
         return(
           <TouchableOpacity 
             onPress={()=>this.ckonbutton(0)}
-            style={{width:50, height:25, backgroundColor:'#004aff', alignItems:'center', justifyContent:'center'}}>
+            style={{width:50, height:25, backgroundColor:'#F88262', alignItems:'center', justifyContent:'center'}}>
             <Text style={{color:'white'}}>음식점 x</Text> 
           </TouchableOpacity>
         );
@@ -68,7 +68,7 @@ export default class DescScreen extends PureComponent {
                     style={this.state.num===3? styles.onbutton : styles.offbutton}>
                     <Icon name='md-basket'/>
                     <Text>
-                      편의점\\
+                      편의점
                     </Text>
                   </TouchableOpacity>
                 </View>
