@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput} from 'react-native';
 import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
 import RowCardComponent  from '../../../../Write/CityRowCardComponent'; 
@@ -21,15 +21,15 @@ export default class DoFind extends Component {
         };
       }
     componentDidMount(){
-    this.getDB()
-    setTimeout(()=>{
-        this.setState({
-        loading:false
-        })
-    }, 1000)
+      this.getDB()
+      setTimeout(()=>{
+          this.setState({
+          loading:false
+          })
+      }, 500)
     }
     getDB(){
-        http.get(`/city/getCity`)
+        http.get(`/Adress/getCity`)
           .then(response => {
             this.state.DBdata = response.data
             this.renderSection()
@@ -40,8 +40,8 @@ export default class DoFind extends Component {
     }
     renderSection() {  
         if(this.state.DBdata != null && this.state.loading==false){
-              this.state.DBdata.map((feed, index) => (
-                this.state.cityArr.push({name:feed.name})
+            this.state.DBdata.map((feed, index) => (
+              this.state.cityArr.push({name:feed.name, code:feed.code})
             ))
             return (
               <FlatGrid
@@ -52,8 +52,9 @@ export default class DoFind extends Component {
                 renderItem={({item})=>(
                   <TouchableOpacity 
                     onPress={()=>{
+                      console.log(item.name, item.code)
                       this.state.city=item.name;
-                      AsyncStorage.setItem('Doch', this.state.city);
+                      
                     }}
                     style={styles.itemContainer}>
                     <Text style={styles.itemName}>{item.name}</Text>
@@ -89,10 +90,11 @@ export default class DoFind extends Component {
                     <Text>취소</Text>
                   </TouchableOpacity>
                   <TouchableOpacity 
-                    onPress={()=>{this.props.Dotoggle(); this.props.Doshow()}}
+                    onPress={()=>{this.props.Dotoggle(); this.props.Doshow();}}
                     style={{width:'50%', alignItems:'center', justifyContent:'center'}}>
                     <Text>저장</Text>
                   </TouchableOpacity>
+                  
                 </View>
             </Container>
         );
