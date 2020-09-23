@@ -11,6 +11,7 @@ import http from '../../http-common'
 import Main from './../MainScreen'
 import Signup from '../Signup/Signup'
 import { TouchableHighlight } from 'react-native-gesture-handler';
+<<<<<<< HEAD
 import styles from "../css/Login.js";
 import * as firebase from 'firebase';
 import "firebase/auth";
@@ -71,6 +72,9 @@ async function attemptToRestoreAuthAsync() {
   }
 }
 
+=======
+import styles from "../css/LoginCSS.js";
+>>>>>>> f03268f3f31e1a07068ea94fe47ddc0f72da7c1b
 export default class Login extends Component {
     // navigationOptions 코드 추가
     static navigationOptions = {

@@ -29,21 +29,15 @@ export default class RawCardComponent extends Component {
             <TouchableOpacity onPress={() => this.toggle()}>
               <CardItem>
                   <Body style={{flex: 1.5, flexDirection: 'column',  alignItems:'flex-start'}}>
-                    {
-                    (String(data.price).replace(/\n/g,' ').slice(0, 15)).length>=11 ?
-                      <Text> 
-                        {String(data.price).replace(/\n/g,' ').slice(0, 15) }...
-                      </Text> 
-                    : <Text> 
-                        {String(data.price).replace(/\n/g,' ').slice(0, 11) }
-                      </Text>
-                    }
+                    <Text style = {{ fontWeight:'900'}}>[{data.author}]</Text>
                     <Text note>{
                     data.title
                     //new Date(data.created).toDateString()
-                    
                     }</Text>
-                    <Text style = {{ fontWeight:'900'}}>파는 곳 : {data.author}</Text>
+                    <Text style={{color:'#FC510C'}}> 
+                      월세 {String(data.price).replace(/\n/g,' ').slice(0, 15)/10000 }(만원)
+                    </Text> 
+
                     {     
                         (data.content.replace(/\n/g,' ').slice(0, 15)).length>=11 ?
                         <Text> 

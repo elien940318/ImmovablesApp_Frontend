@@ -4,10 +4,12 @@ import { Icon, Container, Header, Button } from 'native-base';
 import RowCardComponent  from './RowCardComponent'; 
 import http from "../../../http-common";
 import Loading from "./BiddingAlgorithm/Loading"
+//import {get1} from './BiddingAlgorithm/BiddingGetDB'
 //import PurchaseHope from "./BiddingAlgorithm/PurchaseHope"
-import DetailPostModal from './DetailPostModal'
+// import DetailPostModal from './DetailPostModal'
 import BoardHeader from './BiddingAlgorithm/BoardHeader'
-import styles from '../../css/bottom/Bidding/Board.js'
+import styles from '../../css/bottom/Bidding/BoardCSS.js'
+
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
@@ -29,7 +31,6 @@ export default class Board extends Component {
 
   //로딩 구현(Life cycle (constructor-> static getDerivedStateFromProps() -> render() -> ))
   componentDidMount(){
-    //this.getDB()
     this.getDB()
     this.getDB2()
     setTimeout(()=>{
@@ -45,35 +46,35 @@ export default class Board extends Component {
       )
   }
   
+  toggle(){
+    this.setState({isModalVisible: !this.state.isModalVisible});
+  }
+
   segmentClicked = (activeIndex)=>{
     this.setState({activeIndex});
-    this.renderSection()
   }
 
   segmentClicked2 = (activeIndex2)=>{
     this.setState({activeIndex2});
-    this.renderSection()
   }
 
   getDB(){
     http.get(`/board/getPost`)
     .then(response => {
-      this.state.DBdata = response.data
-      this.renderSection()
+      this.setState({DBdata:response.data})
     })
     .catch(error => {
-      console.log(error);
+      //console.log(error); 
     })
   }
 
   getDB2(){
     http.get(`/board/getPost2`)
     .then(response => {
-      this.state.DBdata2 = response.data
-      this.renderSection()
+      this.setState({DBdata2: response.data})
     })
     .catch(error => {
-      console.log(error);
+      //console.log(error);
     })
   }
 
@@ -117,10 +118,7 @@ export default class Board extends Component {
       )
     }
   }
-
-  toggle(){
-    this.setState({isModalVisible: !this.state.isModalVisible});
-  }
+  
   //Main Render @@구매 & 거래
   render() {
     if(this.state.loading){

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {TextInput,TouchableOpacity, View, Text} from 'react-native';
 import {Container, Icon} from 'native-base';
-import styles from '../../../../css/bottom/Bidding/Setting/DescScreen.js'
+import styles from '../../../../css/bottom/Bidding/Setting/DescScreenCSS.js'
 export default class DescScreen extends PureComponent {
   constructor(props) {
     super(props);

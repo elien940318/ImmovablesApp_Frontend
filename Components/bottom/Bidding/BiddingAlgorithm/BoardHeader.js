@@ -3,8 +3,8 @@ import Modal from "react-native-modal";
 import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import { Icon, Container, Header, Button } from 'native-base'; 
 import RowCardComponent  from '../RowCardComponent'; 
-import WriteModal from '../WriteModal'
-import styles from '../../../css/bottom/Bidding/BoardHeader.js'
+import WriteModal from '../Write/WriteModal'
+import styles from '../../../css/bottom/Bidding/BoardHeaderCSS.js'
 export default class BoardHeader extends Component {
   constructor(props) {
     super(props);

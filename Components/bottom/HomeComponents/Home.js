@@ -5,7 +5,7 @@ import RowCardComponent  from './RowCardComponent';
 import ColumnCardComponent  from './ColumnCardComponent'; 
 import Carousel2 from './Carousel2'
 import myData from '../../Util/test.json';
-import styles from '../../css/bottom/HomComponents/Home.js';
+import styles from '../../css/bottom/HomComponents/HomeCSS.js';
 //const SLIDER_WIDTH = Dimensions.get('window').width;
 //const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);

@@ -9,10 +9,10 @@ const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
 const styles = StyleSheet.create({
     container: {
         margin:-20,
-        backgroundColor: 'whitesmoke'
+        backgroundColor: 'white'
       },
       modalheader:{
-        backgroundColor: 'whitesmoke',
+        backgroundColor: 'white',
         alignItems:'center',
         justifyContent: 'space-between',
 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth:1,
         borderColor:'#a7a7a7',
-        backgroundColor:'whitesmoke'    
+        backgroundColor:'white'    
     },
 
     button:{
@@ -31,12 +31,11 @@ const styles = StyleSheet.create({
         width:'95%',
         height:40,
         flexDirection:'row',
-        justifyContent:'space-between',
+        justifyContent:'center',
         alignItems: 'center',
         borderWidth:1,
         borderColor:'#a7a7a7',
-        borderRadius:5,
-        backgroundColor:'whitesmoke'
+        backgroundColor:'white'
         
     },
     iteminformation:{
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems: 'center',
       borderWidth:1,
-      borderColor:'#a7a7a7',      
+      borderColor:'#EAE9E9',      
     },
     bottomimage:{
       width:'95%',
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
       justifyContent:'flex-start',
       alignItems: 'center',
       borderWidth:1,
-      borderColor:'#a7a7a7',      
+      borderColor:'#EAE9E9',      
     },
     bottombutton:{
       width:'46%',
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems: 'center',
       borderWidth:1,
-      borderColor:'#a7a7a7',      
+      borderColor:'#EAE9E9',      
     },
     bottombutton1:{
       width:'46%',
@@ -84,8 +83,8 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems: 'center',
       borderWidth:1,
-      borderColor:'#a7a7a7',   
-      backgroundColor:'#004aff'   
+      borderColor:'#EAE9E9',   
+      backgroundColor:'#FF5C3B'   
     },
     image: { width: 300, height: 300, backgroundColor: 'gray' },
 
