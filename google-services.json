@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "356463774004-limr8n30ft2dvgm1l992eul2nes2s8l5.apps.googleusercontent.com",
+          "client_id": "356463774004-ju3mslahvkc2jt99jo65h6u7i6mfi96d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gmc.jipsa_android",
-            "certificate_hash": "aad239a547d6a5af104cb4e9216fae2d583ce843"
+            "certificate_hash": "d3652b9900d5c4e0062da41f4500f8e82b4678ad"
           }
         }
       ],

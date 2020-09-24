@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {TextInput,TouchableOpacity, View, Text, StyleSheet, Modal} from 'react-native';
 import {Container, Icon, Header} from 'native-base';
-import styles from '../../../../css/bottom/Bidding/Setting/AddiScreenCSS.js'
+import styles from '../../../../../../css/bottom/Bidding/Setting/AddiScreenCSS.js'
 export default class AddiScreen extends PureComponent {
   constructor(props) {
       super(props);
@@ -109,7 +109,7 @@ export default class AddiScreen extends PureComponent {
             <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
               <TouchableOpacity 
                 onPress={()=>this.SetGasModalVisible(!this.state.Gasshown)}
-                style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+                style={styles.inputbutton}>
                 <Text>입력</Text>
               </TouchableOpacity>
             </View>
@@ -174,11 +174,6 @@ export default class AddiScreen extends PureComponent {
                     <Text style={this.state.loanId === 2? styles.white : styles.black}>가능</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
-            </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
-              <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                <Text>준공년도</Text>
               </View>
             </View>
           </View> 

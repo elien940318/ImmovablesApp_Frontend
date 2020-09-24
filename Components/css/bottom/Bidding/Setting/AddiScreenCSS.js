@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     red: {
-        backgroundColor: '#004aff',
+        backgroundColor: '#F88262',
         alignItems: 'center',
         padding: 10,
       },
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
       height:30,
       borderRadius:50, 
       borderWidth:0.5,
-      backgroundColor:'#004aff'
+      borderColor:'#a7a7a7',
+      backgroundColor:'#F88262'
     },
     offbutton:{
       justifyContent:'center', 
@@ -41,7 +42,17 @@ const styles = StyleSheet.create({
       height:30,
       borderRadius:50, 
       borderWidth:0.5,
-    }
+    },
+    inputbutton:{
+      color:'#000', 
+      width:'90%', 
+      height:40, 
+      borderWidth:0.5, 
+      borderRadius:5,
+      borderColor:'#a7a7a7' ,
+      justifyContent:'center', 
+      alignItems:'center', 
+      backgroundColor:"#F88262"}
 });
 
 export default styles;

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {TextInput,TouchableOpacity, View, Text, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import {Container, Icon,Header} from 'native-base';
 import { ThemeContext } from 'react-navigation';
-import styles from '../../../../css/bottom/Bidding/Setting/DefaultScreenCSS.js'
+import styles from '../../../../../../css/bottom/Bidding/Setting/DefaultScreenCSS.js'
 export default class DefaultScreen extends PureComponent {
   constructor(props) {
     super(props);
@@ -143,7 +143,7 @@ export default class DefaultScreen extends PureComponent {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity 
             onPress={()=>this.SetSizeModalVisible(!this.state.sizeshwon)}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -188,7 +188,7 @@ export default class DefaultScreen extends PureComponent {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity 
             onPress={()=>this.SetHeightModalVisible(!this.state.heightshown)}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -231,7 +231,7 @@ export default class DefaultScreen extends PureComponent {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity 
             onPress={()=>this.SetTypeModalVisible(!this.state.typeshown)}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -274,7 +274,7 @@ export default class DefaultScreen extends PureComponent {
                 onPress={()=>{
                   this.SetPriceModalVisible(!this.state.Priceshown);
                 }}
-                style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+                style={styles.inputbutton}>
                 <Text>입력</Text>
               </TouchableOpacity>
             </View>
@@ -310,7 +310,7 @@ export default class DefaultScreen extends PureComponent {
             <TextInput
               keyboardType='numeric'
               onChangeText={this.MPriceresulthandle1}
-              style={{color:'#000', width:'100%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center'}}
+              style={styles.pricebutton}
               placeholder='0'/>
           </View>
           <View style={{width:'90%', height:'10%', alignItems: 'flex-start'}}>
@@ -324,7 +324,7 @@ export default class DefaultScreen extends PureComponent {
             <TextInput 
             keyboardType='numeric'
             onChangeText={this.MPriceresulthandle2}
-            style={{color:'#000', width:'100%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center'}}
+            style={styles.pricebutton}
             placeholder='0'/>
           </View>
         </View>
@@ -333,7 +333,7 @@ export default class DefaultScreen extends PureComponent {
             onPress={()=>{
               this.SetMPriceModalVisible(!this.state.MPriceshown);
             }}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -353,7 +353,7 @@ export default class DefaultScreen extends PureComponent {
             <View style={{width:'90%', borderBottomWidth:0.5}}>
               <Text style={{margin:15, fontSize: 15 }}>가장 중요한 정보이므로 정확히 입력하세요.</Text>
             </View>
-            <View style={{width:'90%',height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <TouchableOpacity style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}
                 onPress={()=>this.SetTypeModalVisible(true)}>
                 <Text>거래종류</Text>
@@ -366,7 +366,7 @@ export default class DefaultScreen extends PureComponent {
             </View>
               
               {this.MPricebutton()}
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <TouchableOpacity 
                 onPress={()=>{
                   this.SetHeightModalVisible(true);
@@ -379,7 +379,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <TouchableOpacity 
                 onPress={()=>this.SetSizeModalVisible(true)}
                 style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
@@ -390,7 +390,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>단기임대</Text>
                 <View style={{flexDirection:'row'}}>
@@ -403,7 +403,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </View>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>관리비</Text>
                 <View style={{flexDirection:'row'}}>
@@ -416,7 +416,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </View>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>주차</Text>
                 <View style={{flexDirection:'row'}}>
@@ -429,7 +429,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </View>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>입주 가능일</Text>
                 <View style={{flexDirection:'row'}}>

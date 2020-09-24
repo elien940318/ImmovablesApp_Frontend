@@ -2,14 +2,36 @@ import React, { Component } from 'react';
 import { View, Text, Modal, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
 import Txt from './ConvenienceChd.js'
-
+import styles from '../../../../css/bottom/Bidding/ConvenienveModalCSS.js';
 class ConvenienceModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lst:[]
+      lst:[],
+      pressStatus1:0,
+      pressStatus2:0,
+      pressStatus3:0,
+      pressStatus4:0,
+
     };
   }
+  PresStatus1(){
+    this.state.pressStatus1===1 ? 
+    this.setState({ pressStatus1: 0 }):this.setState({ pressStatus1: 1 });
+    }
+  PresStatus2(){
+    this.state.pressStatus2===1 ? 
+    this.setState({ pressStatus2: 0 }):this.setState({ pressStatus2: 1 });
+    }  
+  PresStatus3(){
+    this.state.pressStatus3===1 ? 
+    this.setState({ pressStatus3: 0 }):this.setState({ pressStatus3: 1 });
+    }  
+  PresStatus4(){
+    this.state.pressStatus4===1 ? 
+    this.setState({ pressStatus4: 0 }):this.setState({ pressStatus4: 1 });
+    }
+
   checking=(t)=>{
     this.props.conv(t)
     let lst1 = this.state.lst
@@ -40,40 +62,46 @@ class ConvenienceModal extends Component {
                   <Text/>
                 </View>
                 <View style={{flex:1, flexDirection:'row'}}>
-                  <TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#fd6059'}}
-                    onPress={()=>this.checking('음식점')}>
-                    <Icon name='md-restaurant'/>
-                    <Text>
+                  <TouchableOpacity
+                    onPress={()=>{this.checking('음식점'); this.PresStatus1();}}
+                    style={this.state.pressStatus1 ? styles.onbutton : styles.offbutton}>
+                    <Icon style={this.state.pressStatus1 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}name='md-restaurant'/>
+                    <Text style={this.state.pressStatus1 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}>
                       음식점
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#FBAF5B'}}
-                    onPress={()=>this.checking('카페')}>
-                    <Icon name='ios-cafe'/>
-                    <Text>
+                  <TouchableOpacity
+                    onPress={()=>{this.checking('카페'); this.PresStatus2();}}
+                    style={this.state.pressStatus2 ? styles.onbutton : styles.offbutton}>
+                    <Icon style={this.state.pressStatus2 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='ios-cafe'/>
+                    <Text style={this.state.pressStatus2 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}>
                       카페
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#7BDB84'}}
-                   onPress={()=>this.checking('편의점')}>
-                    <Icon name='md-basket'/>
-                    <Text>
+                  <TouchableOpacity style={styles.offbutton}
+                    onPress={()=>{this.checking('편의점'); this.PresStatus3();}}
+                    style={this.state.pressStatus3 ? styles.onbutton : styles.offbutton}>
+                    <Icon style={this.state.pressStatus3 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='md-basket'/>
+                    <Text style={this.state.pressStatus3 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} >
                       편의점
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#E3F95D'}}
-                   onPress={()=>this.checking('병원')}>
-                    <Icon name='ios-medkit'/>
-                    <Text>
+                  <TouchableOpacity style={styles.offbutton}
+                    onPress={()=>{this.checking('병원'); this.PresStatus4();}}
+                    style={this.state.pressStatus4 ? styles.onbutton : styles.offbutton}>
+                    <Icon style={this.state.pressStatus4 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='ios-medkit'/>
+                    <Text style={this.state.pressStatus4 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}>
                       병원
                     </Text>
                   </TouchableOpacity>
                 </View>
+                <View style={{margin:20, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 {
                   this.state.lst.length > 0?
                   this.state.lst.map((e, index) => <Txt data={e} key={index}/>):
                   null
                 }
+                </View>
               </View>
             </TouchableWithoutFeedback>
             

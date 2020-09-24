@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet,Dimensions, TouchableOpacity, TextInput} from 'react-native';
 import { Container, Header, Icon  } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
-import RowCardComponent  from '../../../../Write/CityRowCardComponent'; 
-import http from "../../../../../../../http-common"
-import styles from '../../../../../../css/bottom/Bidding/Setting/CityFind/GunFindCSS.js'
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
-const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
-export default class GunFind extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isModalVisible: false,
-            loading:true,
-            DBdata:null,
-            city:'',
-            cityArr:[]
-        };
-      }
-    componentDidMount(){
+import http from "../../../../../../../../../http-common.js"
+import styles from '../../../../../../../../css/bottom/Bidding/Setting/CityFind/GunFindCSS.js'
+
+class townFinder extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        loading:true,
+        DBdata:null,
+        townArr:[]
+    };
+  }
+  componentDidMount(){
     this.getDB()
     setTimeout(()=>{
         this.setState({
@@ -29,10 +23,9 @@ export default class GunFind extends Component {
     }, 1000)
     }
     getDB(){
-        http.get(`/city/getCity`)
+        http.get(`/Address/getTown/${this.props.contryNum}`)
           .then(response => {
-            this.state.DBdata = response.data
-            this.renderSection()
+            this.setState({DBdata: response.data})
           })
           .catch(error => {
             console.log(error);
@@ -41,19 +34,19 @@ export default class GunFind extends Component {
     renderSection() {  
         if(this.state.DBdata != null && this.state.loading==false){
               this.state.DBdata.map((feed, index) => (
-                this.state.cityArr.push({name:feed.name})
+                this.state.townArr.push({name:feed.name, code:feed.code})
             ))
             return (
               <FlatGrid
                 itemDimension={100}
-                data={this.state.cityArr}
+                data={this.state.townArr}
                 style={styles.grideView}
                 spacing={0}
                 renderItem={({item})=>(
                   <TouchableOpacity 
                     onPress={()=>{
-                      this.state.city=item.name;
-                      AsyncStorage.setItem('Doch', this.state.city);
+                      this.props.townSetting(item.name,item.code)
+                      this.props.townToggle();
                     }}
                     style={styles.itemContainer}>
                     <Text style={styles.itemName}>{item.name}</Text>
@@ -75,8 +68,8 @@ export default class GunFind extends Component {
         return (
             <Container style={styles.container}>
                 <Header style ={{justifyContent:'space-between', alignItems:'center'}}> 
-                <Icon name='ios-arrow-back' onPress={()=>{this.props.Guntoggle()}}/>
-                <Text>시/도 선택</Text>
+                <Icon name='ios-arrow-back' onPress={()=>{this.props.townToggle()}}/>
+                <Text>동/면/읍 선택</Text>
                 <Text/>
                 </Header>
                 <View style={{height:'82%'}}>                  
@@ -84,13 +77,9 @@ export default class GunFind extends Component {
                 </View>
                 <View style={{height:"8%", flexDirection:'row', justifyContent: 'center', borderWidth:0.5}}>
                   <TouchableOpacity 
-
+                    onPress={()=>{this.props.townToggle()}}
                     style={{height:'100%',width:'50%', alignItems:'center', justifyContent:'center', borderEndWidth:0.5}}>
                     <Text>취소</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity 
-                    style={{width:'50%', alignItems:'center', justifyContent:'center'}}>
-                    <Text>저장</Text>
                   </TouchableOpacity>
                 </View>
             </Container>
@@ -98,3 +87,4 @@ export default class GunFind extends Component {
     }
 }
 
+export default townFinder;

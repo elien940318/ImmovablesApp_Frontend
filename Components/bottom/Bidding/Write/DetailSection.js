@@ -21,40 +21,20 @@ class DetailSection extends Component {
       }  
       else if(sellbuy === 0){
         return(
-            <TouchableOpacity style={styles.button} onPress={this.props.convToggle}>
-              {lst.includes('음식점'||'카페'||'편의점'||'병원')?null:<Text style={{margin:5}}>편의시설</Text>}
-              <View style={{flex:1, flexDirection:'row'}}>
+            <TouchableOpacity style={styles.facilityButton} onPress={this.props.convToggle}>
+              {lst.includes('음식점'||'카페'||'편의점'||'병원')?(<Text>편의시설: </Text>):<Text style={{margin:5}}>편의시설</Text>}
+              <View style={{flex:1, flexDirection:'row', justifyContent:'space'}}>
               {lst.includes('음식점')?
-                (<TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#fd6059'}}>
-                <Icon name='md-restaurant'/>
-                <Text>
-                  음식점
-                </Text>
-              </TouchableOpacity>):null
+                (<Text style={{margin:3, color:'#FF5C3B'}}>음식점</Text>):null
               }
               {lst.includes('카페')?
-                (<TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#FBAF5B'}}>
-                <Icon name='ios-cafe'/>
-                <Text>
-                  카페
-                </Text>
-              </TouchableOpacity>):null
+                (<Text style={{margin:3, color:'#FF5C3B'}}>카페</Text>):null
               }
               {lst.includes('편의점')?
-              (<TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#7BDB84'}}>
-                <Icon name='md-basket'/>
-                <Text>
-                  편의점
-                </Text>
-              </TouchableOpacity>):null
+                (<Text style={{margin:3, color:'#FF5C3B'}}>편의점</Text>):null
               }
               {lst.includes('병원')?
-                (<TouchableOpacity style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#E3F95D'}}>
-                <Icon name='ios-medkit'/>
-                <Text>
-                  병원
-                </Text>
-              </TouchableOpacity>):null
+                (<Text style={{margin:3, color:'#FF5C3B'}}>병원</Text>):null
               }
               </View>
             </TouchableOpacity>

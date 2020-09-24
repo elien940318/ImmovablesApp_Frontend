@@ -16,9 +16,6 @@ import * as GoogleSignIn from 'expo-google-sign-in'
 import * as firebase from 'firebase';
 import "firebase/auth";
 // import 'firebase/firestore';
-import GithubButton from '../Util/LoginUtil/GithubButton';
-import getGithubTokenAsync from './getGithubTokenAsync';
-
 
 
 // key 생성
@@ -42,63 +39,40 @@ export default class Login extends Component {
       };  
     }  
 
-// //////
-//     state = { isSignedIn: false };
-  
-//     componentDidMount() {
-//       this.setupFirebaseAsync();
-//     }
-  
-//     setupFirebaseAsync = async () => {
-//       initializeFirebase();
-  
-//       firebase.auth().onAuthStateChanged(async auth => {
-//         const isSignedIn = !!auth;
-//         this.setState({ isSignedIn });
-//         if (!isSignedIn) {
-//           attemptToRestoreAuthAsync();
-//         }
-//       });
-//     };
-
-// //////
-
-    state = { displayName: '', email: '', password: '', errorMessage: '', loading: false };
+    //state = { displayName: '', email: '', password: '', errorMessage: '', loading: false };
     
-    onLoginSuccess() {
-      this.props.navigation.replace('next');
+    componentDidMount() {
+      firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            this.setState({id: user});
+            this.props.navigation.replace('next')        
+          }
+      });
     }
 
     async signInWithGoogle() {
       try {
         await GoogleSignIn.askForPlayServicesAsync();
         const { type, user } = await GoogleSignIn.signInAsync();
-        if (type === 'success') {
+
+        if (type === 'success') 
+        {
           await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-          const credential = firebase.auth.GoogleAuthProvider.credential(user.auth.idToken, user.auth.accessToken,);
+          
+          const credential = firebase.auth.GoogleAuthProvider.credential(
+            user.auth.idToken, 
+            user.auth.accessToken,
+          );
+          
           const googleProfileData = await firebase.auth().signInWithCredential(credential);
-          this.onLoginSuccess.bind(this);
+          
+          this.setState({id: user});
+          this.props.navigation.replace('next')
         }
       } catch ({ message }) {
         alert('login: Error:' + message);
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
      klikPost(){
       http.post('/login/chinfo', {

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 import { Icon } from 'native-base';
 import { createAppContainer } from 'react-navigation'
 import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
+import firebase from 'firebase';
 
 import home from './bottom/HomeComponents/Home'
 import like from './bottom/like'
@@ -12,7 +13,6 @@ import plus from './bottom/PlusComponents/plus'
 //import write from './bottom/Write/Write'
 //import EditInfo from './bottom/PlusComponents/EditInfo'
 
-import firebase from 'firebase';
 
 const AppTabNavigator = createMaterialTopTabNavigator({
     홈 : {screen: home},
@@ -48,13 +48,6 @@ const AppTabNavigator = createMaterialTopTabNavigator({
 const AppTabContainet = createAppContainer(AppTabNavigator);
 
 export default class MainScreen extends Component {
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        this.setState({user: user});
-      }
-    })
-  }
   // navigationOptions 코드 추가
   static navigationOptions = {
     //headerLeft: <Icon name='ios-camera' style={{ paddingLeft:10 }}/>,

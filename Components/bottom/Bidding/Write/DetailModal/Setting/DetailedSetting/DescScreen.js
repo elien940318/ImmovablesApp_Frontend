@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {TextInput,TouchableOpacity, View, Text} from 'react-native';
 import {Container, Icon} from 'native-base';
-import styles from '../../../../css/bottom/Bidding/Setting/DescScreenCSS.js'
+import styles from '../../../../../../css/bottom/Bidding/Setting/DescScreenCSS.js'
 export default class DescScreen extends PureComponent {
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ export default class DescScreen extends PureComponent {
         return(
           <TouchableOpacity 
             onPress={()=>this.ckonbutton(0)}
-            style={{width:50, height:25, backgroundColor:'#004aff', alignItems:'center', justifyContent:'center'}}>
+            style={{width:50, height:25, backgroundColor:'#F88262', alignItems:'center', justifyContent:'center'}}>
             <Text style={{color:'white'}}>음식점 x</Text> 
           </TouchableOpacity>
         );
