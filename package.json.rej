@@ -1,0 +1,11 @@
+diff a/package.json b/package.json	(rejected hunks)
+@@ -35,8 +35,7 @@
+     "react-native-web": "~0.11.7",
+     "react-navigation": "^4.3.7",
+     "react-navigation-stack": "^2.3.11",
+-    "react-navigation-tabs": "^2.8.11",
+-    "react-native-elements": "0.19.1"
++    "react-navigation-tabs": "^2.8.11"
+   },
+   "devDependencies": {
+     "babel-preset-expo": "~8.0.0",
