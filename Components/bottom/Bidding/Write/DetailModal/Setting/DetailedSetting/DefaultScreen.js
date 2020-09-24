@@ -353,7 +353,7 @@ export default class DefaultScreen extends PureComponent {
             <View style={{width:'90%', borderBottomWidth:0.5}}>
               <Text style={{margin:15, fontSize: 15 }}>가장 중요한 정보이므로 정확히 입력하세요.</Text>
             </View>
-            <View style={{width:'90%',height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <TouchableOpacity style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}
                 onPress={()=>this.SetTypeModalVisible(true)}>
                 <Text>거래종류</Text>
@@ -366,7 +366,7 @@ export default class DefaultScreen extends PureComponent {
             </View>
               
               {this.MPricebutton()}
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <TouchableOpacity 
                 onPress={()=>{
                   this.SetHeightModalVisible(true);
@@ -379,7 +379,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <TouchableOpacity 
                 onPress={()=>this.SetSizeModalVisible(true)}
                 style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
@@ -390,7 +390,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>단기임대</Text>
                 <View style={{flexDirection:'row'}}>
@@ -403,7 +403,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </View>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>관리비</Text>
                 <View style={{flexDirection:'row'}}>
@@ -416,7 +416,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </View>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>주차</Text>
                 <View style={{flexDirection:'row'}}>
@@ -429,7 +429,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </View>
             </View>
-            <View style={{width:'90%', height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
+            <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>입주 가능일</Text>
                 <View style={{flexDirection:'row'}}>

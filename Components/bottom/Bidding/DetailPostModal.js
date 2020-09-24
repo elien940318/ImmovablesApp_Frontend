@@ -43,7 +43,7 @@ export default class DetailPostModal extends Component {
           </View>          
           {/* 가격 뷰 // DB에 전,월세 저장 */}
           <View style={styles.price}>
-            <Text style={{fontSize:25}}>월세 {this.state.data.price}</Text>
+            <Text style={{fontSize:25}}>월세: {this.state.data.price/10000}(만원)</Text>
           </View>                 
           {/*설명*/}
           <View style={styles.content}>
@@ -60,7 +60,7 @@ export default class DetailPostModal extends Component {
           </View>
           <View style={{backgroundColor: 'white'}}>
             <View style={styles.hr}/>
-          </View>  
+          </View>
         </ScrollView>
       </Container>
     );
