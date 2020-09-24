@@ -8,7 +8,8 @@ export default class AdressScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isModalVisible : false
+      isModalVisible : false,
+      immovablesKind : ''
     };
   }
   
@@ -17,12 +18,11 @@ export default class AdressScreen extends PureComponent {
   }
  
   render() {
-    // console.log(this.props.navigation.state.params)
-    console.log(this.props)
+    this.state.immovablesKind= Object.values(this.props.route.params).toString().replace(/,/gi,'')
     return (
         <Container style={styles.container}>
           <Modal isVisible={this.state.isModalVisible}>
-            <FindAdress toggle={()=>{this.toggle()}}/>
+            <FindAdress toggle={()=>{this.toggle()}} immovablesKind={this.state.immovablesKind}/>
           </Modal>
           <View style={styles.Box}>
             <Text style={{margin:15, fontSize: 15 }}>주소는 동, 면, 읍, 단지명 까지만 노출됩니다.</Text>

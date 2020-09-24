@@ -17,6 +17,7 @@ class DetailSettingModal extends Component {
         propsName: '주택',
     };
   }
+
   /* 체크 박스 스위치 메소드 */
   checkController=(sectionNum, idx, bool)=>{
     if(sectionNum === 1){
@@ -107,7 +108,7 @@ class DetailSettingModal extends Component {
       // this.setState({propsName:'아파트'})
       this.state.propsName = '아파트'
     }
-    console.log(this.state.propsName)
+    // console.log(this.state.propsName)
   }
 
   checkSwitcher=(num)=>{

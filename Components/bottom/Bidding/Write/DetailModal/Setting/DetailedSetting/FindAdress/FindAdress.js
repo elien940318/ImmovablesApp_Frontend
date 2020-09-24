@@ -8,7 +8,7 @@ import ContryFinder from './CityFind/ContryFinder'
 import TownFinder from './CityFind/TownFinder'
 import styles from '../../../../../../../css/bottom/Bidding/Setting/CityFind/FindAdressCSS.js'
 import { ScrollView } from 'react-native';
-import httpCommon from '../../../../../../../../http-common';
+import http from '../../../../../../../../http-common';
 class FindAdress extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +19,9 @@ class FindAdress extends Component {
         cityData:['시/도 선택',null],
         contryData:['시/군/구 선택',null],
         townData:['동/면/읍 선택',null],
+        immovablesKind:'',
+        searchWord:'',
+        DBdata:null
     };
   }
   /* 변경 데이터 저장 메소드 */
@@ -42,32 +45,43 @@ class FindAdress extends Component {
     this.setState({townModalVisible:!this.state.townModalVisible});
   }
   /* 검색 메소드 */
+  whatSearch=()=>{
+    if(this.state.immovablesKind === '주택'){
+      this.villaSearch()
+    }else if(this.state.immovablesKind === '오피스텔'){
+      this.officetelSearch()
+    }else if(this.state.immovablesKind === '아파트'){
+      this.apartSearch()
+    }
+  }
+
   villaSearch=()=>{ // 빌라 검색
-    http.get(`/Address/getApart/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.cityData/* <-- 삭제 후 검색어 */}`)
+    http.get(`/Address/getVilla/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.searchWord}`)
       .then(response=>{
-        //response.data
+        this.setState({DBdata:response.data})
       }).catch(e=>{
         console.log(e)
       })
   }
   officetelSearch=()=>{ // 아파트 검색
-    http.get(`/Address/getOfficetel/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.cityData/* <-- 삭제 후 검색어 */}`)
+    http.get(`/Address/getOfficetel/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.searchWord}`)
       .then(response=>{
-        //response.data
+        this.setState({DBdata:response.data})
       }).catch(e=>{
         console.log(e)
       })
   }
   apartSearch=()=>{ // 아파트 검색
-    http.get(`/Address/getVilla/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.cityData/* <-- 삭제 후 검색어 */}`)
+    http.get(`/Address/getApart/${this.state.cityData[1]}/${this.state.contryData[1]}/${this.state.townData[1]}/${this.state.searchWord}`)
       .then(response=>{
-        //response.data
+        this.setState({DBdata:response.data})
       }).catch(e=>{
         console.log(e)
       })
   }
 
   render() {
+    this.state.immovablesKind = this.props.immovablesKind
     return (
       <Container style={styles.container}>
           <Modal isVisible={this.state.cityModalVisible}>
@@ -112,21 +126,27 @@ class FindAdress extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', height:'25%'}}>
-                    <TextInput placeholder='단지명을 입력해주세요.' placeholderTextColor='#0c0c0c' style={styles.bottombutton1}>
-
-                    </TextInput>
+                    <TextInput placeholder='단지명을 입력해주세요.' placeholderTextColor='#0c0c0c' style={styles.bottombutton1}
+                    onChangeText={(value) => this.setState({searchWord: value})} value={this.state.searchWord}/>
                 </View>
                 <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', height:'25%'}}>
-                    <TouchableOpacity style={styles.bottombutton1}>
+                    <TouchableOpacity style={styles.bottombutton1}
+                    onPress={()=>{this.whatSearch()}}>
                         <Text/>
                         <Text>검색하기</Text>
                         <Text/>
                     </TouchableOpacity>
                 </View>
-                <ScrollView>
-
-                </ScrollView>
+                
             </View>
+            <ScrollView style={{height:100}}>
+                {
+                  this.state.DBdata !== null?
+                  this.state.DBdata.map((e,index)=>
+                  <Text>{e.immovable_name}</Text>
+                  ):<Text>검색결과 없음</Text>
+                }
+                </ScrollView>
           </View>
           <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
             <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} onPress={()=>{this.props.toggle()}}>
