@@ -30,7 +30,7 @@ export default class Setting extends Component {
           <Text></Text>
         </Header>
         <AppContainer/>
-        <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
+        <View style={{flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
           <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} onPress={{/* 완료 기능 구현 필요 */}}>
               <Text style={{fontSize:20, color:'white'}}>완료</Text>
           </TouchableOpacity>
