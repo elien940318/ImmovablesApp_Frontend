@@ -24,7 +24,7 @@ export default class AdressScreen extends PureComponent {
           <Modal isVisible={this.state.isModalVisible}>
             <FindAdress toggle={()=>{this.toggle()}}/>
           </Modal>
-          <View style={{ margin:3, width:'90%', height:'80%', borderWidth:0.5, borderRadius:5, alignItems:'center'}}>
+          <View style={styles.Box}>
             <Text style={{margin:15, fontSize: 15 }}>주소는 동, 면, 읍, 단지명 까지만 노출됩니다.</Text>
             <TouchableOpacity 
               style={styles.Button}
@@ -32,6 +32,7 @@ export default class AdressScreen extends PureComponent {
               >
               <Text style={{}}>주소 찾기</Text>  
             </TouchableOpacity>
+            <View/>
           </View>
         </Container>
     );

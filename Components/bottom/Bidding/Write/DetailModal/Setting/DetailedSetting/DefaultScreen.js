@@ -143,7 +143,7 @@ export default class DefaultScreen extends PureComponent {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity 
             onPress={()=>this.SetSizeModalVisible(!this.state.sizeshwon)}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -188,7 +188,7 @@ export default class DefaultScreen extends PureComponent {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity 
             onPress={()=>this.SetHeightModalVisible(!this.state.heightshown)}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -231,7 +231,7 @@ export default class DefaultScreen extends PureComponent {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity 
             onPress={()=>this.SetTypeModalVisible(!this.state.typeshown)}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>
@@ -274,7 +274,7 @@ export default class DefaultScreen extends PureComponent {
                 onPress={()=>{
                   this.SetPriceModalVisible(!this.state.Priceshown);
                 }}
-                style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+                style={styles.inputbutton}>
                 <Text>입력</Text>
               </TouchableOpacity>
             </View>
@@ -310,7 +310,7 @@ export default class DefaultScreen extends PureComponent {
             <TextInput
               keyboardType='numeric'
               onChangeText={this.MPriceresulthandle1}
-              style={{color:'#000', width:'100%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center'}}
+              style={styles.pricebutton}
               placeholder='0'/>
           </View>
           <View style={{width:'90%', height:'10%', alignItems: 'flex-start'}}>
@@ -324,7 +324,7 @@ export default class DefaultScreen extends PureComponent {
             <TextInput 
             keyboardType='numeric'
             onChangeText={this.MPriceresulthandle2}
-            style={{color:'#000', width:'100%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center'}}
+            style={styles.pricebutton}
             placeholder='0'/>
           </View>
         </View>
@@ -333,7 +333,7 @@ export default class DefaultScreen extends PureComponent {
             onPress={()=>{
               this.SetMPriceModalVisible(!this.state.MPriceshown);
             }}
-            style={{color:'#000', width:'90%', height:40, borderWidth:0.5, borderRadius:5, justifyContent:'center', alignItems:'center', backgroundColor:"#004aff"}}>
+            style={styles.inputbutton}>
             <Text>입력</Text>
           </TouchableOpacity>
         </View>

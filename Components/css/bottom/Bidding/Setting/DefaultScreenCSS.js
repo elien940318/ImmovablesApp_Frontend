@@ -28,22 +28,43 @@ const styles = StyleSheet.create({
       color:'#000', 
       width:'90%', 
       height:40, 
-      borderWidth:0.5, 
+      borderWidth:0, 
       borderRadius:5, 
       justifyContent:'center', 
       alignItems:'center',
-      backgroundColor:'#004aff'
+      backgroundColor:'#FF5C3B'
     },
     offtypebutton:{
       color:'#000', 
       width:'90%', 
       height:40, 
       borderWidth:0.5, 
-      borderRadius:5, 
+      borderRadius:5,
+      borderColor:'#a7a7a7',
       justifyContent:'center', 
+      alignItems:'center', 
+    },
+    inputbutton:{
+      color:'#000',
+      width:'90%',
+      height:40,
+      borderWidth:0.5,
+      borderRadius:5,
+      borderColor:'#a7a7a7a7',
+      justifyContent:'center',
       alignItems:'center',
-      
-    }
+      backgroundColor:"#FF5C3B"
+    },
+    pricebutton:{
+      color:'#000',
+      width:'100%',
+      height:40,
+      borderWidth:0.5,
+      borderRadius:5,
+      borderColor:'#a7a7a7a7', 
+      justifyContent:'center', 
+      alignItems:'center'
+    },
 });
 
 export default styles;

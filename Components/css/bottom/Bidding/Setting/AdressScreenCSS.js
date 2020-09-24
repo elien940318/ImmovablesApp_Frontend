@@ -9,12 +9,20 @@ const styles = StyleSheet.create({
     },
     Button:{
       width:'90%',
-      height:'50%',
+      height:'30%',
       borderWidth:0.5,
       borderRadius:5,
       justifyContent:'center',
       alignItems:'center'
     },
+    Box:{ 
+      margin:3,
+      width:'90%',
+      height:'80%',
+      borderWidth:0.5,
+      borderRadius:5,
+      alignItems:'center',
+    }
     
   });
 
