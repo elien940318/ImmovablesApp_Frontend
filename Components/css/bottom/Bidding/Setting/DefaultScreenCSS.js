@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
         padding: 10,
+        height:'100%',
+        
       },
     white: {
         color:'white'
@@ -65,6 +67,11 @@ const styles = StyleSheet.create({
       justifyContent:'center', 
       alignItems:'center'
     },
+    typebutton:{
+      width:'90%', 
+      height:'9%', 
+      justifyContent:'center', 
+      borderBottomWidth:0.5}
 });
 
 export default styles;
