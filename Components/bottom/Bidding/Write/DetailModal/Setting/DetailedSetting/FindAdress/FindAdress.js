@@ -21,7 +21,8 @@ class FindAdress extends Component {
         townData:['동/면/읍 선택',null],
         immovablesKind:'',
         searchWord:'',
-        DBdata:null
+        DBdata:null,
+        address: false
     };
   }
   /* 변경 데이터 저장 메소드 */
@@ -143,15 +144,26 @@ class FindAdress extends Component {
                 {
                   this.state.DBdata !== null?
                   this.state.DBdata.map((e,index)=>
-                  <Text>{e.immovable_name}</Text>
+                  <TouchableOpacity onPress={()=>{this.setState({address:e.immovable_name})}} key={index}>
+                    <Text key={index}>{e.immovable_name}</Text>
+                  </TouchableOpacity>
                   ):<Text>검색결과 없음</Text>
                 }
                 </ScrollView>
           </View>
           <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
-            <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} onPress={()=>{this.props.toggle()}}>
+            {this.state.address === false?
+            <TouchableOpacity disabled={true}
+            style={{width:'100%',height:50, backgroundColor:'gray', justifyContent:'center', alignItems:'center' }}>
+                <Text style={{fontSize:20, color:'white'}}>모두 선택하여 주세요.</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity 
+            style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} 
+            onPress={()=>{this.props.changer(this.state.cityData[0],this.state.contryData[0],this.state.townData[0],this.state.address)}}>
                 <Text style={{fontSize:20, color:'white'}}>완료 후 돌아가기</Text>
             </TouchableOpacity>
+            }
           </View>
       </Container>
     );
