@@ -24,31 +24,31 @@ class DetailSection extends Component {
             <TouchableOpacity style={styles.facilityButton} onPress={this.props.convToggle}>
               {lst.includes('음식점'||'카페'||'편의점'||'병원')?(<Text>편의시설: </Text>):<Text style={{margin:5}}>편의시설</Text>}
               <View style={{flex:1, flexDirection:'row'}}>
-               {lst.includes('음식점')?
+               {lst.includes('병원')?
                 (<View style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#fd6059'}}>
+                <Text>
+                  병원
+                </Text>
+              </View>):null
+              }
+              {lst.includes('음식점')?
+                (<View style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#FBAF5B'}}>
                 <Text>
                   음식점
                 </Text>
               </View>):null
               }
               {lst.includes('카페')?
-                (<View style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#FBAF5B'}}>
+              (<View style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#7BDB84'}}>
                 <Text>
                   카페
                 </Text>
               </View>):null
               }
               {lst.includes('편의점')?
-              (<View style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#7BDB84'}}>
-                <Text>
-                  편의점
-                </Text>
-              </View>):null
-              }
-              {lst.includes('병원')?
                 (<View style={{height:50,width:50,borderRadius:100,justifyContent:'center',alignItems:'center', backgroundColor:'#E3F95D'}}>
                 <Text>
-                  병원
+                  편의점
                 </Text>
               </View>):null
               }
