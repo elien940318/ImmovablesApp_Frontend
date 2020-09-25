@@ -44,7 +44,7 @@ export default class Login extends Component {
     componentDidMount() {
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
-            this.signInSilentlyAsync();
+            this.syncUserWithStateAsync();
           }
       });
     }
@@ -72,7 +72,7 @@ export default class Login extends Component {
           
           const googleProfileData = await firebase.auth().signInWithCredential(credential);
           
-          this.signInSilentlyAsync();
+          this.syncUserWithStateAsync();
         }
       } catch ({ message }) {
         alert('Error:' + message);
