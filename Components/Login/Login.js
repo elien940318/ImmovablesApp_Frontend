@@ -44,12 +44,18 @@ export default class Login extends Component {
     componentDidMount() {
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
-            this.setState({id: user});
-            this.props.navigation.replace('next')        
+            this.signInSilentlyAsync();
           }
       });
     }
 
+
+    async syncUserWithStateAsync() {
+      const user = await GoogleSignIn.signInSilentlyAsync();
+      this.setState({id:user});
+      this.props.navigation.replace('next');
+    }
+    
     async signInWithGoogle() {
       try {
         await GoogleSignIn.askForPlayServicesAsync();
@@ -66,11 +72,10 @@ export default class Login extends Component {
           
           const googleProfileData = await firebase.auth().signInWithCredential(credential);
           
-          this.setState({id: user});
-          this.props.navigation.replace('next')
+          this.signInSilentlyAsync();
         }
       } catch ({ message }) {
-        alert('login: Error:' + message);
+        alert('Error:' + message);
       }
     }
 
@@ -101,7 +106,7 @@ export default class Login extends Component {
       // do something
       this.props.navigation.replace('next')
     }   */
-
+w
     render() {    
       return (
         <View style={styles.container}>
