@@ -63,35 +63,35 @@ class ConvenienceModal extends Component {
                 </View>
                 <View style={{flex:1, flexDirection:'row'}}>
                   <TouchableOpacity
-                    onPress={()=>{this.checking('음식점'); this.PresStatus1();}}
+                    onPress={()=>{this.checking('병원'); this.PresStatus1();}}
                     style={this.state.pressStatus1 ? styles.onbutton : styles.offbutton}>
-                    <Icon style={this.state.pressStatus1 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}name='md-restaurant'/>
+                    <Icon style={this.state.pressStatus1 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}name='ios-medkit'/>
                     <Text style={this.state.pressStatus1 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}>
-                      음식점
+                      병원
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={()=>{this.checking('카페'); this.PresStatus2();}}
+                    onPress={()=>{this.checking('음식점'); this.PresStatus2();}}
                     style={this.state.pressStatus2 ? styles.onbutton : styles.offbutton}>
-                    <Icon style={this.state.pressStatus2 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='ios-cafe'/>
+                    <Icon style={this.state.pressStatus2 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='md-restaurant'/>
                     <Text style={this.state.pressStatus2 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}>
+                      음식점
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.offbutton}
+                    onPress={()=>{this.checking('카페'); this.PresStatus3();}}
+                    style={this.state.pressStatus3 ? styles.onbutton : styles.offbutton}>
+                    <Icon style={this.state.pressStatus3 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='ios-cafe'/>
+                    <Text style={this.state.pressStatus3 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} >
                       카페
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.offbutton}
-                    onPress={()=>{this.checking('편의점'); this.PresStatus3();}}
-                    style={this.state.pressStatus3 ? styles.onbutton : styles.offbutton}>
-                    <Icon style={this.state.pressStatus3 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='md-basket'/>
-                    <Text style={this.state.pressStatus3 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} >
-                      편의점
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.offbutton}
-                    onPress={()=>{this.checking('병원'); this.PresStatus4();}}
+                    onPress={()=>{this.checking('편의점'); this.PresStatus4();}}
                     style={this.state.pressStatus4 ? styles.onbutton : styles.offbutton}>
-                    <Icon style={this.state.pressStatus4 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='ios-medkit'/>
+                    <Icon style={this.state.pressStatus4 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}} name='md-basket'/>
                     <Text style={this.state.pressStatus4 ? {color:'#FF5C3B'} : {color:'#a7a7a7a7'}}>
-                      병원
+                      편의점
                     </Text>
                   </TouchableOpacity>
                 </View>

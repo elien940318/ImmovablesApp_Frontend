@@ -37,7 +37,7 @@ export default class Board extends Component {
       this.setState({
         loading:false
       })
-    }, 3000)
+    }, 500)
   }
 
   static navigationOptions = {
