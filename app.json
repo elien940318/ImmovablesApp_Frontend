@@ -3,7 +3,6 @@
     "name": "jipsa",
     "slug": "ImmovablesApp",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -27,14 +26,14 @@
       "package": "com.gmc.jipsa_android",
       "googleServicesFile": "./google-services.json",
       "config": {
-          "googleSignIn" : {
-            "apiKey": "AIzaSyDOJTGQuJT8xajsASNFI3gqLZqZ0mxog0A",
-            "certificateHash": "D3652B9900D5C4E0062DA41F4500F8E82B4678AD"
-          }
+        "googleSignIn": {
+          "apiKey": "AIzaSyDOJTGQuJT8xajsASNFI3gqLZqZ0mxog0A",
+          "certificateHash": "D3652B9900D5C4E0062DA41F4500F8E82B4678AD"
+        }
       }
     },
     "ios": {
       "supportsTablet": true
-    }    
+    }
   }
 }
