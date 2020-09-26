@@ -12,13 +12,19 @@ export default class DetailPostModal extends Component {
     this.state = {
       modalVisible : false,
       data : props.toData,
-      toggle : props.toggle
+      toggle : props.toggle,
+      chkheart:0
     };
   }
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
-
+  setHeart(){
+    if(this.state.chkheart===0)
+      this.setState({chkheart:1})
+    else if(this.state.chkheart===1)
+      this.setState({chkheart:0})
+  }
 
   render() {
     return (
@@ -33,10 +39,25 @@ export default class DetailPostModal extends Component {
             {this.state.data.title} 
           </Text>   
         </Header>
-        <ScrollView>
+        <ScrollView style={{height:'80%'}}>
           {/*사진 View*/}
           <View style={styles.img}>
-            <Text style={{margin:15}}>사진</Text>        
+            <View>
+              <View style={styles.heartback}>
+                <TouchableOpacity 
+                style={this.state.chkheart===1? styles.heartradiuson : styles.heartradiusoff}
+                onPress={()=>this.setHeart()}
+                >
+                  <Icon name="md-heart" 
+                    style={this.state.chkheart===1?styles.heartbuttonon:styles.heartbuttonoff}
+                  >
+                  </Icon>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
+              <Text style={{margin:15}}>사진</Text>        
+            </View>
           </View>
           <View style={{backgroundColor: 'white'}}>
             <View style={styles.hr}/>
@@ -62,6 +83,9 @@ export default class DetailPostModal extends Component {
             <View style={styles.hr}/>
           </View>
         </ScrollView>
+        <TouchableOpacity style={styles.biddingbutton}>
+          <Text style={styles.biddingfont}>입찰하기</Text>
+        </TouchableOpacity>
       </Container>
     );
   }
