@@ -7,7 +7,7 @@ import AddiScreen from './DetailedSetting/AddiScreen'
 import DescScreen from './DetailedSetting/DescScreen'
 import AdressScreen from './DetailedSetting/AdressScreen'
 import DefaultScreen from './DetailedSetting/DefaultScreen'
-
+import styles from '../../../../../css/bottom/Bidding/Setting/SettingCSS'
 const Tab = createMaterialTopTabNavigator();
 
 export default class Setting extends Component {
@@ -39,8 +39,8 @@ export default class Setting extends Component {
           <Tab.Screen name="설명" component={DescScreen} />
         </Tab.Navigator>
         </NavigationContainer>
-        <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
-          <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'#FF5C3B', justifyContent:'center', alignItems:'center' }} onPress={{/* 완료 기능 구현 필요 */}}>
+        <View style={styles.outline}>
+          <TouchableOpacity style={styles.findbutton} onPress={{/* 완료 기능 구현 필요 */}}>
               <Text style={{fontSize:20, color:'white'}}>완료</Text>
           </TouchableOpacity>
         </View>
