@@ -6,6 +6,7 @@ import ColumnCardComponent  from './ColumnCardComponent';
 import Carousel2 from './Carousel2'
 import myData from '../../Util/test.json';
 import styles from '../../css/bottom/HomComponents/HomeCSS.js';
+import * as firebase from 'firebase';
 //const SLIDER_WIDTH = Dimensions.get('window').width;
 //const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
@@ -34,6 +35,20 @@ export default class home extends Component {
               feeds
             })
         });
+
+        var user = firebase.auth().currentUser;
+        var name, email, photoUrl, uid, emailVerified;
+        if (user) {
+          // User is signed in.
+          name = user.displayName;
+          email = user.email;
+          photoUrl = user.photoURL;
+          emailVerified = user.emailVerified;
+          uid = user.uid;
+        } else {
+          // No user is signed in.
+          this.props.navigation.navigate('Login')
+        }
     }
  
     fetchFeeds() {
