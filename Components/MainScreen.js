@@ -1,51 +1,20 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import { Icon } from 'native-base';
-import { createAppContainer } from 'react-navigation'
-import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
+//import { createAppContainer } from 'react-navigation'
+//import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import firebase from 'firebase';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import home from './bottom/HomeComponents/Home'
 import like from './bottom/like'
 import map from './bottom/Map'
 import Board from './bottom/Bidding/Board'
 import plus from './bottom/PlusComponents/plus'
-//import write from './bottom/Write/Write'
-//import EditInfo from './bottom/PlusComponents/EditInfo'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-
-const AppTabNavigator = createMaterialTopTabNavigator({
-    홈 : {screen: home},
-    관심목록: {screen:like},
-    지도: {screen:map},
-    게시판: {screen:Board},
-    더보기: {screen:plus}
-}, {
-  animationEnabled: true,
-  swipeEnabled: false,
-  tabBarPosition: "bottom",
-  tabBarOptions: {
-    style : {/*
-      ...Platform.select({
-        ios:{
-          backgroundColor:'white',
-        }
-      })*/
-      backgroundColor:'white',
-      height:50
-      
-    },
-    iconStyle: {height:30, alignItems:'center', justifyContent:'center', margin:-6} ,
-    activeTintColor:'#000',
-    inactiveTintColor:'#d1cece',
-    //upperCaseLabel: false,
-    showLabel: true,
-    showIcon:true,
-    labelStyle:{fontSize:10}
-  }
-});
-
-const AppTabContainet = createAppContainer(AppTabNavigator);
+const AppTabContainet = createBottomTabNavigator();
 
 export default class MainScreen extends Component {
   // navigationOptions 코드 추가
@@ -57,7 +26,36 @@ export default class MainScreen extends Component {
 
   render() {
     return (
-      <AppTabContainet/>
+      <NavigationContainer>
+        <AppTabContainet.Navigator>
+          <AppTabContainet.Screen name="홈" component={home} options={{
+          //tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}/>
+          {/* <AppTabContainet.Screen name="관심목록" component={like}/> */}
+          {/* <AppTabContainet.Screen name="지도" component={map} options={{
+          //tabBarLabel: 'map',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="map" color={color} size={size} />
+          ),
+        }}/> */}
+          <AppTabContainet.Screen name="게시판" component={Board}options={{
+          //tabBarLabel: 'post',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="clipboard" color={color} size={size} />
+          ),
+        }}/>
+          <AppTabContainet.Screen name="더보기" component={plus}options={{
+          //tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="more-horiz" color={color} size={size} />
+          ),
+        }}/>
+        </AppTabContainet.Navigator>
+      </NavigationContainer>
+      
     );
   }
 }

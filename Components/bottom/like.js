@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import { Container, Content,Icon, Header,Button,Card, CardItem} from 'native-base';
-import { createAppContainer } from 'react-navigation'
-import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
-import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+// import { createAppContainer } from 'react-navigation'
+// import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
+// import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
 import CardComponent  from '../CardComponent'; 
-import RecentR from '../LikeTab/RecentR';
-import RecentT from '../LikeTab/RecentT';
-import ContectedO from '../LikeTab/ContectedO';
-import SubsT from '../LikeTab/SubsT';
-import SubsR from '../LikeTab/SubsR';
+// import RecentR from '../LikeTab/RecentR';
+// import RecentT from '../LikeTab/RecentT';
+// import ContectedO from '../LikeTab/ContectedO';
+// import SubsT from '../LikeTab/SubsT';
+// import SubsR from '../LikeTab/SubsR';
 import styles from '../css/bottom/LikeCSS.js'
 /*const AppTabNavigator = createMaterialTopTabNavigator({
   본방 : {screen: RecentR},

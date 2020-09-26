@@ -25,6 +25,7 @@ export default class WriteModal extends Component {
         sellbuy:null, // 0 : 방 구하기 & 1 : 방 내놓기
         imageArray: [],
         convLst:[], // 편의시설 배열
+        formDataLst:[]
       };  
   }
 
@@ -54,11 +55,17 @@ export default class WriteModal extends Component {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 1,
+        quality: 1, 
       });
       if (!result.cancelled) {
+        // let l = result.uri.split('/')
+        // l = l[l.length - 1].split('.')
+        // let name = l[0]
+        //console.log(name)
         let lst = this.state.imageArray
-        lst.push(result.uri)
+        //result.push({"name":name})
+        // console.log(result)
+        lst.push(result)
         this.setState({imageArray:lst})
       }
     } catch (E) {}
@@ -130,38 +137,41 @@ export default class WriteModal extends Component {
   /* 방 구매 업로드 */
   createFormData = (photo, body) => {
     const data = new FormData();
-  
+    var l = photo.uri.split('/');
+    l = l[l.length - 1]
+    var name = l.split('.')
+    name = name[0]
     data.append('photo', {
-      name: photo.fileName,
+      name: name,
       type: photo.type,
       uri:
         Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
     });
   
-    Object.keys(body).forEach((key) => {
-      data.append(key, body[key]);
-    });
-  
+    // Object.keys(body).forEach((key) => {
+    //   data.append(key, body[key]);
+    //  });
+    // console.log(data)
     return data;
   };
 
 
   postData=()=>{
     let textData = {title:this.state.title, contents:this.state.contents, preference:this.state.convLst}
-    let formDataLst = []
-    this.state.imageArray.forEach(e=>{
-      formDataLst.append(this.createFormData(e, { userId: 'test' }))
-    })
+    var formDataLst = []
     
-    http.post('/board/postSell', formDataLst, textData)
-    .then((response) => response.json())
+    // this.state.imageArray.forEach(e=>{
+    //    formDataLst.push(this.createFormData(e, { userId: '123' }))
+    // })
+    http.post('/post/postSell', this.createFormData(this.state.imageArray[0], { userId: '123' }))
+    //.then((response) => response.json())
     .then((response) => {
-      console.log('upload succes', response);
+      //console.log('upload succes', response);
       alert('Upload success!');
-      this.setState({ imageArray: [] });
+      //this.setState({ imageArray: [] });
     })
     .catch((error) => {
-      console.log('upload error', error);
+      //console.log('upload error', error);
       alert('Upload failed!');
     });
   }
@@ -196,7 +206,7 @@ export default class WriteModal extends Component {
               {
                 imageArray.length > 0?
                 imageArray.map((e, index)=>(
-                  <ImgComponet data={e} key={index}/>
+                  <ImgComponet data={e.uri} key={index}/>
                 ))
                 :<Text>이미지를 업로드 하세요!</Text>
               }
