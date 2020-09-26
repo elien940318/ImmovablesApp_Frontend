@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, Modal, TouchableHighlight, ScrollView} from 'react-native';
+import Modal from "react-native-modal";
+import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
+import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -13,8 +15,13 @@ export default class DetailPostModal extends Component {
       modalVisible : false,
       data : props.toData,
       toggle : props.toggle,
-      chkheart:0
+      chkheart:0,
+      isModalVisible: false,
     };
+  }
+
+  toggle(){
+    this.setState({isModalVisible:!this.state.isModalVisible});
   }
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -29,6 +36,9 @@ export default class DetailPostModal extends Component {
   render() {
     return (
       <Container style={styles.container}>
+        <Modal isVisible={this.state.isModalVisible}>
+          <DoBidding toggle3={() => this.toggle()}/>
+        </Modal>
         <Header style={styles.header}>
           <Icon 
             name='ios-close'
@@ -83,7 +93,7 @@ export default class DetailPostModal extends Component {
             <View style={styles.hr}/>
           </View>
         </ScrollView>
-        <TouchableOpacity style={styles.biddingbutton}>
+        <TouchableOpacity style={styles.biddingbutton} onPress={()=>{this.toggle()}}>
           <Text style={styles.biddingfont}>입찰하기</Text>
         </TouchableOpacity>
       </Container>
