@@ -375,4 +375,4 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/reactnative,node,visualstudiocode
 
 # Http-Connector
-./http-common.js
+http-common.js
