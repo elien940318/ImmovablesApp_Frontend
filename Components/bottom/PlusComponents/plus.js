@@ -8,6 +8,7 @@ import http from '../../../http-common';
 import EditInfo from './EditInfo';
 import styles from '../../css/bottom/PlusComponents/PlusCSS.js'
 //import myData from '.././Util/idpw.json';
+import firebase from 'firebase';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
 
@@ -19,13 +20,26 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
         this.state = {
             isModalVisible: false,
        //   jsonD: myData
+            uid: null,
+            email: null,
+            displayName: null,
       };  
     } 
     componentDidMount(){
         AsyncStorage.getItem('idchk').then(value =>
-        this.setState({ getValue: value })
+            this.setState({ getValue: value })
         );
 
+        var user = firebase.auth().currentUser;
+        if (user) {
+            this.setState({uid: user.uid});
+            this.setState({email: user.email}); 
+            this.setState({displayName: user.displayName});
+            alert('email: ' + user.email + '\ndisplayName: ' + user.displayName + '\nuid: ' + user.uid);
+        }
+        else{
+            alert('firebase.auth().currentUser failed...');
+        }
     }
     static navigationOptions = {
         tabBarIcon: ({tintColor}) => (
@@ -39,7 +53,7 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
   }
 
     render() {
-
+            const {email} = this.state;
                 return(
                     <Container style={styles.container}>
                         <Modal isVisible={this.state.isModalVisible}>
@@ -49,7 +63,7 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
                         <View style ={{  padding:10, flexDirection: 'column' }}>
                             <View style ={{ height: 50 }}></View>
                             <Text>{this.state.getValue}</Text>
-                            <Text>e-mail</Text>
+                            <Text>{email}</Text>
                             <Button style ={styles.chimpormation} onPress={()=>this.ahekf()}>
                                 <Text style ={{color : '#FF5C3B'}}>정보수정</Text>
                             </Button>

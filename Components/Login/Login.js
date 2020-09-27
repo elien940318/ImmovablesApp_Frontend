@@ -27,46 +27,59 @@ export default class Login extends Component {
       headerShown : false
       // title: <Text>어디 살래?</Text>,
     }
-    
+
     constructor(props) {  
         super(props);  
         this.state = {
+          // Login state
           id: '',
           pw: '',
           dataku: [],
           textInputData: '',
           getValue: '',
-          user:null,
+
+          // OAuth state
+          uid: null,
+          email: null,
+          displayName: null
       };  
     }  
     
     componentDidMount() {
-      this.initAsync();
+      //this.initAsync();
+
+      // 현재 로그인되어있는 상태인지 체크한다...
       firebase.auth().onAuthStateChanged(user => {
-          if (user) {
+          if (user) {            
+            // firebase uid는 firebase authentication 갱신때마다 값이 변화한다... 사용하지 말아야할 uid...
+            // alert('Login:firebase.onAuthStateChanged: ' + user.uid + ' ' + user.email);
             this.syncUserWithStateAsync();
           }
       });
     }
 
-    async initAsync() {
-      try{
-        await GoogleSignIn.initAsync({
-          clientId: '356463774004-ncg5gr5k1lv9qvdva1laolhkh8cfn6jv.apps.googleusercontent.com',
-        });
-      }
-      catch({message}){
-        console.log('GoogleSignIn.initAsync(): ' + message);
-      }
-      this.syncUserWithStateAsync();
-    }
+    // iOS 부분 주석처리함... 로직오류...
+    // async initAsync() {
+    //   try{
+    //     await GoogleSignIn.initAsync({
+    //       clientId: '356463774004-ncg5gr5k1lv9qvdva1laolhkh8cfn6jv.apps.googleusercontent.com',
+    //     });
+    //   }
+    //   catch({message}){
+    //     console.log('GoogleSignIn.initAsync(): ' + message);
+    //   }
+    // }
 
     async syncUserWithStateAsync() {
       const user = await GoogleSignIn.signInSilentlyAsync();
-      this.setState({user: user});
-      this.props.navigation.replace('next', {
-        userlog: this.state.user
-      });
+      this.setState({uid: user.uid}); 
+      this.setState({email: user.email}); 
+      this.setState({displayName: user.displayName});       
+      // Google uid는 고정적인 uid인것 같음... 이걸 활용해서 db 구성해야 함...
+      // props로 uid와 email을 보내주거나, 해당 페이지에서 다시 호출하여 user 가져오는 식으로...
+      // 여기서 백엔드로 유저 insert 보내주어야 하는가...?
+      // alert('Login:GoogleSignIn Check: ' + user.uid + ' ' + user.email);
+      this.props.navigation.replace('next');
     }
     
     async signInWithGoogle() {
@@ -83,8 +96,7 @@ export default class Login extends Component {
             user.auth.accessToken,
           );
           
-          //const googleProfileData = await firebase.auth().signInWithCredential(credential);
-          
+          const googleProfileData = await firebase.auth().signInWithCredential(credential);          
           this.syncUserWithStateAsync();
         }
       } catch ({ message }) {
