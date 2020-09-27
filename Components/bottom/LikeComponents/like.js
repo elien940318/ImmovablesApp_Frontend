@@ -5,13 +5,13 @@ import { Container, Content,Icon, Header,Button,Card, CardItem} from 'native-bas
 // import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
 // import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
-import CardComponent  from '../../CardComponent'; 
 import RecentR from './LikeTab/RecentR';
 import RecentT from './LikeTab/RecentT';
 import ContectedO from './LikeTab/ContectedO';
 import SubsT from './LikeTab/SubsT';
 import SubsR from './LikeTab/SubsR';
 import styles from '../../css/bottom/LikeCSS.js'
+
 /*const AppTabNavigator = createMaterialTopTabNavigator({
   본방 : {screen: RecentR},
   본단지: {screen: RecentT},
@@ -39,6 +39,7 @@ tabBarOptions: {
 
 const AppTabContainet = createAppContainer(AppTabNavigator);
 */
+
 export default class home extends Component {
 
       state = {
@@ -52,6 +53,7 @@ export default class home extends Component {
       });
   }
 
+    
   renderSection = () => {
     if(this.state.activeIndex === 0) {
         return <RecentR></RecentR>
@@ -69,33 +71,6 @@ export default class home extends Component {
     return <ContectedO></ContectedO>
   }
 }
-
-    componentDidMount() {   //기존함수 componentWillMount에서 componentDidMount로 변경함.
-        this.fetchFeeds().then(feeds => {
-            this.setState({
-              feeds
-            })
-        });
-    }
-    
-    fetchFeeds() {
-        const data = {
-            id: 1,
-            jsonrpc: "2.0",
-            method: "call",
-            params: [
-              "database_api",
-              "get_discussions_by_created",
-              [{ tag: "kr", limit: 20 }]
-            ]
-        };
-        return fetch('https://api.steemit.com', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(res => res.result)
-    }
     static navigationOptions = {
         tabBarIcon: ({tintColor}) => (
             <Icon name='ios-home' style={{color: tintColor}}/>
@@ -103,6 +78,7 @@ export default class home extends Component {
     }
           //tabbar에 스크롤 제거, touchableopacity클릭시 하단부 밑줄, 안드로이드 작동 확인
     render() {
+        let elems = this.renderSection();
         return (          
           <Container style={styles.container }>
               <Header style ={{ height:100, flexDirection: 'column', backgroundColor: 'white' }}>
@@ -142,12 +118,7 @@ export default class home extends Component {
                  
                 </View>
               </Header>
-              { this.renderSection() }
-
-            <Content>
-              
-                
-            </Content>
+              {elems}
           </Container>
         );
       }
