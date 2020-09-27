@@ -106,7 +106,7 @@ export default class Board extends Component {
               
             </View>
             {
-                this.state.DBdata2.map((feed, index) => (
+                this.state.DBdata2.reverse().map((feed, index) => (
                   <RowCardComponent data={ feed } key={index}/>
                 ))
               } 
