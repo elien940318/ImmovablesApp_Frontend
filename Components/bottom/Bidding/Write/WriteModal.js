@@ -162,12 +162,8 @@ export default class WriteModal extends Component {
   postData= async ()=>{
 
     http.post(`/post/postSell`, this.createFormData(this.state.imageArray))
-    //.then((response) => response.json())
     .then((response) => {
-      //console.log('upload succes', response);
       alert('파일을 업로드 하였습니다.');
-      //console.log(response.data)
-      //this.setState({ imageArray: [] });
       this.props.toggle()
     })
     .catch((error) => {
@@ -249,7 +245,7 @@ export default class WriteModal extends Component {
                   <Text>취소</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.bottombutton1}
-                  onPress={()=>(this.state.title!=''&this.state.contents!=''&this.state.convLst!=[])?this.postData():alert('빠트리지 않고 기입해주세요.')}>
+                  onPress={()=>(this.state.title!=''&this.state.contents!=''&this.state.convLst.length!=0)?this.postData():alert('빠트리지 않고 기입해주세요.')}>
                   <Text style={{color:'white'}}>작성하기</Text>
                 </TouchableOpacity>
               </View>

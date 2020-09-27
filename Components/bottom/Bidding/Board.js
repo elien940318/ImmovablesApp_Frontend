@@ -46,8 +46,9 @@ export default class Board extends Component {
       )
   }
   
-  toggle(){
-    this.setState({isModalVisible: !this.state.isModalVisible});
+  reloading(){
+    this.getDB()
+    this.getDB2()
   }
 
   segmentClicked = (activeIndex)=>{
@@ -128,7 +129,7 @@ export default class Board extends Component {
     }else{
       return (        
         <Container style={styles.container}>         
-          <BoardHeader/>     
+          <BoardHeader reloader={()=>this.reloading()}/>     
           <View style={styles.category}>
             <TouchableOpacity style={[ this.state.activeIndex === 0 ? {height:40,borderBottomWidth:2} :{height:40}], { padding: 15, backgroundColor:'string', flexDirection: 'row'}}
               onPress={() => this.segmentClicked(0)}

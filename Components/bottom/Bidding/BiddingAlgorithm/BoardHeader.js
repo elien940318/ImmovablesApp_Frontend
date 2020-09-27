@@ -5,6 +5,7 @@ import { Icon, Container, Header, Button } from 'native-base';
 import RowCardComponent  from '../RowCardComponent'; 
 import WriteModal from '../Write/WriteModal'
 import styles from '../../../css/bottom/Bidding/BoardHeaderCSS.js'
+import http from '../../../../http-common'
 export default class BoardHeader extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +13,17 @@ export default class BoardHeader extends Component {
       isModalVisible: false
     };
   }
+
+
   toggle(){
+   
+    if(this.state.isModalVisible){
+      this.props.reloader()
+    }
     this.setState({isModalVisible: !this.state.isModalVisible});
   }
   render() {
+    
     return (
         <View>
             <Header style={styles.header}>
