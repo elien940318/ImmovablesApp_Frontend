@@ -2,52 +2,58 @@
 import React, { Component } from 'react';
 import Modal from  'react-native-modal';
 import { AsyncStorage,StyleSheet, Text, View, FlatList, Image, Dimensions} from 'react-native';
-import {  Container, Content,Icon, Button, } from 'native-base'; 
+import {  Container, Content,Icon, Button, } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import http from '../../../http-common';
 import EditInfo from './EditInfo';
 import styles from '../../css/bottom/PlusComponents/PlusCSS.js'
 //import myData from '.././Util/idpw.json';
-import firebase from 'firebase';
+import * as GoogleSignIn from 'expo-google-sign-in'
+import * as firebase from 'firebase';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
 
 
   export default class plus extends Component {
 
-    constructor(props) {  
-        super(props);  
+    constructor(props) {
+        super(props);
         this.state = {
             isModalVisible: false,
        //   jsonD: myData
             uid: null,
             email: null,
             displayName: null,
-      };  
-    } 
+      };
+    }
     componentDidMount(){
         AsyncStorage.getItem('idchk').then(value =>
             this.setState({ getValue: value })
         );
-
-        var user = firebase.auth().currentUser;
-        if (user) {
-            this.setState({uid: user.uid});
-            this.setState({email: user.email}); 
-            this.setState({displayName: user.displayName});
-            alert('email: ' + user.email + '\ndisplayName: ' + user.displayName + '\nuid: ' + user.uid);
-        }
-        else{
-            alert('firebase.auth().currentUser failed...');
-        }
+        
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+              this.syncUserWithStateAsync();
+            }
+        });
     }
+
+    async syncUserWithStateAsync() {
+        const user = await GoogleSignIn.signInSilentlyAsync();
+        this.setState({uid: user.uid}); 
+        this.setState({email: user.email}); 
+        this.setState({displayName: user.displayName});       
+        alert('email: ' + user.email + '\ndisplayName: ' + user.displayName + '\nuid: ' + user.uid);
+    }
+        
+    
+
     static navigationOptions = {
         tabBarIcon: ({tintColor}) => (
             <Icon name='ios-more' style={{color: tintColor}}/>
         )
     }
 
-    
   ahekf(){
     this.setState({isModalVisible: !this.state.isModalVisible});
   }
@@ -101,10 +107,9 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
                         </ScrollView>
                     </Container>
                 );
-            
-            
-            
-        
+
+
+
+
     }
 }
- 

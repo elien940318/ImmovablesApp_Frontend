@@ -70,6 +70,22 @@ export default class Login extends Component {
     //   }
     // }
 
+
+    // 이런식으로 GoogleSignIn 사용하지않고 firebase에서 직접 google의 profile 정보를 얻어올 수도 있는것 같음...
+    // 이부분은 alert해서 테스트 해봐야 할것 같다.
+    // var user = firebase.auth().currentUser;
+
+    // if (user != null) {
+    //   user.providerData.forEach(function (profile) {
+    //     console.log("Sign-in provider: " + profile.providerId);
+    //     console.log("  Provider-specific UID: " + profile.uid);
+    //     console.log("  Name: " + profile.displayName);
+    //     console.log("  Email: " + profile.email);
+    //     console.log("  Photo URL: " + profile.photoURL);
+    //   });
+    // }
+
+
     async syncUserWithStateAsync() {
       const user = await GoogleSignIn.signInSilentlyAsync();
       this.setState({uid: user.uid}); 
@@ -78,7 +94,7 @@ export default class Login extends Component {
       // Google uid는 고정적인 uid인것 같음... 이걸 활용해서 db 구성해야 함...
       // props로 uid와 email을 보내주거나, 해당 페이지에서 다시 호출하여 user 가져오는 식으로...
       // 여기서 백엔드로 유저 insert 보내주어야 하는가...?
-      // alert('Login:GoogleSignIn Check: ' + user.uid + ' ' + user.email);
+      alert('Login:GoogleSignIn Check\n uid:' + user.uid + '\nemail: ' + user.email);
       this.props.navigation.replace('next');
     }
     
