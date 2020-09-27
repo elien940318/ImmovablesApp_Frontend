@@ -27,14 +27,18 @@ export default class MainScreen extends Component {
   render() {
     return (
       <NavigationContainer>
-        <AppTabContainet.Navigator>
+        <AppTabContainet.Navigator tabBarOptions={{activeTintColor: '#FF5C3B'}}>
           <AppTabContainet.Screen name="홈" component={home} options={{
           //tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}/>
-          {/* <AppTabContainet.Screen name="관심목록" component={like}/> */}
+          <AppTabContainet.Screen name="관심목록" component={like} options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="heart" color={color} size={size} />
+          ),
+        }}/>
           {/* <AppTabContainet.Screen name="지도" component={map} options={{
           //tabBarLabel: 'map',
           tabBarIcon: ({ color, size }) => (
