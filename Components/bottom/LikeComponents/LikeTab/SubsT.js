@@ -14,9 +14,7 @@ export default class SubsT extends Component {
     render() {
         return (
             <Container style={style.container}>
-             <Header>
-                <Text>더보기</Text>
-            </Header>
+             <Text>찜한 단지</Text>
           
           </Container>
         );
