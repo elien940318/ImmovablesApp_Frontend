@@ -83,7 +83,7 @@ export default class Board extends Component {
     if(this.state.DBdata != null){
       if(this.state.activeIndex === 0){
         return (    
-          this.state.DBdata.map((feed, index) => (
+          this.state.DBdata.reverse().map((feed, index) => (
             <RowCardComponent data={ feed } key={index}/>
           ))  
         )            
