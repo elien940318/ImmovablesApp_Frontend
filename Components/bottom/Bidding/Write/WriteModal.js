@@ -10,6 +10,7 @@ import SellBuyCategoryModal from './DetailModal/SellBuyModal.js'
 import DetailSettingModal from './DetailModal/DetailSettingModal.js'
 import styles from '../../../css/bottom/Bidding/WriteModalCSS.js' 
 import http from '../../../../http-common'
+import axios from 'axios'
 
 export default class WriteModal extends Component {
 
@@ -58,13 +59,7 @@ export default class WriteModal extends Component {
         quality: 1, 
       });
       if (!result.cancelled) {
-        // let l = result.uri.split('/')
-        // l = l[l.length - 1].split('.')
-        // let name = l[0]
-        //console.log(name)
         let lst = this.state.imageArray
-        //result.push({"name":name})
-        // console.log(result)
         lst.push(result)
         this.setState({imageArray:lst})
       }
@@ -135,43 +130,48 @@ export default class WriteModal extends Component {
     )
   }
   /* 방 구매 업로드 */
-  createFormData = (photo, body) => {
+  createFormData = (photoes) => {
     const data = new FormData();
-    var l = photo.uri.split('/');
-    l = l[l.length - 1]
-    var name = l.split('.')
-    name = name[0]
-    data.append('photo', {
-      name: name,
-      type: photo.type,
-      uri:
-        Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+    
+    photoes.forEach(photo => {
+      let l = photo.uri.split('/').pop().split('.')
+      l.pop()
+      
+      data.append('photo', {
+        name: l.pop(),
+        type: photo.type+'/'+photo.uri.split('.').pop(),
+        uri:
+          Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+      });
     });
-  
-    // Object.keys(body).forEach((key) => {
-    //   data.append(key, body[key]);
-    //  });
-    // console.log(data)
+    let tempStr = ''
+    this.state.convLst.forEach(e=>
+      tempStr += e + ','
+      )
+    data.append('title',this.state.title)
+    data.append('contents',this.state.contents)
+    data.append('preference', tempStr)
+    data.append('price',1000)
+    data.append('location','진주')
+    data.append('user', 'tester')
+    data.append('att', this.state.sellbuy == 0?2:1)
     return data;
   };
 
 
-  postData=()=>{
-    let textData = {title:this.state.title, contents:this.state.contents, preference:this.state.convLst}
-    var formDataLst = []
-    
-    // this.state.imageArray.forEach(e=>{
-    //    formDataLst.push(this.createFormData(e, { userId: '123' }))
-    // })
-    http.post('/post/postSell', this.createFormData(this.state.imageArray[0], { userId: '123' }))
+  postData= async ()=>{
+
+    http.post(`/post/postSell`, this.createFormData(this.state.imageArray))
     //.then((response) => response.json())
     .then((response) => {
       //console.log('upload succes', response);
-      alert('Upload success!');
+      alert('파일을 업로드 하였습니다.');
+      //console.log(response.data)
       //this.setState({ imageArray: [] });
+      this.props.toggle()
     })
     .catch((error) => {
-      //console.log('upload error', error);
+      console.log('upload error', error);
       alert('Upload failed!');
     });
   }
@@ -249,7 +249,7 @@ export default class WriteModal extends Component {
                   <Text>취소</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.bottombutton1}
-                  onPress={()=>this.postData()}>
+                  onPress={()=>(this.state.title!=''&this.state.contents!=''&this.state.convLst!=[])?this.postData():alert('빠트리지 않고 기입해주세요.')}>
                   <Text style={{color:'white'}}>작성하기</Text>
                 </TouchableOpacity>
               </View>
