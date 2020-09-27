@@ -5,13 +5,13 @@ import { Container, Content,Icon, Header,Button,Card, CardItem} from 'native-bas
 // import {createMaterialTopTabNavigator } from 'react-navigation-tabs'
 // import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
-import CardComponent  from '../CardComponent'; 
-// import RecentR from '../LikeTab/RecentR';
-// import RecentT from '../LikeTab/RecentT';
-// import ContectedO from '../LikeTab/ContectedO';
-// import SubsT from '../LikeTab/SubsT';
-// import SubsR from '../LikeTab/SubsR';
-import styles from '../css/bottom/LikeCSS.js'
+import CardComponent  from '../../CardComponent'; 
+import RecentR from './LikeTab/RecentR';
+import RecentT from './LikeTab/RecentT';
+import ContectedO from './LikeTab/ContectedO';
+import SubsT from './LikeTab/SubsT';
+import SubsR from './LikeTab/SubsR';
+import styles from '../../css/bottom/LikeCSS.js'
 /*const AppTabNavigator = createMaterialTopTabNavigator({
   본방 : {screen: RecentR},
   본단지: {screen: RecentT},
@@ -42,7 +42,6 @@ const AppTabContainet = createAppContainer(AppTabNavigator);
 export default class home extends Component {
 
       state = {
-        feeds: [],
         activeIndex: 0,
 
     }
@@ -55,14 +54,19 @@ export default class home extends Component {
 
   renderSection = () => {
     if(this.state.activeIndex === 0) {
-        return  <ScrollView>
-                  {this.state.feeds.map(feed => (
-                    <CardComponent data={ feed } key={feed.url}/>
-                  ))}
-                </ScrollView>
+        return <RecentR></RecentR>
     }
     else if(this.state.activeIndex === 1) {
-      return <View><Text>This is fissdsdction</Text></View>
+      return <RecentT></RecentT>
+  }
+    else if(this.state.activeIndex === 2) {
+      return <SubsR></SubsR>
+  }
+    else if(this.state.activeIndex === 3) {
+      return <SubsT></SubsT>
+  }
+    else if(this.state.activeIndex === 4) {
+    return <ContectedO></ContectedO>
   }
 }
 

@@ -7,7 +7,7 @@ import firebase from 'firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import home from './bottom/HomeComponents/Home'
-import like from './bottom/like'
+import like from './bottom/LikeComponents/like'
 import map from './bottom/Map'
 import Board from './bottom/Bidding/Board'
 import plus from './bottom/PlusComponents/plus'

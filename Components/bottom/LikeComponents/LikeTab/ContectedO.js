@@ -14,9 +14,7 @@ export default class ContectedO extends Component {
     render() {
         return (
             <Container style={style.container}>
-             <Header>
-                <Text>더보기</Text>
-            </Header>
+             <Text>연락한 부동산</Text>
           
           </Container>
         );
