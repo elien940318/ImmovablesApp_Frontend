@@ -36,12 +36,12 @@ export default class Login extends Component {
           dataku: [],
           textInputData: '',
           getValue: '',
+          user:null,
       };  
     }  
-
-    //state = { displayName: '', email: '', password: '', errorMessage: '', loading: false };
     
     componentDidMount() {
+      this.initAsync();
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
             this.syncUserWithStateAsync();
@@ -49,10 +49,21 @@ export default class Login extends Component {
       });
     }
 
+    async initAsync() {
+      try{
+        await GoogleSignIn.initAsync({
+          clientId: '356463774004-ncg5gr5k1lv9qvdva1laolhkh8cfn6jv.apps.googleusercontent.com',
+        });
+      }
+      catch({message}){
+        console.log('GoogleSignIn.initAsync(): ' + message);
+      }
+      this.syncUserWithStateAsync();
+    }
 
     async syncUserWithStateAsync() {
       const user = await GoogleSignIn.signInSilentlyAsync();
-      this.setState({id:user});
+      this.setState({user});
       this.props.navigation.replace('next');
     }
     
