@@ -8,12 +8,11 @@ class tokenChecker extends Component
 {
     tokenCheck = () => {
         var user = firebase.auth().currentUser;
-        var name, email, photoUrl, uid, emailVerified;
+        var name, email, uid, emailVerified;
         if (user) {
           // User is signed in.
           name = user.displayName;
           email = user.email;
-          photoUrl = user.photoURL;
           emailVerified = user.emailVerified;
           uid = user.uid;
         } else {

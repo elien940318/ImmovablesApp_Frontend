@@ -63,8 +63,10 @@ export default class Login extends Component {
 
     async syncUserWithStateAsync() {
       const user = await GoogleSignIn.signInSilentlyAsync();
-      this.setState({user});
-      this.props.navigation.replace('next');
+      this.setState({user: user});
+      this.props.navigation.replace('next', {
+        userlog: this.state.user
+      });
     }
     
     async signInWithGoogle() {
@@ -81,7 +83,7 @@ export default class Login extends Component {
             user.auth.accessToken,
           );
           
-          const googleProfileData = await firebase.auth().signInWithCredential(credential);
+          //const googleProfileData = await firebase.auth().signInWithCredential(credential);
           
           this.syncUserWithStateAsync();
         }
