@@ -41,7 +41,7 @@ export default class Login extends Component {
           // OAuth state
           uid: null,
           email: null,
-          displayName: null
+          name: null
       };  
     }  
     
@@ -50,10 +50,10 @@ export default class Login extends Component {
 
       // 현재 로그인되어있는 상태인지 체크한다...
       firebase.auth().onAuthStateChanged(user => {
-          if (user) {            
-            // firebase uid는 firebase authentication 갱신때마다 값이 변화한다... 사용하지 말아야할 uid...
-            // alert('Login:firebase.onAuthStateChanged: ' + user.uid + ' ' + user.email);
-            this.syncUserWithStateAsync();
+          if (user) {
+            // OAuth 로그인이 되어있는 상태입니다. 그러니 바로 next로 넘겨줍시다.
+            // this.syncUserWithStateAsync();
+            this.props.navigation.replace('next');
           }
       });
     }
@@ -70,34 +70,29 @@ export default class Login extends Component {
     //   }
     // }
 
-
-    // 이런식으로 GoogleSignIn 사용하지않고 firebase에서 직접 google의 profile 정보를 얻어올 수도 있는것 같음...
-    // 이부분은 alert해서 테스트 해봐야 할것 같다.
-    // var user = firebase.auth().currentUser;
-
-    // if (user != null) {
-    //   user.providerData.forEach(function (profile) {
-    //     console.log("Sign-in provider: " + profile.providerId);
-    //     console.log("  Provider-specific UID: " + profile.uid);
-    //     console.log("  Name: " + profile.displayName);
-    //     console.log("  Email: " + profile.email);
-    //     console.log("  Photo URL: " + profile.photoURL);
-    //   });
+    // async syncUserWithStateAsync() {
+    //   const user = await GoogleSignIn.signInSilentlyAsync();
+    //   // Google uid는 고정적인 uid인것 같음... 이걸 활용해서 db 구성해야 함...
+    //   // props로 uid와 email을 보내주거나, 해당 페이지에서 다시 호출하여 user 가져오는 식으로...
+    //   // 여기서 백엔드로 유저 insert 보내주어야 하는가...? 그렇습니다.      
+    //   this.InsertUser(user.uid, user.email, user.lastName+user.firstName);
+    //   this.props.navigation.replace('next');
     // }
-
-
-    async syncUserWithStateAsync() {
-      const user = await GoogleSignIn.signInSilentlyAsync();
-      this.setState({uid: user.uid}); 
-      this.setState({email: user.email}); 
-      this.setState({displayName: user.displayName});       
-      // Google uid는 고정적인 uid인것 같음... 이걸 활용해서 db 구성해야 함...
-      // props로 uid와 email을 보내주거나, 해당 페이지에서 다시 호출하여 user 가져오는 식으로...
-      // 여기서 백엔드로 유저 insert 보내주어야 하는가...?
-      alert('Login:GoogleSignIn Check\n uid:' + user.uid + '\nemail: ' + user.email);
-      this.props.navigation.replace('next');
-    }
     
+    InsertUser(uid, email, name) {
+        http.post('/login/checkUser', {
+          _email: email,
+          _uid: uid,
+          _name: name,
+        })
+        .then((response)=>{
+          alert(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
     async signInWithGoogle() {
       try {
         await GoogleSignIn.askForPlayServicesAsync();
@@ -105,15 +100,20 @@ export default class Login extends Component {
 
         if (type === 'success') 
         {
+          // 로그인은 양호하게 처리된 상태...
           await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
           
           const credential = firebase.auth.GoogleAuthProvider.credential(
             user.auth.idToken, 
             user.auth.accessToken,
           );
-          
+          // 이건 무슨 구문인지 아직 이해가 안됩니다...
           const googleProfileData = await firebase.auth().signInWithCredential(credential);          
-          this.syncUserWithStateAsync();
+          
+          // db에 insert or update 시켜주는 구문 처리...
+          this.InsertUser(user.uid, user.email, user.displayName);
+          // this.syncUserWithStateAsync();
+          this.props.navigation.replace('next');
         }
       } catch ({ message }) {
         alert('Error:' + message);

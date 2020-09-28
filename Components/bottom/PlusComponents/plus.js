@@ -31,22 +31,16 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
             this.setState({ getValue: value })
         );
         
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-              this.syncUserWithStateAsync();
-            }
-        });
+        var user = firebase.auth().currentUser;
+        if (user != null) {
+            user.providerData.forEach(function (profile) {
+                alert(profile.uid + '\n' + profile.email + '\n' + profile.displayName );
+                this.setState({uid: profile.uid}); 
+                this.setState({email: profile.email}); 
+                this.setState({displayName: profile.displayName});       
+            });
+        }
     }
-
-    async syncUserWithStateAsync() {
-        const user = await GoogleSignIn.signInSilentlyAsync();
-        this.setState({uid: user.uid}); 
-        this.setState({email: user.email}); 
-        this.setState({displayName: user.displayName});       
-        alert('email: ' + user.email + '\ndisplayName: ' + user.displayName + '\nuid: ' + user.uid);
-    }
-        
-    
 
     static navigationOptions = {
         tabBarIcon: ({tintColor}) => (
