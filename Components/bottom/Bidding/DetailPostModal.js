@@ -15,7 +15,8 @@ export default class DetailPostModal extends Component {
       toggle : props.toggle,
       chkheart:0,
       isModalVisible: false,
-      imges : []
+      imges : [],
+      preference: []
     };
   }
   toggle(){
@@ -35,6 +36,9 @@ export default class DetailPostModal extends Component {
     this.state.data = this.props.toData
     this.state.imges = this.state.data.img.split(',')
     this.state.imges.pop()
+    let l = this.state.data.preference.split(',')
+    l.pop()
+    this.state.preference = l 
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>
@@ -66,11 +70,11 @@ export default class DetailPostModal extends Component {
                 </TouchableOpacity>
               </View>
             </View>
+            <ScrollView style={{margin:10}} horizontal={true}>
             {
+              
               this.state.imges.length > 0?
               this.state.imges.map((e, index)=>{
-                console.log(http.connAPI)
-                 console.log(e)
                  return<Image key={index} source={{uri:http.connAPI+'/board/getSellImg/'+e}}  style={{ height:250, width:350 }}/>
                 
               }):
@@ -78,12 +82,20 @@ export default class DetailPostModal extends Component {
               <Text style={{margin:15}}>사진이 없습니다.</Text> 
               </View>
             }
-                
+            </ScrollView>
            
           </View>
           <View style={{backgroundColor: 'white'}}>
             <View style={styles.hr}/>
           </View>          
+          <View style={styles.price}>
+            <Text style={{fontSize:25}}>선호하는 편의시설</Text>
+            {/** 세로로 눞힐것 */
+              this.state.preference.map((e, idx) => {
+                return  <Text key={idx}>{e}</Text>
+              })
+            }
+          </View>   
           {/* 가격 뷰 // DB에 전,월세 저장 */}
           <View style={styles.price}>
             <Text style={{fontSize:25}}>월세: {this.state.data.price/10000}(만원)</Text>
