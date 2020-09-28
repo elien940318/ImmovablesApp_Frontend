@@ -71,7 +71,7 @@ export default class DetailPostModal extends Component {
               this.state.imges.map((e, index)=>{
                 console.log(http.connAPI)
                  console.log(e)
-                 return<Image key={index} source={{uri:http.connAPI+'/board/getSellImg/'+e}}  style={{ height:100, width:150 }}/>
+                 return<Image key={index} source={{uri:http.connAPI+'/board/getSellImg/'+e}}  style={{ height:250, width:350 }}/>
                 
               }):
               <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
