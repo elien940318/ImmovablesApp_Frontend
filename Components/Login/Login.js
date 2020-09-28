@@ -99,7 +99,8 @@ export default class Login extends Component {
           
           // db에 insert or update 시켜주는 구문 처리...
           // 따로 state에 회원정보 저장해두지는 않습니다.
-          this.InsertUser(user.uid, user.email, user.displayName);                            
+          this.InsertUser(user.uid, user.email, user.displayName); 
+          this.props.navigation.replace('next');                           
         }
       } catch ({ message }) {
         alert('Error:' + message);
