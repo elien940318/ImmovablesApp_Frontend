@@ -18,15 +18,6 @@ export default class DetailPostModal extends Component {
       imges : []
     };
   }
-
-  getImg(name){
-    http.get(`/board/getSellImg/${name}`,).then(response=>{
-      console.log(response.data)
-    }).catch(e=>{
-      
-    })
-  }
-
   toggle(){
     this.setState({isModalVisible:!this.state.isModalVisible});
   }
@@ -78,7 +69,8 @@ export default class DetailPostModal extends Component {
             {
               this.state.imges.length > 0?
               this.state.imges.map((e, index)=>{
-                console.log(e)
+                console.log(http.connAPI)
+                 console.log(e)
                  return<Image key={index} source={{uri:http.connAPI+'/board/getSellImg/'+e}}  style={{ height:100, width:150 }}/>
                 
               }):

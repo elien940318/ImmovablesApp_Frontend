@@ -22,7 +22,6 @@ export default class RawCardComponent extends Component {
     render() {
       const { data } = this.props; // 피드 항목 데이터
       this.state.imges = data.img.split(',').reverse().pop()
-      console.log(this.state.imges)
       return (
         <Card>
             <Modal isVisible={this.state.isModalVisible}>

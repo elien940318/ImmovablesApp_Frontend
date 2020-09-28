@@ -114,7 +114,7 @@ export default class Board extends Component {
         )
       }
     }else{
-      
+      this.reloading() // 연속적 로딩 기능 구현 해야함
       return(
       <Text>로딩에 실패하였습니다.</Text>
       )
