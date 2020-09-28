@@ -50,35 +50,27 @@ class DPMInfo extends Component {
           <View style={{flexDirection:'row'}}>
             <View style={styles.LeftBox}>
                 <Text style={{margin:10}}>
-                    월세
+                    구매 희망사항
                 </Text>
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                    {this.state.data.price/10000}(만원)
+                    <Text>{this.state.data.content}</Text>
                 </Text>
             </View>
           </View>
           <View style={{flexDirection:'row'}}>
             <View style={styles.LeftBox}>
                 <Text style={{margin:10}}>
-                    월세
+                    작성자
                 </Text>
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                    {this.state.data.price/10000}(만원)
+                    {this.state.data.author}
                 </Text>
             </View>
           </View>
-           {/** 세로로 눞힐것 */
-              this.state.preference.map((e, idx) => {
-                return  <Text key={idx}>{e}</Text>
-              })
-            }
-        <Text style={{fontSize:25}}>월세: {this.state.data.price/10000}(만원)</Text>
-        <Text>{this.state.data.content}</Text>
-        <Text>{this.state.data.author}</Text>
       </View>
     );
   }

@@ -82,35 +82,6 @@ export default class DetailPostModal extends Component {
               </View>
             }
             </ScrollView>
-           
-          </View>
-          <View style={{backgroundColor: 'white'}}>
-            <View style={styles.hr}/>
-          </View>          
-          <View style={styles.price}>
-            <Text style={{fontSize:25}}>선호하는 편의시설</Text>
-            {/** 세로로 눕힐것 */
-              this.state.preference.map((e, idx) => {
-                return  <Text key={idx}>{e}</Text>
-              })
-            }
-          </View>   
-          {/* 가격 뷰 // DB에 전,월세 저장 */}
-          <View style={styles.price}>
-            <Text style={{fontSize:25}}>월세: {this.state.data.price/10000}(만원)</Text>
-          </View>                 
-          {/*설명*/}
-          <View style={styles.content}>
-            <Text>{this.state.data.content}</Text>
-          </View>
-          <View style={{backgroundColor: 'white'}}>
-            <View style={styles.hr}/>
-          </View> 
-          {/*부동산*/}
-          <View style={styles.category}>
-            <View style={styles.info}>
-              <Text>{this.state.data.author}</Text>
-            </View>
           </View>
           
           <View style={{backgroundColor: 'white'}}>
@@ -120,16 +91,6 @@ export default class DetailPostModal extends Component {
           <DPMInfo toData={this.state.data}>
           </DPMInfo>
           </View>
-          <TouchableOpacity style={{height:150, backgroundColor:'red'}}>
-            <Text>ef</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{height:150, backgroundColor:'red'}}>
-            <Text>ef</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{height:150, backgroundColor:'red'}}>
-            <Text>ef</Text>
-          </TouchableOpacity>
-
         </ScrollView>
         <TouchableOpacity style={styles.biddingbutton} onPress={()=>{this.toggle()}}>
           <Text style={styles.biddingfont}>입찰하기</Text>
