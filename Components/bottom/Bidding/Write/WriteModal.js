@@ -128,7 +128,8 @@ export default class WriteModal extends Component {
       </Modal>
     )
   }
-  /* 방 구매 업로드 */
+
+  /* ########## 방 구매 업로드  ########## */
   createFormData = (photoes) => {
     const data = new FormData();
     
@@ -153,22 +154,41 @@ export default class WriteModal extends Component {
     data.append('price',1000)
     data.append('location','진주')
     data.append('user', 'tester')
-    data.append('att', this.state.sellbuy == 0?2:1)
+    data.append('att', this.state.sellbuy == 0?1:2)
     return data;
   };
 
-
   postData= async ()=>{
+    if(this.state.sellbuy == 0){
+      http.post(`/post/postSell`, this.createFormData(this.state.imageArray))
+      .then((response) => {
+        alert('파일을 업로드 하였습니다.');
+        this.props.toggle()
+      })
+      .catch((error) => {
+        console.log('upload error', error);
+        alert('Upload failed!');
+      });
+    }else{
+      http.post(`/post/postTrade`, this.createFormData(this.state.imageArray))
+      .then((response) => {
+        alert('파일을 업로드 하였습니다.');
+        this.props.toggle()
+      })
+      .catch((error) => {
+        console.log('upload error', error);
+        alert('Upload failed!');
+      });
+    }
+  }
 
-    http.post(`/post/postSell`, this.createFormData(this.state.imageArray))
-    .then((response) => {
-      alert('파일을 업로드 하였습니다.');
-      this.props.toggle()
-    })
-    .catch((error) => {
-      console.log('upload error', error);
-      alert('Upload failed!');
-    });
+  /* ########## 유효성 체크 ########## */ 
+  checker = () => {
+    if(this.state.title!=''&this.state.contents!=''/*&this.state.convLst.length!=0*/){
+      this.postData()
+    }else{
+      alert('빠트리지 않고 기입해주세요.')
+    }
   }
   /* ########## main ########## */ 
   render() {
@@ -244,7 +264,7 @@ export default class WriteModal extends Component {
                   <Text>취소</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.bottombutton1}
-                  onPress={()=>(this.state.title!=''&this.state.contents!=''&this.state.convLst.length!=0)?this.postData():alert('빠트리지 않고 기입해주세요.')}>
+                  onPress={()=>{this.checker()}}>
                   <Text style={{color:'white'}}>작성하기</Text>
                 </TouchableOpacity>
               </View>
