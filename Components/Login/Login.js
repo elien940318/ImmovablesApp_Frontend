@@ -69,8 +69,14 @@ export default class Login extends Component {
           _uid: uid,
           _name: name,
         })
+        .then((response) => {
+          if(response.data.values == -1){
+            alert(response.data.logs);
+          }
+        })
         .catch(function (error) {
           console.log(error);
+          alert("로그인 중 db connection 에러 발생.");
         });
     }
 
@@ -93,8 +99,7 @@ export default class Login extends Component {
           
           // db에 insert or update 시켜주는 구문 처리...
           // 따로 state에 회원정보 저장해두지는 않습니다.
-          this.InsertUser(user.uid, user.email, user.displayName);                  
-          this.props.navigation.replace('next');
+          this.InsertUser(user.uid, user.email, user.displayName);                            
         }
       } catch ({ message }) {
         alert('Error:' + message);
