@@ -15,7 +15,6 @@ import styles from "../css/LoginCSS.js";
 import * as GoogleSignIn from 'expo-google-sign-in'
 import * as firebase from 'firebase';
 import "firebase/auth";
-// import 'firebase/firestore';
 
 
 // key 생성
@@ -37,11 +36,6 @@ export default class Login extends Component {
           dataku: [],
           textInputData: '',
           getValue: '',
-
-          // OAuth state
-          uid: null,
-          email: null,
-          name: null
       };  
     }  
     
@@ -52,13 +46,12 @@ export default class Login extends Component {
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
             // OAuth 로그인이 되어있는 상태입니다. 그러니 바로 next로 넘겨줍시다.
-            // this.syncUserWithStateAsync();
             this.props.navigation.replace('next');
           }
       });
     }
 
-    // iOS 부분 주석처리함... 로직오류...
+    // iOS 부분 주석처리함... 수정해야할 부분...
     // async initAsync() {
     //   try{
     //     await GoogleSignIn.initAsync({
@@ -70,23 +63,11 @@ export default class Login extends Component {
     //   }
     // }
 
-    // async syncUserWithStateAsync() {
-    //   const user = await GoogleSignIn.signInSilentlyAsync();
-    //   // Google uid는 고정적인 uid인것 같음... 이걸 활용해서 db 구성해야 함...
-    //   // props로 uid와 email을 보내주거나, 해당 페이지에서 다시 호출하여 user 가져오는 식으로...
-    //   // 여기서 백엔드로 유저 insert 보내주어야 하는가...? 그렇습니다.      
-    //   this.InsertUser(user.uid, user.email, user.lastName+user.firstName);
-    //   this.props.navigation.replace('next');
-    // }
-    
     InsertUser(uid, email, name) {
         http.post('/login/checkUser', {
           _email: email,
           _uid: uid,
           _name: name,
-        })
-        .then((response)=>{
-          alert(response);
         })
         .catch(function (error) {
           console.log(error);
@@ -111,8 +92,8 @@ export default class Login extends Component {
           const googleProfileData = await firebase.auth().signInWithCredential(credential);          
           
           // db에 insert or update 시켜주는 구문 처리...
-          this.InsertUser(user.uid, user.email, user.displayName);
-          // this.syncUserWithStateAsync();
+          // 따로 state에 회원정보 저장해두지는 않습니다.
+          this.InsertUser(user.uid, user.email, user.displayName);                  
           this.props.navigation.replace('next');
         }
       } catch ({ message }) {
