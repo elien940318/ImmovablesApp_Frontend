@@ -4,13 +4,14 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import DetailPostModal from './DetailPostModal'
-
+import * as http from '../../../http-common'
 export default class RawCardComponent extends Component {
 
     constructor(props){
       super(props);
       this.state = {
-        isModalVisible: false
+        isModalVisible: false,
+        imges : ''
       };  
     }
       
@@ -20,7 +21,7 @@ export default class RawCardComponent extends Component {
 
     render() {
       const { data } = this.props; // 피드 항목 데이터
-      //const { image } = JSON.parse(data.json_metadata); // json_metadata에서 이미지 url을 파싱
+      this.state.imges = data.img.split(',').reverse().pop()
       return (
         <Card>
             <Modal isVisible={this.state.isModalVisible}>
@@ -52,14 +53,11 @@ export default class RawCardComponent extends Component {
                   
                   <Body style={{flex: 1}}>
                     {
-                      <Text>사진</Text>
-                      /*
-                      image && image.length ?
-                      <Image 
-                        source={{ uri: image[0] }} 
-                        style={{ height:100, width:150 }} />
-                    : null
-                    */
+                      this.state.imges !== '0'?
+                      
+                      <Image source={{uri:http.connAPI+'/board/getSellImg/'+this.state.imges}} style={{ height:100, width:150 }}/>
+                      :
+                      <Text>사진이 없습니다.</Text>
                     }
                   </Body>
               </CardItem>

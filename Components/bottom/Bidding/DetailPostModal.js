@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import Modal from "react-native-modal";
-import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
+import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
 import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4)
+import * as http from '../../../http-common'
 
 export default class DetailPostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible : false,
-      data : props.toData,
+      data : this.props.toData,
       toggle : props.toggle,
       chkheart:0,
       isModalVisible: false,
+      imges : [],
+      preference: []
     };
   }
-
   toggle(){
     this.setState({isModalVisible:!this.state.isModalVisible});
   }
@@ -34,6 +33,12 @@ export default class DetailPostModal extends Component {
   }
 
   render() {
+    this.state.data = this.props.toData
+    this.state.imges = this.state.data.img.split(',')
+    this.state.imges.pop()
+    let l = this.state.data.preference.split(',')
+    l.pop()
+    this.state.preference = l 
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>
@@ -65,13 +70,32 @@ export default class DetailPostModal extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
-              <Text style={{margin:15}}>사진</Text>        
-            </View>
+            <ScrollView style={{margin:10}} horizontal={true}>
+            {
+              
+              this.state.imges.length > 0?
+              this.state.imges.map((e, index)=>{
+                 return<Image key={index} source={{uri:http.connAPI+'/board/getSellImg/'+e}}  style={{ height:250, width:350 }}/>
+                
+              }):
+              <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
+              <Text style={{margin:15}}>사진이 없습니다.</Text> 
+              </View>
+            }
+            </ScrollView>
+           
           </View>
           <View style={{backgroundColor: 'white'}}>
             <View style={styles.hr}/>
           </View>          
+          <View style={styles.price}>
+            <Text style={{fontSize:25}}>선호하는 편의시설</Text>
+            {/** 세로로 눞힐것 */
+              this.state.preference.map((e, idx) => {
+                return  <Text key={idx}>{e}</Text>
+              })
+            }
+          </View>   
           {/* 가격 뷰 // DB에 전,월세 저장 */}
           <View style={styles.price}>
             <Text style={{fontSize:25}}>월세: {this.state.data.price/10000}(만원)</Text>
