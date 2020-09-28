@@ -3,6 +3,7 @@ import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         margin:-20,
         backgroundColor: 'whitesmoke'
       },
@@ -94,6 +95,19 @@ const styles = StyleSheet.create({
       borderColor:'#FF5C3B',
       alignItems:'center', 
       justifyContent:'center'
+    },
+    convenientView:{
+      flexDirection:'row',
+      margin:5
+
+    },
+    convenientText:{
+      margin:2
+    },
+    describeback:{
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor:'white'
     },
   });
   export default styles;
