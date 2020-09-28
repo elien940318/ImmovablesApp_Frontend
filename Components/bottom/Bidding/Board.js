@@ -37,7 +37,7 @@ export default class Board extends Component {
       this.setState({
         loading:false
       })
-    }, 3000)
+    }, 500)
   }
 
   static navigationOptions = {
@@ -46,8 +46,9 @@ export default class Board extends Component {
       )
   }
   
-  toggle(){
-    this.setState({isModalVisible: !this.state.isModalVisible});
+  reloading(){
+    this.getDB()
+    this.getDB2()
   }
 
   segmentClicked = (activeIndex)=>{
@@ -82,7 +83,7 @@ export default class Board extends Component {
     if(this.state.DBdata != null){
       if(this.state.activeIndex === 0){
         return (    
-          this.state.DBdata.map((feed, index) => (
+          this.state.DBdata.reverse().map((feed, index) => (
             <RowCardComponent data={ feed } key={index}/>
           ))  
         )            
@@ -105,7 +106,7 @@ export default class Board extends Component {
               
             </View>
             {
-                this.state.DBdata2.map((feed, index) => (
+                this.state.DBdata2.reverse().map((feed, index) => (
                   <RowCardComponent data={ feed } key={index}/>
                 ))
               } 
@@ -128,7 +129,7 @@ export default class Board extends Component {
     }else{
       return (        
         <Container style={styles.container}>         
-          <BoardHeader/>     
+          <BoardHeader reloader={()=>this.reloading()}/>     
           <View style={styles.category}>
             <TouchableOpacity style={[ this.state.activeIndex === 0 ? {height:40,borderBottomWidth:2} :{height:40}], { padding: 15, backgroundColor:'string', flexDirection: 'row'}}
               onPress={() => this.segmentClicked(0)}

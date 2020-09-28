@@ -1,5 +1,5 @@
-const { fetchUpdateAsync } = require("expo/build/Updates/Updates");
-import React, { Component, useState } from 'react';
+//const { fetchUpdateAsync } = require("expo/build/Updates/Updates");
+//import React, { Component, useState } from 'react';
 import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({

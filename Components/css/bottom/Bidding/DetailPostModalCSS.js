@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
     },
     img:{
       height: 300,
-      alignItems:'center',
-      justifyContent: 'center',
       backgroundColor: 'white'
     },
     price:{
@@ -51,6 +49,51 @@ const styles = StyleSheet.create({
     br: {
       height: '10%',
       backgroundColor: 'whitesmoke'
-    }
+    },
+    biddingbutton:{
+      height:'10%', 
+      justifyContent: 'center', 
+      alignItems:'center', 
+      backgroundColor:'#FF5C3B'
+    },
+    biddingfont:{
+      color:'white', 
+      fontWeight:'bold', 
+      fontSize:20
+    },
+    heartback:{
+      flexDirection:'row',
+      backgroundColor:'white',
+      justifyContent:'flex-end',
+
+    },
+    heartbuttonon:{
+      margin:5,
+      color:'#FF5C3B',
+      borderColor:'black'
+    },
+    heartbuttonoff:{
+      width:25,
+      height:30,       
+    },
+    heartradiusoff:{
+      margin:5,
+      height:40,
+      width:40,
+      borderWidth:2, 
+      borderRadius:100, 
+      alignItems:'center', 
+      justifyContent:'center'
+    },
+    heartradiuson:{
+      margin:5,
+      height:40,
+      width:40,
+      borderWidth:2, 
+      borderRadius:100, 
+      borderColor:'#FF5C3B',
+      alignItems:'center', 
+      justifyContent:'center'
+    },
   });
   export default styles;

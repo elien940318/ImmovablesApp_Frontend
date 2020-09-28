@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {  Container, Content,Icon, Header } from 'native-base'; 
 
-export default class SubsR extends Component {
+export default class RecentT extends Component {
 
     static navigationOptions = {
         tabBarIcon: ({tintColor}) => (
@@ -14,9 +14,7 @@ export default class SubsR extends Component {
     render() {
         return (
             <Container style={style.container}>
-             <Header>
-                <Text>더보기</Text>
-            </Header>
+             <Text>최근 본 단지</Text>
           
           </Container>
         );

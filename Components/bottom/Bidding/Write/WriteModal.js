@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {TouchableOpacity,TextInput, Text, View, Dimensions, Modal, ScrollView} from 'react-native';
+import {TouchableOpacity,TextInput, Text, View, Modal, ScrollView} from 'react-native';
 import { Icon, Container, Header } from 'native-base'; 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -9,33 +9,34 @@ import ConvModal from './DetailModal/ConvenienceModal.js'
 import SellBuyCategoryModal from './DetailModal/SellBuyModal.js'
 import DetailSettingModal from './DetailModal/DetailSettingModal.js'
 import styles from '../../../css/bottom/Bidding/WriteModalCSS.js' 
-
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH );
-const ITEM_WIDTH1 = Math.round(SLIDER_WIDTH);
+import http from '../../../../http-common'
+import axios from 'axios'
 
 export default class WriteModal extends Component {
 
     constructor(props) {  
       super(props);  
       this.state = {
-        convModalShown: false,
-        detailModalShown: false,
-        sellBuyModalShown: false,
-        SettingInfoVisible: false,
+        convModalShown: false, // 편의 시설 모달 Bool
+        detailModalShown: false, // 세부 설정 모달 Bool
+        sellBuyModalShown: false, // 방 구하기, 방 내놓기 모달 Bool
         title:'',
+        contents:'',
         category:'카테고리',
-        sellbuy:null,
+        sellbuy:null, // 0 : 방 구하기 & 1 : 방 내놓기
         imageArray: [],
-        lst:[], // 편의시설 배열
+        convLst:[], // 편의시설 배열
+        formDataLst:[]
       };  
   }
 
   componentDidMount() {
     this.getPermissionAsync();
+    setTimeout(()=>{
+      this.sellBuyModalToggle()
+    }, 200)
   }
-
+  /* ########## Image 관련 함수 ########## */
   getPermissionAsync = async () => {
     if (Platform.OS !== 'web') {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -55,37 +56,37 @@ export default class WriteModal extends Component {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 1,
+        quality: 1, 
       });
       if (!result.cancelled) {
         let lst = this.state.imageArray
-        lst.push(result.uri)
+        lst.push(result)
         this.setState({imageArray:lst})
       }
     } catch (E) {}
   }; 
   /* ########## 편의 시설 모달 함수 ########## */
   selectionConv=(text)=>{
-    if(!this.state.lst.includes(text)){
-      this.state.lst.push(text)
+    if(!this.state.convLst.includes(text)){
+      this.state.convLst.push(text)
     }
     else{
-      let idx = this.state.lst.indexOf(text)
-      this.state.lst.splice(idx, 1)
+      let idx = this.state.convLst.indexOf(text)
+      this.state.convLst.splice(idx, 1)
     }
   }
   convModalToggle(){
     
     this.setState({convModalShown: !this.state.convModalShown})
     if(!this.state.convModalShown)
-      this.state.lst =[]
+      this.state.convLst =[]
     
   }
   convModal=()=>{  
     return(
       <Modal animationType="fade" transparent={true} visible={this.state.convModalShown} 
       onRequestClose={() => {this.convModalToggle();}} backdrop={true}>
-        <ConvModal toggle={()=>this.convModalToggle()} conv={this.selectionConv} lst={this.state.lst}/>
+        <ConvModal toggle={()=>this.convModalToggle()} conv={this.selectionConv} lst={this.state.convLst}/>
       </Modal>
     )
   }
@@ -128,9 +129,52 @@ export default class WriteModal extends Component {
       </Modal>
     )
   }
-  /* ########## main  ########## */ 
+  /* 방 구매 업로드 */
+  createFormData = (photoes) => {
+    const data = new FormData();
+    
+    photoes.forEach(photo => {
+      let l = photo.uri.split('/').pop().split('.')
+      l.pop()
+      
+      data.append('photo', {
+        name: l.pop(),
+        type: photo.type+'/'+photo.uri.split('.').pop(),
+        uri:
+          Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+      });
+    });
+    let tempStr = ''
+    this.state.convLst.forEach(e=>
+      tempStr += e + ','
+      )
+    data.append('title',this.state.title)
+    data.append('contents',this.state.contents)
+    data.append('preference', tempStr)
+    data.append('price',1000)
+    data.append('location','진주')
+    data.append('user', 'tester')
+    data.append('att', this.state.sellbuy == 0?2:1)
+    return data;
+  };
+
+
+  postData= async ()=>{
+
+    http.post(`/post/postSell`, this.createFormData(this.state.imageArray))
+    .then((response) => {
+      alert('파일을 업로드 하였습니다.');
+      this.props.toggle()
+    })
+    .catch((error) => {
+      console.log('upload error', error);
+      alert('Upload failed!');
+    });
+  }
+  /* ########## main ########## */ 
   render() {
       let { imageArray } = this.state // 이미지 배열 지역변수
+      
       return (
         <Container style={styles.container}>
           <ScrollView>
@@ -143,34 +187,40 @@ export default class WriteModal extends Component {
               </Text>
               <Text></Text>           
             </Header>
-            <View style={{flexDirection:'row', margin:10}}>
-              <Text style={{fontSize:20, fontWeight:'bold'}}> 방 내놓기 </Text>
-            </View>
+            {
+              this.state.sellbuy === 0?
+              <View style={{flexDirection:'row', margin:10}}>
+                <Text style={{fontSize:20, fontWeight:'bold'}}> 방 구하기 </Text>
+              </View>
+              :
+              <View style={{flexDirection:'row', margin:10}}>
+                <Text style={{fontSize:20, fontWeight:'bold'}}> 방 내놓기 </Text>
+              </View>
+            }
+            
             <ScrollView style={{margin:10}} horizontal={true} /* 이미지 미리보기 */>
               {
                 imageArray.length > 0?
                 imageArray.map((e, index)=>(
-                  <ImgComponet data={e} key={index}/>
+                  <ImgComponet data={e.uri} key={index}/>
                 ))
                 :<Text>이미지를 업로드 하세요!</Text>
               }
             </ScrollView>
-            {this.sellBuyCategoryModal() /* 방 구하기, 팔기 대분류 모달 */}
-            {this.detailModal() /* 세부 사항 모달 */}
-            {this.convModal()/* 편의 시설 모달 함수 */} 
             <View style={{alignItems:'center'}}>
               
               <TouchableOpacity style={styles.button} onPress={()=>this.sellBuyModalToggle()}>
                 <Text style={{margin:5}}>{this.state.category}</Text>
               </TouchableOpacity>
               <DetailSection detailToggle={()=>this.detailModalToggle()} convToggle={()=>this.convModalToggle()}
-                sellbuy={this.state.sellbuy} lst={this.state.lst} /* 세부사항, 편의시설 컴포넌트 분리 *//>
+                sellbuy={this.state.sellbuy} lst={this.state.convLst} /* 세부사항, 편의시설 컴포넌트 분리 *//>
               <TextInput
                 style={styles.button}  
                 placeholder="제목" onChangeText={(title) => this.setState({title})} value={this.state.title}>  
               </TextInput>
               <View style={{margin:5, width:'100%', alignItems:'center'}}>
                 <TextInput 
+                  onChangeText={(contents) => this.setState({contents})} value={this.state.contents}
                   style={styles.mcontent} placeholder="게시글을 작성해주세요." >
                   
                 </TextInput>
@@ -194,12 +244,16 @@ export default class WriteModal extends Component {
                 <TouchableOpacity style={styles.bottombutton} onPress={this.props.toggle}> 
                   <Text>취소</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.bottombutton1}>
+                <TouchableOpacity style={styles.bottombutton1}
+                  onPress={()=>(this.state.title!=''&this.state.contents!=''&this.state.convLst.length!=0)?this.postData():alert('빠트리지 않고 기입해주세요.')}>
                   <Text style={{color:'white'}}>작성하기</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </ScrollView>
+          {this.sellBuyCategoryModal() /* 방 구하기, 팔기 대분류 모달 */}
+          {this.detailModal() /* 세부 사항 모달 */}
+          {this.convModal()/* 편의 시설 모달 함수 */} 
         </Container >
       );
   }
