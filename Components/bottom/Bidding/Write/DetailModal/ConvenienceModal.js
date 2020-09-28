@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { Icon, Container, Header, Button, CheckBox, } from 'native-base'; 
-import Txt from './ConvenienceChd.js'
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Icon } from 'native-base'; 
 import styles from '../../../../css/bottom/Bidding/ConvenienveModalCSS.js';
 class ConvenienceModal extends Component {
   constructor(props) {
@@ -98,7 +97,7 @@ class ConvenienceModal extends Component {
                 <View style={{margin:20, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 {
                   this.state.lst.length > 0?
-                  this.state.lst.map((e, index) => <Txt data={e} key={index}/>):
+                  this.state.lst.map((e, index) => <Text key={index}>{e}</Text>):
                   null
                 }
                 </View>
