@@ -18,6 +18,7 @@ export default class Setting extends Component{
         address: '',
       },
       defaultData:{},
+      addiData:{}
     };
   }
 
@@ -32,6 +33,9 @@ export default class Setting extends Component{
   }
   defaultDataUpdater=(data)=>{
     this.state.defaultData = data;
+  }
+  addiDataUpdater=(data)=>{
+    this.state.addiData = data;
   }
   /** ############# 유효성 체크 #############*/
   checker(){
@@ -58,7 +62,10 @@ export default class Setting extends Component{
             <DefaultScreen 
               defaultDataUpdater={this.defaultDataUpdater}
             /> } />
-          <Tab.Screen name="추가정보" component={AddiScreen} />
+          <Tab.Screen name="추가정보" c children={()=>
+            <AddiScreen 
+            addiDataUpdater={this.addiDataUpdater}
+            /> } />
           <Tab.Screen name="설명" component={DescScreen} />
         </Tab.Navigator>
         

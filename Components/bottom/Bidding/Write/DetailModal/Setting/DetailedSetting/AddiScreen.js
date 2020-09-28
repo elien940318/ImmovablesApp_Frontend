@@ -44,7 +44,7 @@ export default class AddiScreen extends PureComponent {
     );
   }
   render() {
-    console.log(this.state.data)
+    this.props.addiDataUpdater(this.state.data)
     return (
         <Container style={styles.container}>
           {this.GasModal()}
