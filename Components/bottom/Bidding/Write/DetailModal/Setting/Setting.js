@@ -9,20 +9,37 @@ import DefaultScreen from './DetailedSetting/DefaultScreen'
 import styles from '../../../../../css/bottom/Bidding/Setting/SettingCSS'
 const Tab = createMaterialTopTabNavigator();
 
-export default class Setting extends Component {
+export default class Setting extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      immovablesKind: ''
+      data:{
+        immovablesKind: '',
+        address: '',
+      },
+      defaultData:{},
     };
   }
-  static navigationOptions = {
-    title: 'Great',
-  };
- 
 
+  completeDetailSetting(){
+    console.log('In Setting.js')
+    console.log('매물 종류 : '+ this.state.data.immovablesKind)
+    console.log()
+  }
+  /** ############# 데이터 저장 #############*/
+  addressUpdater=(address)=>{
+    this.state.data.address = address;
+  }
+  defaultDataUpdater=(data)=>{
+    this.state.defaultData = data;
+  }
+  /** ############# 유효성 체크 #############*/
+  checker(){
+    console.log('유효성 체크')
+  }
+//initialParams={this.state.immovablesKind}
   render() {
-    this.state.immovablesKind = this.props.name;
+    this.state.data.immovablesKind = this.props.name;
     return (
       <Container>
         <Header style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
@@ -32,14 +49,21 @@ export default class Setting extends Component {
         </Header>
         
         <Tab.Navigator>
-          <Tab.Screen name="주소" component={AdressScreen} initialParams={this.state.immovablesKind}/>
-          <Tab.Screen name="기본정보" component={DefaultScreen} />
+          <Tab.Screen name="주소" children={()=>
+            <AdressScreen 
+              immovablesKind={this.state.data.immovablesKind}
+              addressUpdater={this.addressUpdater}
+              /> }/>
+          <Tab.Screen name="기본정보" children={()=>
+            <DefaultScreen 
+              defaultDataUpdater={this.defaultDataUpdater}
+            /> } />
           <Tab.Screen name="추가정보" component={AddiScreen} />
           <Tab.Screen name="설명" component={DescScreen} />
         </Tab.Navigator>
         
         <View style={styles.outline}>
-          <TouchableOpacity style={styles.findbutton} onPress={{/* 완료 기능 구현 필요 */}}>
+          <TouchableOpacity style={styles.findbutton} onPress={()=>{this.completeDetailSetting()}}>
               <Text style={{fontSize:20, color:'white'}}>완료</Text>
           </TouchableOpacity>
         </View>

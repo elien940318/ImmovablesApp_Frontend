@@ -16,6 +16,7 @@ export default class AdressScreen extends PureComponent {
   
   addressChanger=(city, contry, town, address)=>{
     this.setState({address:city+' '+contry+' '+town+' '+address})
+    this.props.addressUpdater(city+' '+contry+' '+town+' '+address)
     this.toggle()
   }
 
@@ -24,7 +25,7 @@ export default class AdressScreen extends PureComponent {
   }
  
   render() {
-    this.state.immovablesKind= Object.values(this.props.route.params).toString().replace(/,/gi,'')
+    this.state.immovablesKind= this.props.immovablesKind
     return (
         <Container style={styles.container}>
           <Modal isVisible={this.state.isModalVisible}>

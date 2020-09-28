@@ -99,16 +99,12 @@ class DetailSettingModal extends Component {
 
   checkPropsName=()=>{
     if(this.state.firstSectionVisible){
-      // this.setState({propsName:'주택'})
       this.state.propsName = '주택'
     }else if(this.state.secondSectionVisible){
-      //this.setState({propsName:'오피스텔'})
       this.state.propsName = '오피스텔'
     }else if(this.state.thirdSectionVisible){
-      // this.setState({propsName:'아파트'})
       this.state.propsName = '아파트'
     }
-    // console.log(this.state.propsName)
   }
 
   checkSwitcher=(num)=>{

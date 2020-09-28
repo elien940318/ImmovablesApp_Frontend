@@ -90,7 +90,7 @@ export default class DetailPostModal extends Component {
           </View>          
           <View style={styles.price}>
             <Text style={{fontSize:25}}>선호하는 편의시설</Text>
-            {/** 세로로 눞힐것 */
+            {/** 세로로 눕힐것 */
               this.state.preference.map((e, idx) => {
                 return  <Text key={idx}>{e}</Text>
               })
