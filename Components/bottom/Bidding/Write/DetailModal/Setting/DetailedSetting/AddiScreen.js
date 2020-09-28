@@ -7,39 +7,44 @@ export default class AddiScreen extends PureComponent {
   constructor(props) {
       super(props);
       this.state = {
-          optionId : 0,
-          petId : 0,
-          loanId : 0,
+          data:{
+            gasKinds:'',
+            option : 0,
+            pet : 0,
+            loan : 0,
+          },    
           gasModalSwitch:false,
-          bt:0,
-
       };
     }
-  chbt = (nu) =>{
-    this.setState({bt:nu});
+  
+  /** checker method */
+  optionChecker = (id) => {
+    this.state.data.option = id
+    this.setState(this.state.data);
   };
-  SetGasModalVisible(){
-    this.setState({gasModalSwitch : !this.state.gasModalSwitch})
+  petChecker = (id) => {
+    this.state.data.pet = id
+    this.setState(this.state.data);
   };
-  choption = (id) => {
-    this.setState({optionId: id});
-  };
-  chpet = (id) => {
-    this.setState({petId: id});
-  };
-  chloan = (id) => {
-    this.setState({loanId: id});
+  loanChecker = (id) => {
+    this.state.data.loan = id
+    this.setState(this.state.data);
   };
   /** ############# 가스 모달 ############# */
+  gasModalVisible=(kind='')=>{
+    this.state.data.gasKinds = kind
+    this.setState({gasModalSwitch : !this.state.gasModalSwitch})
+  };
   GasModal=()=>{
     return(
       <GasModal 
         gasModalSwitch = {this.state.gasModalSwitch}
-        
+        gasModalVisible = {this.gasModalVisible}
         />
     );
   }
   render() {
+    console.log(this.state.data)
     return (
         <Container style={styles.container}>
           {this.GasModal()}
@@ -51,22 +56,22 @@ export default class AddiScreen extends PureComponent {
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>옵션</Text>
                 <View style={{flexDirection:'row'}}>
-                  <TouchableOpacity onPress={()=>this.choption(1)} style={this.state.optionId === 1? styles.red : styles.button} >
-                    <Text style={this.state.optionId === 1? styles.white : styles.black}>없음</Text>
+                  <TouchableOpacity onPress={()=>this.optionChecker(1)} style={this.state.data.option === 1? styles.red : styles.button} >
+                    <Text style={this.state.data.option === 1? styles.white : styles.black}>없음</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.choption(2)} style={this.state.optionId === 2? styles.red : styles.button} >
-                    <Text style={this.state.optionId === 2? styles.white : styles.black}>있음</Text>
+                  <TouchableOpacity onPress={()=>this.optionChecker(2)} style={this.state.data.option === 2? styles.red : styles.button} >
+                    <Text style={this.state.data.option === 2? styles.white : styles.black}>있음</Text>
                   </TouchableOpacity>
                 </View>
               </View>
             </View>
             <View style={{width:'90%',height:'8%', justifyContent:'center', borderBottomWidth:0.5}}>
               <TouchableOpacity 
-                onPress={()=>this.SetGasModalVisible(true)}
+                onPress={()=>this.gasModalVisible()}
                 style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>난방종류</Text>
                 <View style={{ flexDirection:'row', alignItems:'center'}}>
-                  <Text>입력하세요</Text>
+                  {this.state.data.gasKinds===''?<Text>입력하세요</Text>:<Text>{this.state.data.gasKinds}</Text>}
                   <Icon name='ios-arrow-forward'/>
                 </View>
               </TouchableOpacity>
@@ -75,11 +80,11 @@ export default class AddiScreen extends PureComponent {
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>반려동물</Text>
                 <View style={{flexDirection:'row'}}>
-                  <TouchableOpacity onPress={()=>this.chpet(1)} style={this.state.petId === 1? styles.red : styles.button} >
-                    <Text style={this.state.petId === 1? styles.white : styles.black}>불가</Text>
+                  <TouchableOpacity onPress={()=>this.petChecker(1)} style={this.state.data.pet === 1? styles.red : styles.button} >
+                    <Text style={this.state.data.pet === 1? styles.white : styles.black}>불가</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.chpet(2)} style={this.state.petId === 2? styles.red : styles.button} >
-                    <Text style={this.state.petId === 2? styles.white : styles.black}>가능</Text>
+                  <TouchableOpacity onPress={()=>this.petChecker(2)} style={this.state.data.pet === 2? styles.red : styles.button} >
+                    <Text style={this.state.data.pet === 2? styles.white : styles.black}>가능</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -88,11 +93,11 @@ export default class AddiScreen extends PureComponent {
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>전세자금대출</Text>
                 <View style={{flexDirection:'row'}}>
-                  <TouchableOpacity onPress={()=>this.chloan(1)} style={this.state.loanId === 1? styles.red : styles.button} >
-                    <Text style={this.state.loanId === 1? styles.white : styles.black}>불가</Text>
+                  <TouchableOpacity onPress={()=>this.loanChecker(1)} style={this.state.data.loan === 1? styles.red : styles.button} >
+                    <Text style={this.state.data.loan === 1? styles.white : styles.black}>불가</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.chloan(2)} style={this.state.loanId === 2? styles.red : styles.button} >
-                    <Text style={this.state.loanId === 2? styles.white : styles.black}>가능</Text>
+                  <TouchableOpacity onPress={()=>this.loanChecker(2)} style={this.state.data.loan === 2? styles.red : styles.button} >
+                    <Text style={this.state.data.loan === 2? styles.white : styles.black}>가능</Text>
                   </TouchableOpacity>
                 </View>
               </View>
