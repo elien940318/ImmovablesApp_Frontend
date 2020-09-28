@@ -10,7 +10,6 @@ import SellBuyCategoryModal from './DetailModal/SellBuyModal.js'
 import DetailSettingModal from './DetailModal/DetailSettingModal.js'
 import styles from '../../../css/bottom/Bidding/WriteModalCSS.js' 
 import http from '../../../../http-common'
-import axios from 'axios'
 
 export default class WriteModal extends Component {
 

@@ -19,8 +19,8 @@ export default class Board extends Component {
   constructor(props) {  
     super(props);       
     this.state = {
-      DBdata: null,
-      DBdata2: null,
+      DBdata1: null, // 중개를 원해요 
+      DBdata2: null, // 구매 희망 게시판 데이터
       activeIndex: 0,
       activeIndex2: 3,
       loading: true,
@@ -37,7 +37,7 @@ export default class Board extends Component {
       this.setState({
         loading:false
       })
-    }, 500)
+    }, 1000)
   }
 
   static navigationOptions = {
@@ -62,7 +62,7 @@ export default class Board extends Component {
   getDB(){
     http.get(`/board/getPost`)
     .then(response => {
-      this.setState({DBdata:response.data})
+      this.setState({DBdata1:response.data})
     })
     .catch(error => {
       //console.log(error); 
@@ -80,10 +80,10 @@ export default class Board extends Component {
   }
 
   renderSection() {  
-    if(this.state.DBdata != null){
+    if(this.state.DBdata2 != null){
       if(this.state.activeIndex === 0){
         return (    
-          this.state.DBdata.reverse().map((feed, index) => (
+          this.state.DBdata2.reverse().map((feed, index) => (
             <RowCardComponent data={ feed } key={index}/>
           ))  
         )            
@@ -106,7 +106,7 @@ export default class Board extends Component {
               
             </View>
             {
-                this.state.DBdata2.reverse().map((feed, index) => (
+                this.state.DBdata1.map((feed, index) => (
                   <RowCardComponent data={ feed } key={index}/>
                 ))
               } 
@@ -114,8 +114,9 @@ export default class Board extends Component {
         )
       }
     }else{
+      
       return(
-        <Text>로딩에 실패하였습니다.</Text>
+      <Text>로딩에 실패하였습니다.</Text>
       )
     }
   }

@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import Modal from "react-native-modal";
-import {TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
+import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
 import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
-const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4)
+import * as http from '../../../http-common'
 
 export default class DetailPostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible : false,
-      data : props.toData,
+      data : this.props.toData,
       toggle : props.toggle,
       chkheart:0,
       isModalVisible: false,
+      imges : []
     };
+  }
+
+  getImg(name){
+    http.get(`/board/getSellImg/${name}`,).then(response=>{
+      console.log(response.data)
+    }).catch(e=>{
+      
+    })
   }
 
   toggle(){
@@ -34,6 +41,9 @@ export default class DetailPostModal extends Component {
   }
 
   render() {
+    this.state.data = this.props.toData
+    this.state.imges = this.state.data.img.split(',')
+    this.state.imges.pop()
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>
@@ -65,9 +75,19 @@ export default class DetailPostModal extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
-              <Text style={{margin:15}}>사진</Text>        
-            </View>
+            {
+              this.state.imges.length > 0?
+              this.state.imges.map((e, index)=>{
+                console.log(e)
+                 return<Image key={index} source={{uri:http.connAPI+'/board/getSellImg/'+e}}  style={{ height:100, width:150 }}/>
+                
+              }):
+              <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
+              <Text style={{margin:15}}>사진이 없습니다.</Text> 
+              </View>
+            }
+                
+           
           </View>
           <View style={{backgroundColor: 'white'}}>
             <View style={styles.hr}/>
