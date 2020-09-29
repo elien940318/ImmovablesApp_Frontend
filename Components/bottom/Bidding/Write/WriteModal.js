@@ -269,10 +269,13 @@ export default class WriteModal extends Component {
               </View> 
               {this.state.sellData!==null?
                 <View style={{width:'100%'}}>
-                  <Text style={{fontWeight:'bold'}}>부동산 정보</Text>
-                  <SellDetailWriteModal toData={this.state.sellData} />
+                  <View style={{width:'90%'}}>
+                    <Text style={{fontWeight:'bold', margin:5}}>부동산 정보</Text>
+                  </View>
+                  <View style={{alignItems:'center'}}>
+                    <SellDetailWriteModal toData={this.state.sellData} />
+                  </View>
                 </View>
-
               :
               null
               }

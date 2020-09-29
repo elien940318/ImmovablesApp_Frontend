@@ -18,8 +18,6 @@ const styles = StyleSheet.create({
         width:'70%',
         backgroundColor:'white', 
         borderBottomWidth:1, 
-        borderRightWidth:1,
-        borderRightColor:'#a7a7a7a7', 
         borderBottomColor:'#a7a7a7a7'
     },
 
