@@ -14,7 +14,7 @@ export default class AdressScreen extends PureComponent {
     };
   }
   
-  addressChanger=(city, contry, town, address)=>{
+  addressChanger=(city='', contry='', town='', address='')=>{
     this.setState({address:city+' '+contry+' '+town+' '+address})
     this.props.addressUpdater(city+' '+contry+' '+town+' '+address)
     this.toggle()
