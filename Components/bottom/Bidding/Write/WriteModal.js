@@ -189,7 +189,12 @@ export default class WriteModal extends Component {
   /* ########## 유효성 체크 ########## */ 
   checker = () => {
     if(this.state.title!=''&this.state.contents!=''/*&this.state.convLst.length!=0*/){
-      this.postData()
+      if(this.state.sellData===null){
+        this.postData()
+      }else{
+        alert('방 내놓기 글쓰기는 아직 구현중이에요 .. ㅎㅎ')
+      }
+      
     }else{
       alert('빠트리지 않고 기입해주세요.')
     }
