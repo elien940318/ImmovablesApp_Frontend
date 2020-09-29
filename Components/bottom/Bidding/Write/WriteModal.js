@@ -25,7 +25,9 @@ export default class WriteModal extends Component {
         sellbuy:null, // 0 : 방 구하기 & 1 : 방 내놓기
         imageArray: [],
         convLst:[], // 편의시설 배열
-        formDataLst:[]
+        formDataLst:[],
+        sellData:null,
+        att:0
       };  
   }
 
@@ -90,14 +92,16 @@ export default class WriteModal extends Component {
     )
   }
   /* ########## 세부 시설 모달 함수 ########## */
-  detailModalToggle() {
+
+  detailModalToggle=(data=null)=>{
+    this.state.sellData = data;
     this.setState({detailModalShown: !this.state.detailModalShown});
   }
   detailModal=()=>{
     return (
       <Modal animationType="slide" transparent={false} visible={this.state.detailModalShown}
         onRequestClose={() => {this.detailModalToggle();}} backdrop={true}>
-        <DetailSettingModal toggle={()=>this.detailModalToggle()} />
+        <DetailSettingModal toggle={this.detailModalToggle} />
       </Modal>
     )
   }
@@ -233,6 +237,26 @@ export default class WriteModal extends Component {
               </TouchableOpacity>
               <DetailSection detailToggle={()=>this.detailModalToggle()} convToggle={()=>this.convModalToggle()}
                 sellbuy={this.state.sellbuy} lst={this.state.convLst} /* 세부사항, 편의시설 컴포넌트 분리 *//>
+              {this.state.sellData!==null?
+              <View>
+                <Text>주소 : {this.state.sellData[0].address}</Text>
+                <Text>매물 종류 : {this.state.sellData[0].immovablesKind}</Text>
+                <Text>{this.state.sellData[1].floor} 층</Text>
+                <Text>{this.state.sellData[1].size} 평</Text>
+                <Text>거래 종류 : {this.state.sellData[1].tradeType}</Text>
+                {this.state.sellData[1].rent !== 0?<Text>단기 임대 : {this.state.sellData[1].rent === 1?'가능':'불가능'}</Text>:null}
+                {this.state.sellData[1].tradeType !== '매매'?<Text>보증금 : {this.state.sellData[1].deposit}</Text>:null}
+                {this.state.sellData[1].tradeType !== '매매'?<Text>월세 : {this.state.sellData[1].prcie}</Text>:<Text>가격 : {this.state.sellData[1].prcie}</Text>}
+                <Text>관리비 : {this.state.sellData[1].manage}</Text>
+                <Text>주차 : {this.state.sellData[1].park === 1?'가능':'불가능'}</Text>
+                <Text>난방 : {this.state.sellData[2].gasKinds}</Text>
+                <Text>전세자금대출 : {this.state.sellData[2].loan==1?'가능':'불가능'}</Text>
+                <Text>옵션 : {this.state.sellData[2].option==1?'있음':'없음'}</Text>
+                <Text>동물 : {this.state.sellData[2].pet==1?'가능':'불가능'}</Text>
+              </View>
+              :
+              null
+              }
               <TextInput
                 style={styles.button}  
                 placeholder="제목" onChangeText={(title) => this.setState({title})} value={this.state.title}>  

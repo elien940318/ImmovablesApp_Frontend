@@ -18,28 +18,56 @@ export default class Setting extends Component{
         address: '',
       },
       defaultData:{},
-      addiData:{}
+      addiData:{},
+      describeData:[],
+      totalData: [],
+      submitButton:false
     };
+    
   }
 
   completeDetailSetting(){
-    console.log('In Setting.js')
-    console.log('매물 종류 : '+ this.state.data.immovablesKind)
-    console.log()
+    this.state.totalData.push(this.state.data)
+    this.state.totalData.push(this.state.defaultData)
+    this.state.totalData.push(this.state.addiData)
+    this.state.totalData.push(this.state.describeData)
+    this.props.dataTransfer(this.state.totalData)
+    
   }
   /** ############# 데이터 저장 #############*/
   addressUpdater=(address)=>{
     this.state.data.address = address;
+    this.checker()
   }
   defaultDataUpdater=(data)=>{
     this.state.defaultData = data;
+    this.checker()
   }
   addiDataUpdater=(data)=>{
     this.state.addiData = data;
+    this.checker()
+  }
+  describeDataUpdater=(data)=>{
+    this.state.describeData = data
+    this.checker()
   }
   /** ############# 유효성 체크 #############*/
   checker(){
-    console.log('유효성 체크')
+    if(this.state.data.address !== ''& // 주소
+    this.state.defaultData.tradeType !== ''& // 거래 종류가 정해졌는지
+    this.state.defaultData.floor !== ''&
+    this.state.defaultData.manage !== 0&
+    this.state.defaultData.moveIn !== 0&
+    this.state.defaultData.park !== 0&
+    (this.state.defaultData.tradeType !== '매매'? this.state.defaultData.rent !== 0:true)&
+    this.state.defaultData.size !== ''&
+    (this.state.defaultData.tradeType !== '매매'?this.state.defaultData.deposit !== '':true)&
+    this.state.addiData.gasKinds !== ''&
+    this.state.addiData.loan !== 0&
+    this.state.addiData.option !== 0&
+    this.state.addiData.pet !== 0){
+      this.setState({submitButton:true})
+    }
   }
 //initialParams={this.state.immovablesKind}
   render() {
@@ -48,7 +76,7 @@ export default class Setting extends Component{
       <Container>
         <Header style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
           <Icon name='ios-arrow-back' onPress={this.props.SettingInfoVisible1}/>
-          <Text>세부설정</Text>
+          <Text>{this.state.data.immovablesKind} 세부설정</Text>
           <Text></Text>
         </Header>
         
@@ -62,17 +90,27 @@ export default class Setting extends Component{
             <DefaultScreen 
               defaultDataUpdater={this.defaultDataUpdater}
             /> } />
-          <Tab.Screen name="추가정보" c children={()=>
+          <Tab.Screen name="추가정보" children={()=>
             <AddiScreen 
             addiDataUpdater={this.addiDataUpdater}
             /> } />
-          <Tab.Screen name="설명" component={DescScreen} />
+          <Tab.Screen name="설명" children={()=>
+            <DescScreen 
+            describeDataUpdater={this.describeDataUpdater}
+          /> } />
         </Tab.Navigator>
         
         <View style={styles.outline}>
-          <TouchableOpacity style={styles.findbutton} onPress={()=>{this.completeDetailSetting()}}>
-              <Text style={{fontSize:20, color:'white'}}>완료</Text>
-          </TouchableOpacity>
+            {
+              this.state.submitButton?
+              <TouchableOpacity style={styles.findbutton} onPress={()=>{this.completeDetailSetting()}}>
+                <Text style={{fontSize:20, color:'white'}}>완료</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity style={styles.findbutton} onPress={()=>alert('내용을 채워주세요!')}>
+                <Text style={{fontSize:20, color:'white'}}>모두 선택해 주세요.</Text>
+              </TouchableOpacity>
+            }
         </View>
       </Container>
     );

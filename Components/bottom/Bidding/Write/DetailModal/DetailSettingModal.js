@@ -15,6 +15,7 @@ class DetailSettingModal extends Component {
         secondSectionCheckList: [false, false, false, false],
         thirdSectionCheckList: [false, false, false, false],
         propsName: '주택',
+        sellData:{}
     };
   }
 
@@ -126,6 +127,11 @@ class DetailSettingModal extends Component {
     }
     
   }
+  /** 컴포넌트 간 데이터 전송 메소드 */
+  dataTransfer=(data='')=>{
+    this.SettingInfoVisible1()
+    this.props.toggle(data)
+  }
 
   /* 세부 설정 모달 on/off 메소드 */
   SettingInfoVisible1() {
@@ -134,7 +140,10 @@ class DetailSettingModal extends Component {
   SettingInfoModal=()=>{
     return( <Modal animationType="slide" transparent={false} visible={this.state.SettingInfoVisible}
     onRequestClose={() => { this.SettingInfoVisible1(); }} backdrop={true} >
-      <SettingInfo SettingInfoVisible1={()=>this.SettingInfoVisible1()} name={this.state.propsName}/>
+      <SettingInfo 
+      dataTransfer={this.dataTransfer} 
+      SettingInfoVisible1={()=>this.SettingInfoVisible1()} 
+      name={this.state.propsName}/>
     </Modal>
     )
   }

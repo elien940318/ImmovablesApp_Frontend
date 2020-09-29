@@ -30,13 +30,13 @@ class LeaseTypeModal extends Component {
         transparent={false}
         visible={this.props.modalSwitch}
         onRequestClose={() => {
-        this.props.leaseTypeModalVisible(deposit, price);
+        this.props.leaseTypeModalVisible(this.state.deposit, this.state.price);
     }}
     backdrop={true}
     >
       <View style={{flex:1}}>
         <Header style ={{justifyContent:'space-between', width:'100%'}}>
-          <Icon name='ios-arrow-back' onPress={()=>{this.props.leaseTypeModalVisible(deposit,price)}}/>
+          <Icon name='ios-arrow-back' onPress={()=>{this.props.leaseTypeModalVisible(this.state.deposit, this.state.price)}}/>
           <Text>가격</Text>
           <Text/>
         </Header>
@@ -50,7 +50,7 @@ class LeaseTypeModal extends Component {
             </View>
             <TextInput
               keyboardType='numeric'
-              onChangeText={this.depositHandle}
+              onChangeText={(text)=>this.depositHandle(text)}
               style={styles.pricebutton}
               placeholder='0'/>
           </View>
@@ -64,7 +64,7 @@ class LeaseTypeModal extends Component {
             </View>
             <TextInput 
             keyboardType='numeric'
-            onChangeText={this.priceHandle}
+            onChangeText={(text)=>this.priceHandle(text)}
             style={styles.pricebutton}
             placeholder='0'/>
           </View>
@@ -72,7 +72,7 @@ class LeaseTypeModal extends Component {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity
             onPress={()=>{
-              this.props.leaseTypeModalVisible(deposit, price);
+              this.props.leaseTypeModalVisible(this.state.deposit, this.state.price);
             }}
             style={styles.inputbutton}>
             <Text>입력</Text>

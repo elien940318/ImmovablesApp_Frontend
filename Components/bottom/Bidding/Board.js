@@ -37,7 +37,7 @@ export default class Board extends Component {
       this.setState({
         loading:false
       })
-    }, 1000)
+    }, 3000)
   }
 
   static navigationOptions = {
@@ -65,7 +65,7 @@ export default class Board extends Component {
       this.setState({DBdata1:response.data})
     })
     .catch(error => {
-      //console.log(error); 
+      console.log(error); 
     })
   }
 
@@ -75,7 +75,7 @@ export default class Board extends Component {
       this.setState({DBdata2: response.data})
     })
     .catch(error => {
-      //console.log(error);
+      console.log(error);
     })
   }
 

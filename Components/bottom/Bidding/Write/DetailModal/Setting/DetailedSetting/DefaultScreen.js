@@ -45,6 +45,7 @@ export default class DefaultScreen extends PureComponent {
   }
   /** ################## 매매 가격 모달 ################## */
   sellTypeModalVisible=(price='')=>{
+    
     this.state.data.price = price
     this.state.modalSwitch[1] = !this.state.modalSwitch[1]
     this.setState(this.state.modalSwitch);
@@ -58,7 +59,7 @@ export default class DefaultScreen extends PureComponent {
     );
   }
   /** ################## 임대 가격 모달 ################## */
-  leaseTypeModalVisible(deposit='', price='') {
+  leaseTypeModalVisible=(deposit='', price='')=>{
     this.state.data.deposit = deposit
     this.state.data.price = price
     this.state.modalSwitch[2] = !this.state.modalSwitch[2]
@@ -141,11 +142,16 @@ export default class DefaultScreen extends PureComponent {
           <TouchableOpacity style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}
             onPress={()=>{
               this.leaseTypeModalVisible();
-              this.setState({MPriceresult1:'', MPriceresult2:''});
             }}>
             <Text>가격</Text>
             <View style={{width:90, flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
-              <Text>{this.state.MPriceresult2===''?this.state.MPriceresult1===''?'입력하세요':'전세'+this.state.MPriceresult1+'만 원':this.state.MPriceresult1==='입력하세요'?'':'월세'+this.state.MPriceresult1+'만 원 / '+this.state.MPriceresult2+'만 원'}</Text>
+              <Text>{this.state.data.deposit===''?
+                      this.state.data.price===''?
+                        '입력하세요':
+                        '월세 '+this.state.data.price+'만 원'
+                      :this.state.data.price===''?
+                        '보증금'+this.state.data.deposit+'만 원'
+                        :'보증금'+this.state.data.deposit+'만 원 / 월세 '+this.state.data.price+'만 원'}</Text>
               <Icon name='ios-arrow-forward'/>
             </View>
           </TouchableOpacity>
@@ -154,6 +160,14 @@ export default class DefaultScreen extends PureComponent {
     }
   }
   
+secondSection(){
+  return(
+    <View>
+      
+    </View>
+  )
+}
+
   render() {
     this.props.defaultDataUpdater(this.state.data)
     return (
@@ -178,8 +192,8 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </TouchableOpacity>
             </View>
-              
-              {this.tradeTypeSection()}
+            
+            {this.tradeTypeSection()}
             <View style={styles.typebutton}>
               <TouchableOpacity 
                 onPress={()=>{
@@ -204,6 +218,7 @@ export default class DefaultScreen extends PureComponent {
                 </View>
               </TouchableOpacity>
             </View>
+            {this.state.data.tradeType!=='매매'?
             <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>단기임대</Text>
@@ -216,7 +231,8 @@ export default class DefaultScreen extends PureComponent {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
+            </View>:null
+            }
             <View style={styles.typebutton}>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text>관리비</Text>
