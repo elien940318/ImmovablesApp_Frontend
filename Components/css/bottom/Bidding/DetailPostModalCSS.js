@@ -64,13 +64,13 @@ const styles = StyleSheet.create({
     },
     heartback:{
       flexDirection:'row',
-      backgroundColor:'white',
       justifyContent:'flex-end',
+      
 
     },
     heartbuttonon:{
       margin:5,
-      color:'#FF5C3B',
+      color:'red',
       borderColor:'black'
     },
     heartbuttonoff:{
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
       width:40,
       borderWidth:2, 
       borderRadius:100, 
-      borderColor:'#FF5C3B',
+      borderColor:'red',
       alignItems:'center', 
       justifyContent:'center'
     },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     describeback:{
       justifyContent:'center',
       alignItems:'center',
-      backgroundColor:'white'
+      backgroundColor:'white',
     },
   });
   export default styles;

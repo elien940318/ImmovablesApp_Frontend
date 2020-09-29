@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     EntireBox:{
         flex:1, 
         borderWidth:0.5,
-        width:'90%',
+        width:'89%',
         borderColor:'#a7a7a7'
     },
     LeftBox:{ 
