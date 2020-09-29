@@ -189,10 +189,10 @@ export default class WriteModal extends Component {
   /* ########## 유효성 체크 ########## */ 
   checker = () => {
     if(this.state.title!=''&this.state.contents!=''/*&this.state.convLst.length!=0*/){
-      if(this.state.sellData===null){
+      if(this.state.sellbuy==0){
         this.postData()
       }else{
-        alert('방 내놓기 글쓰기는 아직 구현중이에요 .. ㅎㅎ')
+        alert('방 내놓기 글쓰기는 아직 구현중이에요')
       }
       
     }else{
@@ -202,7 +202,6 @@ export default class WriteModal extends Component {
   /* ########## main ########## */ 
   render() {
       let { imageArray } = this.state // 이미지 배열 지역변수
-      
       return (
         <Container style={styles.container}>
           <ScrollView>
@@ -293,7 +292,7 @@ export default class WriteModal extends Component {
                   <Text>취소</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.bottombutton1}
-                  onPress={()=>{this.checker()}}>
+                  onPress={this.checker}>
                   <Text style={{color:'white'}}>작성하기</Text>
                 </TouchableOpacity>
               </View>
