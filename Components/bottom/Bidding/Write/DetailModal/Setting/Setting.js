@@ -59,7 +59,7 @@ export default class Setting extends Component{
     this.state.defaultData.manage !== 0&
     this.state.defaultData.moveIn !== 0&
     this.state.defaultData.park !== 0&
-    this.state.defaultData.rent !== 0&
+    (this.state.defaultData.tradeType !== '매매'? this.state.defaultData.rent !== 0:true)&
     this.state.defaultData.size !== ''&
     (this.state.defaultData.tradeType !== '매매'?this.state.defaultData.deposit !== '':true)&
     this.state.addiData.gasKinds !== ''&

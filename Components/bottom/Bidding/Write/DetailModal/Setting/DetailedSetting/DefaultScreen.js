@@ -45,6 +45,7 @@ export default class DefaultScreen extends PureComponent {
   }
   /** ################## 매매 가격 모달 ################## */
   sellTypeModalVisible=(price='')=>{
+    
     this.state.data.price = price
     this.state.modalSwitch[1] = !this.state.modalSwitch[1]
     this.setState(this.state.modalSwitch);
