@@ -31,15 +31,25 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
             this.setState({ getValue: value })
         );
         
-        var user = firebase.auth().currentUser;
-        if (user != null) {
-            user.providerData.forEach(function (profile) {
-                alert(profile.uid + '\n' + profile.email + '\n' + profile.displayName );
-                this.setState({uid: profile.uid}); 
-                this.setState({email: profile.email}); 
-                this.setState({displayName: profile.displayName});       
-            });
-        }
+        // 빌드 후 오류 발생으로 아래 소스로 대체...
+        // var user = firebase.auth().currentUser;
+        // if (user != null) {
+        //     user.providerData.forEach(function (profile) {
+        //         alert(profile.uid + '\n' + profile.email + '\n' + profile.displayName );
+        //         this.setState({uid: profile.uid}); 
+        //         this.setState({email: profile.email}); 
+        //         this.setState({displayName: profile.displayName});       
+        //     });
+        // }
+        
+        firebase.auth().onAuthStateChanged(user => {
+            if(user) {
+                this.setState({uid: user.uid}); 
+                this.setState({email: user.email}); 
+                this.setState({displayName: user.displayName});
+                alert('uid: ' + user.uid + '\nemail: ' + user.email + '\ndisplayName: ' + user.displayName );
+            }
+        });
     }
 
     static navigationOptions = {

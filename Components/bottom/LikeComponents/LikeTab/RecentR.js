@@ -1,12 +1,28 @@
-
 import React, { Component } from 'react';
 import { StyleSheet, Text, View , ScrollView} from 'react-native';
 import {  Container, Content,Icon, Header } from 'native-base'; 
 import CardComponent from'../../../CardComponent.js'
+import firebase from 'firebase';
+
 export default class RecentR extends Component {
 
     state = {
         feeds: [],
+        uid: null,
+        email: null,
+    }
+    
+    getUserProfile()
+    {
+        firebase.auth().onAuthStateChanged(user => {
+            if(user) {
+                this.setState({uid: user.uid}); 
+                this.setState({email: user.email}); 
+            }
+            else {
+                alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+            }
+        });
     }
 
     componentDidMount() {   //기존함수 componentWillMount에서 componentDidMount로 변경함.
@@ -16,6 +32,21 @@ export default class RecentR extends Component {
             })
         });
     }
+
+    getRecentData() {
+        http.post('/like/recentData', {
+            _email: this.state.email,
+        })
+        .then((response) => {
+        if(response.data.values == -1){
+            alert(response.data.logs);
+        }
+        })
+        .catch(function (error) {
+            
+        });
+    }
+
     fetchFeeds() {
         const data = {
             id: 1,
