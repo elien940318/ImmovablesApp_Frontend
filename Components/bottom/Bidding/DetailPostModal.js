@@ -5,7 +5,7 @@ import { Icon, Container, Header, } from 'native-base';
 import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
 import * as http from '../../../http-common'
-
+import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
 export default class DetailPostModal extends Component {
   constructor(props) {
     super(props);
@@ -54,9 +54,8 @@ export default class DetailPostModal extends Component {
             {this.state.data.title} 
           </Text>   
         </Header>
-        <ScrollView style={{height:'80%'}}>
-          {/*사진 View*/}
-          <View style={styles.img}>
+        <ScrollView>
+        <View style={styles.img}>
             <View>
               <View style={styles.heartback}>
                 <TouchableOpacity 
@@ -83,38 +82,14 @@ export default class DetailPostModal extends Component {
               </View>
             }
             </ScrollView>
-           
           </View>
+          
           <View style={{backgroundColor: 'white'}}>
             <View style={styles.hr}/>
-          </View>          
-          <View style={styles.price}>
-            <Text style={{fontSize:25}}>선호하는 편의시설</Text>
-            {/** 세로로 눞힐것 */
-              this.state.preference.map((e, idx) => {
-                return  <Text key={idx}>{e}</Text>
-              })
-            }
-          </View>   
-          {/* 가격 뷰 // DB에 전,월세 저장 */}
-          <View style={styles.price}>
-            <Text style={{fontSize:25}}>월세: {this.state.data.price/10000}(만원)</Text>
-          </View>                 
-          {/*설명*/}
-          <View style={styles.content}>
-            <Text>{this.state.data.content}</Text>
-          </View>
-          <View style={{backgroundColor: 'white'}}>
-            <View style={styles.hr}/>
-          </View> 
-          {/*부동산*/}
-          <View style={styles.category}>
-            <View style={styles.info}>
-              <Text>{this.state.data.author}</Text>
-            </View>
-          </View>
-          <View style={{backgroundColor: 'white'}}>
-            <View style={styles.hr}/>
+          </View>  
+          <View style={styles.describeback}>
+          <DPMInfo toData={this.state.data}>
+          </DPMInfo>
           </View>
         </ScrollView>
         <TouchableOpacity style={styles.biddingbutton} onPress={()=>{this.toggle()}}>
