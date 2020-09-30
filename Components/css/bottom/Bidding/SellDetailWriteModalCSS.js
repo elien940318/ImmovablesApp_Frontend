@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     EntireBox:{
         flex:1, 
         borderWidth:0.5,
-        width:'89%',
+        width:'90%',
         borderColor:'#a7a7a7'
     },
     LeftBox:{ 
@@ -17,11 +17,9 @@ const styles = StyleSheet.create({
     RightBox:{ 
         width:'70%',
         backgroundColor:'white', 
-        borderBottomWidth:1,
+        borderBottomWidth:1, 
         borderBottomColor:'#a7a7a7a7'
     },
-    ConText:{
-        color:'#FF5C3B'
-    }
+
 });
 export default styles;

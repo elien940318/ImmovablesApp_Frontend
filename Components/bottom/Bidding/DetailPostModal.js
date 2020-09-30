@@ -56,19 +56,6 @@ export default class DetailPostModal extends Component {
         </Header>
         <ScrollView>
         <View style={styles.img}>
-            <View>
-              <View style={styles.heartback}>
-                <TouchableOpacity 
-                style={this.state.chkheart===1? styles.heartradiuson : styles.heartradiusoff}
-                onPress={()=>this.setHeart()}
-                >
-                  <Icon name="md-heart" 
-                    style={this.state.chkheart===1?styles.heartbuttonon:styles.heartbuttonoff}
-                  >
-                  </Icon>
-                </TouchableOpacity>
-              </View>
-            </View>
             <ScrollView style={{margin:10}} horizontal={true}>
             {
               
@@ -92,6 +79,19 @@ export default class DetailPostModal extends Component {
           </DPMInfo>
           </View>
         </ScrollView>
+        <View>
+          <View style={styles.heartback}>
+            <TouchableOpacity 
+            style={this.state.chkheart===1? styles.heartradiuson : styles.heartradiusoff}
+            onPress={()=>this.setHeart()}
+            >
+              <Icon name="md-heart" 
+                style={this.state.chkheart===1?styles.heartbuttonon:styles.heartbuttonoff}
+              >
+              </Icon>
+            </TouchableOpacity>
+          </View>
+        </View>
         <TouchableOpacity style={styles.biddingbutton} onPress={()=>{this.toggle()}}>
           <Text style={styles.biddingfont}>입찰하기</Text>
         </TouchableOpacity>
