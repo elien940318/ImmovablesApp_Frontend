@@ -30,13 +30,13 @@ class LeaseTypeModal extends Component {
         transparent={false}
         visible={this.props.modalSwitch}
         onRequestClose={() => {
-        this.props.leaseTypeModalVisible(this.state.deposit, this.state.price);
+        this.props.leaseTypeModalVisible(this.state.price,this.state.deposit);
     }}
     backdrop={true}
     >
       <View style={{flex:1}}>
         <Header style ={{justifyContent:'space-between', width:'100%'}}>
-          <Icon name='ios-arrow-back' onPress={()=>{this.props.leaseTypeModalVisible(this.state.deposit, this.state.price)}}/>
+          <Icon name='ios-arrow-back' onPress={()=>{this.props.leaseTypeModalVisible(this.state.price, this.state.deposit)}}/>
           <Text>가격</Text>
           <Text/>
         </Header>
@@ -72,7 +72,7 @@ class LeaseTypeModal extends Component {
         <View style={{alignItems:'center', justifyContent:'center', width:'100%'}}>
           <TouchableOpacity
             onPress={()=>{
-              this.props.leaseTypeModalVisible(this.state.deposit, this.state.price);
+              this.props.leaseTypeModalVisible(this.state.price, this.state.deposit);
             }}
             style={styles.inputbutton}>
             <Text>입력</Text>
