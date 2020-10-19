@@ -1,79 +1,154 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View , ScrollView} from 'react-native';
+import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import {  Container, Content,Icon, Header } from 'native-base'; 
-import CardComponent from'../../../CardComponent.js'
-import firebase from 'firebase';
+import http from '../../../../http-common.js'
+import RowCardComponent from "../../Bidding/RowCardComponent.js"
 
 export default class RecentR extends Component {
 
     state = {
-        feeds: [],
-        uid: null,
-        email: null,
+        // feeds: [],
+        email: this.props.data,
+        idx: 0,
+        DB_recentdata1: null,
+        DB_recentdata2: null,
+        loading: true,
     }
     
-    getUserProfile()
+    static navigationOptions = {
+        tabBarIcon: ({tintColor}) => (
+            <Icon name='ios-add-circle' style={{color: tintColor}}/>
+        )
+    }
+
+    // shouldComponentUpdate(nextProps, nextState){    
+    //     console.log("shouldComponentUpdate()");  
+    //     return true;
+    // }
+
+    componentDidMount() 
     {
-        firebase.auth().onAuthStateChanged(user => {
-            if(user) {
-                this.setState({uid: user.uid}); 
-                this.setState({email: user.email}); 
-            }
-            else {
-                alert("firebase로부터 user profile 가져오는 중 오류 발생.");
-            }
-        });
-    }
+        console.log('call componentDidMount()');
+        // this.fetchFeeds().then(feeds => {
+        //     this.setState({
+        //       feeds
+        //     })
+        // });
+        this.getRecentData1();
+        this.getRecentData2();
 
-    componentDidMount() {   //기존함수 componentWillMount에서 componentDidMount로 변경함.
-        this.fetchFeeds().then(feeds => {
+        setTimeout(()=>{
             this.setState({
-              feeds
+              loading:false
             })
-        });
+        }, 2000)
     }
 
-    getRecentData() {
+    OptionChanged = (idx) => {
+        console.log('call OptionChanged()');        
+        this.setState({idx});
+    }
+    
+    getRecentData1() {
         http.post('/like/recentData', {
             _email: this.state.email,
+            _option: 0
         })
         .then((response) => {
-        if(response.data.values == -1){
-            alert(response.data.logs);
-        }
+            this.setState({DB_recentdata1: response.data});
         })
         .catch(function (error) {
-            
+            alert("## error: recentData DB접근 오류");
         });
     }
 
-    fetchFeeds() {
-        const data = {
-            id: 1,
-            jsonrpc: "2.0",
-            method: "call",
-            params: [
-              "database_api",
-              "get_discussions_by_created",
-              [{ tag: "kr", limit: 20 }]
-            ]
-        };
-        return fetch('https://api.steemit.com', {
-            method: 'POST',
-            body: JSON.stringify(data)
+    getRecentData2() {
+        http.post('/like/recentData', {
+            _email: this.state.email,
+            _option: 1
         })
-        .then(res => res.json())
-        .then(res => res.result)
+        .then((response) => {
+            this.setState({DB_recentdata2: response.data});
+        })
+        .catch(function (error) {
+            alert("## error: recentData DB접근 오류");
+        });
     }
 
+    renderSection()
+    {      
+        if(this.state.idx === 0)
+        {
+            return(
+                this.state.DB_recentdata1.reverse().map((row) => (
+                    <RowCardComponent data = { row }/>
+                ))
+            )
+        
+        }
+        else {
+            return(
+                this.state.DB_recentdata2.reverse().map((row) => (
+                    <RowCardComponent data = { row }/>
+                ))
+            )
+            
+        }
+    }
+
+    // fetchFeeds() {
+    //     const data = {
+    //         id: 1,
+    //         jsonrpc: "2.0",
+    //         method: "call",
+    //         params: [
+    //           "database_api",
+    //           "get_discussions_by_created",
+    //           [{ tag: "kr", limit: 20 }]
+    //         ]
+    //     };
+    //     return fetch('https://api.steemit.com', {
+    //         method: 'POST',
+    //         body: JSON.stringify(data)
+    //     })
+    //     .then(res => res.json())
+    //     .then(res => res.result)
+    // }
+
     render() {
-        return (
-            <ScrollView>
-                  {this.state.feeds.map(feed => (
-                    <CardComponent data={ feed } key={feed.url}/>
-                  ))}
-            </ScrollView>
-        );
+        if(this.state.loading)
+        {
+            return (
+                <Text>로딩중 입니다...</Text>
+            )
+        }
+        else
+        {                                
+            return (
+                <View>
+                    <View style={{ flexDirection: 'row', justifyContent:'space-around', height:30}}>
+                        <TouchableOpacity active={this.state.idx === 0}  
+                            style={{height:40, padding: 10, flexDirection: 'row'}}
+                            onPress={() => this.OptionChanged(0)}>
+                            <Text style={[this.state.idx === 0 ? {color: 'red'} : {color: 'black'}]}>구매희망</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            active={this.state.idx === 1} 
+                            style={{height:40, padding: 10, flexDirection: 'row'}}
+                            onPress={() => this.OptionChanged(1)}>
+                            <Text style={[this.state.idx === 1 ? {color: 'red'} : {color: 'black'}]}>거래</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView>                        
+                    {   
+                        this.renderSection()
+                    }
+                    </ScrollView>
+                </View>
+            );            
+            
+            
+        }
     }
 }
  
