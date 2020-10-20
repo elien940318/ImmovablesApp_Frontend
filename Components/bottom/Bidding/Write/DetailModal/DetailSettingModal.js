@@ -131,6 +131,7 @@ class DetailSettingModal extends Component {
   dataTransfer=(data='')=>{
     this.SettingInfoVisible1()
     this.props.toggle(data)
+    
   }
 
   /* 세부 설정 모달 on/off 메소드 */
