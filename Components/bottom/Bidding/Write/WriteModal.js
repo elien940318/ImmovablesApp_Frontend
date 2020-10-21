@@ -164,7 +164,7 @@ export default class WriteModal extends Component {
 
   postData= async ()=>{
     if(this.state.sellbuy == 0){
-      http.post(`/post/postSell`, this.createFormData(this.state.imageArray))
+      http.post(`/post/postWish`, this.createFormData(this.state.imageArray))
       .then((response) => {
         alert('파일을 업로드 하였습니다.');
         this.props.toggle()
@@ -174,7 +174,7 @@ export default class WriteModal extends Component {
         alert('Upload failed!');
       });
     }else{
-      http.post(`/post/postTrade`, this.createFormData(this.state.imageArray))
+      http.post(`/post/postTrade`, this.createFormData2(this.state.imageArray))
       .then((response) => {
         alert('파일을 업로드 하였습니다.');
         this.props.toggle()
@@ -185,18 +185,53 @@ export default class WriteModal extends Component {
       });
     }
   }
-
+  /* ########## 방 판매 업로드  ########## */
+  createFormData2 = (photoes) => {
+    const data = new FormData();
+    
+    photoes.forEach(photo => {
+      let l = photo.uri.split('/').pop().split('.')
+      l.pop()
+      
+      data.append('photo', {
+        name: l.pop(),
+        type: photo.type+'/'+photo.uri.split('.').pop(),
+        uri:
+          Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
+      });
+    });
+    data.append('title',this.state.title)
+    data.append('contents',this.state.contents)
+    data.append('user', 'tester')
+    data.append('address',this.state.sellData[0].adrress)
+    data.append('immovablesKind',this.state.sellData[0].immovablesKind)
+    this.state.sellData[1].tradeType !== '매매'?data.append(this.state.sellData[1].deposit):null
+    data.append('floor', this.state.sellData[1].floor)
+    data.append('manage', this.state.sellData[1].manage)
+    data.append('moveIn', this.state.sellData[1].moveIn)
+    data.append('park', this.state.sellData[1].park)
+    data.append('price', this.state.sellData[1].price)
+    data.append('rent', this.state.sellData[1].rent)
+    data.append('size', this.state.sellData[1].size)
+    data.append('tradeType', this.state.sellData[1].tradeType)
+    data.append('gasKinds', this.state.sellData[2].gasKinds)
+    data.append('loan', this.state.sellData[2].loan)
+    data.append('option', this.state.sellData[2].option)
+    data.append('pet', this.state.sellData[2].pet)
+    return data;
+  };
   /* ########## 유효성 체크 ########## */ 
   checker = () => {
     if(this.state.title!=''&this.state.contents!=''/*&this.state.convLst.length!=0*/){
-      if(this.state.sellbuy==0){
-        this.postData()
-      }else{
-        alert('방 내놓기 글쓰기는 아직 구현중이에요')
-      }
-      
-    }else{
-      alert('빠트리지 않고 기입해주세요.')
+    //   if(this.state.sellbuy==0){
+    //     this.postData()
+    //   }else{
+    //     alert('방 내놓기 글쓰기는 아직 구현중이에요')
+    //   }
+    // }else{
+    //   alert('빠트리지 않고 기입해주세요.')
+    // }
+    this.postData()
     }
   }
   /* ########## main ########## */ 
