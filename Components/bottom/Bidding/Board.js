@@ -71,7 +71,7 @@ export default class Board extends Component {
   }
 
   getDB2(){
-    http.get(`/board/getDealPost`)
+    http.get(`/board/getDealPost`) 
     .then(response => {
       this.setState({DBdata2: response.data})
     })
@@ -81,12 +81,12 @@ export default class Board extends Component {
   }
 
   renderSection() {  
-    if(this.state.DBdata2 != null){
+    if(this.state.DBdata1 != ''){
       if(this.state.activeIndex === 0){
         return (    
           this.state.DBdata1.reverse().map((feed, index) => (
             <RowCardComponent data={ feed } key={index}/>
-          ))  
+          ))
         )            
       }
       else if(this.state.activeIndex === 1){
