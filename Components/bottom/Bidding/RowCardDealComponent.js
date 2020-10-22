@@ -3,7 +3,7 @@ import Modal from "react-native-modal";
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import DetailPostModal from './DetailPostModal'
+import DetailDealModal from './DetailDealModal'
 import * as http from '../../../http-common'
 export default class RawCardComponent extends Component {
 
@@ -25,7 +25,7 @@ export default class RawCardComponent extends Component {
       return (
         <Card>
             <Modal isVisible={this.state.isModalVisible}>
-              <DetailPostModal toggle2={() => this.toggle()} toData={data}/>
+              <DetailDealModal toggle2={() => this.toggle()} toData={data}/>
             </Modal>
             <TouchableOpacity onPress={() => this.toggle()}>
               <CardItem>
@@ -55,7 +55,7 @@ export default class RawCardComponent extends Component {
                     {
                       this.state.imges !== '0'?
                       
-                      <Image source={{uri:http.connAPI+'/board/getWishImg/'+this.state.imges}} style={{ height:100, width:150 }}/>
+                      <Image source={{uri:http.connAPI+'/board/getDealImg/'+this.state.imges}} style={{ height:100, width:150 }}/>
                       :
                       <Text>사진이 없습니다.</Text>
                     }

@@ -6,7 +6,7 @@ import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
 import * as http from '../../../http-common'
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
-export default class DetailPostModal extends Component {
+export default class DetailDealPostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +61,7 @@ export default class DetailPostModal extends Component {
               
               this.state.imges.length > 0?
               this.state.imges.map((e, index)=>{
-                 return<Image key={index} source={{uri:http.connAPI+'/board/getWishImg/'+e}}  style={{ height:250, width:350 }}/>
+                 return<Image key={index} source={{uri:http.connAPI+'/board/getDealImg/'+e}}  style={{ height:250, width:350 }}/>
                 
               }):
               <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
