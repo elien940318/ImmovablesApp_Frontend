@@ -204,20 +204,22 @@ export default class WriteModal extends Component {
     data.append('contents',this.state.contents)
     data.append('user', 'tester')
     data.append('address',this.state.sellData[0].adrress)
-    data.append('immovablesKind',this.state.sellData[0].immovablesKind)
-    this.state.sellData[1].tradeType !== '매매'?data.append(this.state.sellData[1].deposit):null
+    data.append('immovabletype',this.state.sellData[0].immovablesKind)
+    this.state.sellData[1].tradeType !== '매매'?data.append('deposit',this.state.sellData[1].deposit):data.append('deposit',-1)
     data.append('floor', this.state.sellData[1].floor)
-    data.append('manage', this.state.sellData[1].manage)
+    data.append('management', this.state.sellData[1].manage)
     data.append('moveIn', this.state.sellData[1].moveIn)
     data.append('park', this.state.sellData[1].park)
     data.append('price', this.state.sellData[1].price)
     data.append('rent', this.state.sellData[1].rent)
-    data.append('size', this.state.sellData[1].size)
+    data.append('area', this.state.sellData[1].size)
     data.append('tradeType', this.state.sellData[1].tradeType)
-    data.append('gasKinds', this.state.sellData[2].gasKinds)
+    data.append('heater', this.state.sellData[2].gasKinds)
     data.append('loan', this.state.sellData[2].loan)
-    data.append('option', this.state.sellData[2].option)
+    data.append('option_', this.state.sellData[2].option)
     data.append('pet', this.state.sellData[2].pet)
+    data.append('purchasetype', 1) //거래 유형
+    data.append('location','진주')
     return data;
   };
   /* ########## 유효성 체크 ########## */ 

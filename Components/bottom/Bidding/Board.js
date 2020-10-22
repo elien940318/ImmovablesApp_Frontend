@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import { Icon, Container, Header, Button } from 'native-base'; 
 import RowCardComponent  from './RowCardComponent'; 
+import RowCardDealComponent from './RowCardDealComponent'
 import http from "../../../http-common";
 import Loading from "./BiddingAlgorithm/Loading"
 //import {get1} from './BiddingAlgorithm/BiddingGetDB'
@@ -60,7 +61,7 @@ export default class Board extends Component {
   }
 
   getDB(){
-    http.get(`/board/getPost`)
+    http.get(`/board/getWishPost`)
     .then(response => {
       this.setState({DBdata1:response.data})
     })
@@ -70,7 +71,7 @@ export default class Board extends Component {
   }
 
   getDB2(){
-    http.get(`/board/getPost2`)
+    http.get(`/board/getDealPost`)
     .then(response => {
       this.setState({DBdata2: response.data})
     })
@@ -107,7 +108,7 @@ export default class Board extends Component {
             </View>
             {
                 this.state.DBdata2.map((feed, index) => (
-                  <RowCardComponent data={ feed } key={index}/>
+                  <RowCardDealComponent data={ feed } key={index}/>
                 ))
               } 
           </View>
