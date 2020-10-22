@@ -82,7 +82,7 @@ class SellDetailWriteModal extends Component {
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                {this.state.data[1].deposit}
+                {this.state.data[1].deposit} 만원
                 </Text>
             </View>
           </View>
@@ -96,20 +96,20 @@ class SellDetailWriteModal extends Component {
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                {this.state.data[1].prcie}
+                {this.state.data[1].price} 만원
                 </Text>
             </View>
           </View>
           :
           <View style={{flexDirection:'row'}}>
             <View style={styles.LeftBox}>
-                <Text style={{margin:10}}>
+                <Text style={{margin:10}}> 만원
                     가격 
                 </Text>
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                {this.state.data[1].prcie}
+                {this.state.data[1].price} 만원
                 </Text>
             </View>
           </View>

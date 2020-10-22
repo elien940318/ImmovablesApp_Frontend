@@ -66,6 +66,7 @@ export default class Setting extends Component{
     this.state.addiData.loan !== 0&
     this.state.addiData.option !== 0&
     this.state.addiData.pet !== 0){
+      // this.state.submitButton = true;
       this.setState({submitButton:true})
     }
   }

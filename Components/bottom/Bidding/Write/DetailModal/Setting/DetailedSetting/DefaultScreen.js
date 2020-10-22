@@ -45,7 +45,6 @@ export default class DefaultScreen extends PureComponent {
   }
   /** ################## 매매 가격 모달 ################## */
   sellTypeModalVisible=(price='')=>{
-    
     this.state.data.price = price
     this.state.modalSwitch[1] = !this.state.modalSwitch[1]
     this.setState(this.state.modalSwitch);
@@ -59,10 +58,12 @@ export default class DefaultScreen extends PureComponent {
     );
   }
   /** ################## 임대 가격 모달 ################## */
-  leaseTypeModalVisible=(deposit='', price='')=>{
+  leaseTypeModalVisible=(price='',deposit='')=>{
     this.state.data.deposit = deposit
     this.state.data.price = price
+    
     this.state.modalSwitch[2] = !this.state.modalSwitch[2]
+    
     this.setState(this.state.modalSwitch);
   }
   leaseTypeModal=()=>{
