@@ -4,6 +4,7 @@ import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollV
 import {  Container, Content,Icon, Header } from 'native-base';
 import http from "../../../../http-common.js";
 import RowCardComponent from "../../Bidding/RowCardComponent.js"
+import RowCardDealComponent from "../../Bidding/RowCardDealComponent.js"
 
 export default class SubsR extends Component {
 
@@ -35,6 +36,10 @@ export default class SubsR extends Component {
 
     OptionChanged = (idx) => {
         this.setState({idx});
+        if(idx === 0)
+            this.getLikeData2();
+        else if(idx === 1)
+            this.getLikeData1();
     }
 
     getLikeData1() {
@@ -66,15 +71,15 @@ export default class SubsR extends Component {
         if(this.state.idx === 0)
         {
             return(
-                this.state.DB_likedata1.reverse().map((row) => (
-                    <RowCardComponent data = { row }/>
+                this.state.DB_likedata1.reverse().map((feed, index) => (
+                    <RowCardComponent data={ feed } key={index}/>
                 ))
             )
         }
-        else {
+        else if(this.state.idx === 1){
             return(
-                this.state.DB_likedata2.reverse().map((row) => (
-                    <RowCardComponent data = { row }/>
+                this.state.DB_likedata2.reverse().map((feed, index) => (
+                    <RowCardDealComponent data={ feed } key={index}/>
                 ))
             )
         }

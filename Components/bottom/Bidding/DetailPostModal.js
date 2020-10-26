@@ -4,8 +4,10 @@ import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, T
 import { Icon, Container, Header, } from 'native-base'; 
 import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
-import * as http from '../../../http-common'
+import http from "../../../http-common";
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
+import firebase from 'firebase';
+
 export default class DetailPostModal extends Component {
   constructor(props) {
     super(props);
@@ -13,23 +15,121 @@ export default class DetailPostModal extends Component {
       modalVisible : false,
       data : this.props.toData,
       toggle : props.toggle,
-      chkheart:0,
+      chkheart: null,
       isModalVisible: false,
       imges : [],
-      preference: []
+      preference: [],
+      uid: '103842694532689299916',
+      email: 'changkeereum@gmail.com',
     };
   }
+
+  componentDidMount ()
+  {    
+    // 빌드시 주석 풀것... oauth 기능 빌드후 작동하므로...
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if(user) {
+    //       this.setState({uid: user.uid}); 
+    //       this.setState({email: user.email}); 
+    //   }
+    //   else {
+    //       alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+    //   }
+    // });
+    this.postLikeStatus();  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
+    this.putRecentList();   // recentlist에 추가되어있는지 체크
+  }
+
+  componentWillUnmount()
+  {
+    console.log("call componentWillUnmount()");
+  }
+
   toggle(){
     this.setState({isModalVisible:!this.state.isModalVisible});
   }
+
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
+
   setHeart(){
     if(this.state.chkheart===0)
+    {
       this.setState({chkheart:1})
+      this.putLikeList()
+    }
     else if(this.state.chkheart===1)
+    {
       this.setState({chkheart:0})
+      this.deleteLikeList();
+    }
+  }
+
+  // 현재 해당 Component의 찜 상태를 가져옴.
+  postLikeStatus()
+  {
+    console.log('call postLikeStatus()');
+    http.post('/board/postLikeStatus', {
+      _email: this.state.email,
+      _option: '1',
+      _idx: this.state.data.idx,
+    })
+    .then((response) => {
+      var temp = Object.keys(response.data).length;
+      if(temp == 1)
+        this.setState({chkheart: 1})
+      else if (temp == 0)
+        this.setState({chkheart: 0})
+    })
+    .catch(function (error) {
+        alert("## error: postLikeStatus DB접근 오류");
+    });
+  }
+
+  // 최근 본방에 추가
+  putRecentList()
+  {
+    console.log('call putRecentList()');
+    http.put('/board/putRecentList', {
+      _email: this.state.email,
+      _option: '1',
+      _idx: this.state.data.idx,
+    })
+    .then((response) => {})
+    .catch(function (error) {
+        alert("## error: putRecentList DB접근 오류");
+    });
+  }
+
+  // 찜한 방에 추가
+  putLikeList()
+  {
+    console.log('call putLikeList()');
+    http.put('/board/putLikeList', {
+      _email: this.state.email,
+      _option: '1',
+      _idx: this.state.data.idx
+    })
+    .then((response) => {})
+    .catch(function (error) {
+        alert("## error: putLikeList DB접근 오류");
+    });
+  }
+
+  // 찜한 방에서 삭제
+  deleteLikeList()
+  {
+    console.log('call deleteLikeList()');
+    http.post('/board/deleteLikeList', {
+      _email: this.state.email,
+      _option: '1',
+      _idx: this.state.data.idx
+    })
+    .then((response) => {})
+    .catch(function (error) {
+        alert("## error: deleteLikeList DB접근 오류");
+    });
   }
 
   render() {
@@ -39,6 +139,7 @@ export default class DetailPostModal extends Component {
     let l = this.state.data.preference.split(',')
     l.pop()
     this.state.preference = l 
+    
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>

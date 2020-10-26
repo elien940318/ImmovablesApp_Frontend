@@ -3,6 +3,7 @@ import { TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, ScrollV
 import {  Container, Content,Icon, Header } from 'native-base'; 
 import http from '../../../../http-common.js'
 import RowCardComponent from "../../Bidding/RowCardComponent.js"
+import RowCardDealComponent from "../../Bidding/RowCardDealComponent.js"
 
 export default class RecentR extends Component {
 
@@ -44,9 +45,13 @@ export default class RecentR extends Component {
         }, 2000)
     }
 
-    OptionChanged = (idx) => {
-        console.log('call OptionChanged()');        
+    OptionChanged = (idx) => {      
         this.setState({idx});
+        
+        if(idx === 0)
+            this.getRecentData1();
+        else if(idx === 1)
+            this.getRecentData2();
     }
     
     getRecentData1() {
@@ -80,19 +85,17 @@ export default class RecentR extends Component {
         if(this.state.idx === 0)
         {
             return(
-                this.state.DB_recentdata1.reverse().map((row) => (
-                    <RowCardComponent data = { row }/>
+                this.state.DB_recentdata1.reverse().map((feed, index) => (
+                    <RowCardComponent data={ feed } key={index}/>
                 ))
             )
-        
         }
         else {
             return(
-                this.state.DB_recentdata2.reverse().map((row) => (
-                    <RowCardComponent data = { row }/>
+                this.state.DB_recentdata2.reverse().map((feed, index) => (
+                    <RowCardDealComponent data={ feed } key={index}/>
                 ))
             )
-            
         }
     }
 
