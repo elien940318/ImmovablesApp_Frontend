@@ -90,7 +90,6 @@ export default class Board extends Component {
         )            
       }
       else if(this.state.activeIndex === 1){
-        
         return (    
           <View>
             <View style={styles.category}>

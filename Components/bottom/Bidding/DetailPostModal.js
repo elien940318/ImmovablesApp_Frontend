@@ -9,6 +9,8 @@ import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
 import firebase from 'firebase';
 
 export default class DetailPostModal extends Component {
+  
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +21,6 @@ export default class DetailPostModal extends Component {
       isModalVisible: false,
       imges : [],
       preference: [],
-      uid: '103842694532689299916',
       email: 'changkeereum@gmail.com',
     };
   }
@@ -27,22 +28,19 @@ export default class DetailPostModal extends Component {
   componentDidMount ()
   {    
     // 빌드시 주석 풀것... oauth 기능 빌드후 작동하므로...
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if(user) {
-    //       this.setState({uid: user.uid}); 
-    //       this.setState({email: user.email}); 
-    //   }
-    //   else {
-    //       alert("firebase로부터 user profile 가져오는 중 오류 발생.");
-    //   }
-    // });
-    this.postLikeStatus();  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
-    this.putRecentList();   // recentlist에 추가되어있는지 체크
-  }
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        this.setState({email: user.email})
+        this.postLikeStatus(user.email);  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
+        this.putRecentList(user.email);   // recentlist에 추가되어있는지 체크
+      }
+      else {
+          // alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+          this.postLikeStatus(this.state.email);  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
+          this.putRecentList(this.state.email);   // recentlist에 추가되어있는지 체크
+      }
+    });
 
-  componentWillUnmount()
-  {
-    console.log("call componentWillUnmount()");
   }
 
   toggle(){
@@ -67,11 +65,10 @@ export default class DetailPostModal extends Component {
   }
 
   // 현재 해당 Component의 찜 상태를 가져옴.
-  postLikeStatus()
+  postLikeStatus(email)
   {
-    console.log('call postLikeStatus()');
     http.post('/board/postLikeStatus', {
-      _email: this.state.email,
+      _email: email,
       _option: '1',
       _idx: this.state.data.idx,
     })
@@ -88,11 +85,10 @@ export default class DetailPostModal extends Component {
   }
 
   // 최근 본방에 추가
-  putRecentList()
+  putRecentList(email)
   {
-    console.log('call putRecentList()');
     http.put('/board/putRecentList', {
-      _email: this.state.email,
+      _email: email,
       _option: '1',
       _idx: this.state.data.idx,
     })
@@ -105,7 +101,6 @@ export default class DetailPostModal extends Component {
   // 찜한 방에 추가
   putLikeList()
   {
-    console.log('call putLikeList()');
     http.put('/board/putLikeList', {
       _email: this.state.email,
       _option: '1',
@@ -120,7 +115,6 @@ export default class DetailPostModal extends Component {
   // 찜한 방에서 삭제
   deleteLikeList()
   {
-    console.log('call deleteLikeList()');
     http.post('/board/deleteLikeList', {
       _email: this.state.email,
       _option: '1',

@@ -12,7 +12,6 @@ import SubsT from './LikeTab/SubsT';
 import SubsR from './LikeTab/SubsR';
 import styles from '../../css/bottom/LikeCSS.js'
 
-import firebase from 'firebase';
 
 /*const AppTabNavigator = createMaterialTopTabNavigator({
   본방 : {screen: RecentR},
@@ -44,24 +43,12 @@ const AppTabContainet = createAppContainer(AppTabNavigator);
 
 export default class home extends Component {
 
-  state = {
-    activeIndex: 0,
-    uid: '103842694532689299916',
-    email: 'changkeereum@gmail.com',
-  }
-
-  componentDidMount ()
-  {    
-    // 빌드시 주석 풀것... oauth 기능 빌드후 작동하므로...
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if(user) {
-    //       this.setState({uid: user.uid}); 
-    //       this.setState({email: user.email}); 
-    //   }
-    //   else {
-    //       alert("firebase로부터 user profile 가져오는 중 오류 발생.");
-    //   }
-    // });
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIndex: 0,
+    }
   }
   
   segmentClicked = (activeIndex) => {
@@ -70,20 +57,20 @@ export default class home extends Component {
 
   renderSection = () => {
     if(this.state.activeIndex === 0) {
-      return <RecentR data={this.state.email}></RecentR>
+      return <RecentR></RecentR>
     }
     else if(this.state.activeIndex === 1) {
-      return <SubsR data={this.state.email}></SubsR>
+      return <SubsR></SubsR>
     }
   }
-
 
   static navigationOptions = {
       tabBarIcon: ({tintColor}) => (
           <Icon name='ios-home' style={{color: tintColor}}/>
       )
   }
-        //tabbar에 스크롤 제거, touchableopacity클릭시 하단부 밑줄, 안드로이드 작동 확인
+
+  //tabbar에 스크롤 제거, touchableopacity클릭시 하단부 밑줄, 안드로이드 작동 확인
   render() {
     return (          
       <Container style={styles.container }>

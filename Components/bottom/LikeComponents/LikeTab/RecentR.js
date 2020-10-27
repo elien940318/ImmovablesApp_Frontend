@@ -4,12 +4,13 @@ import {  Container, Content,Icon, Header } from 'native-base';
 import http from '../../../../http-common.js'
 import RowCardComponent from "../../Bidding/RowCardComponent.js"
 import RowCardDealComponent from "../../Bidding/RowCardDealComponent.js"
+import firebase from 'firebase';
 
 export default class RecentR extends Component {
 
     state = {
         // feeds: [],
-        email: this.props.data,
+        email: 'changkeereum@gmail.com',
         idx: 0,
         DB_recentdata1: null,
         DB_recentdata2: null,
@@ -29,34 +30,39 @@ export default class RecentR extends Component {
 
     componentDidMount() 
     {
-        console.log('call componentDidMount()');
-        // this.fetchFeeds().then(feeds => {
-        //     this.setState({
-        //       feeds
-        //     })
-        // });
-        this.getRecentData1();
-        this.getRecentData2();
+        // 현재 로그인되어있는 상태인지 체크한다...
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) { 
+                this.setState({email: user.email})
+                this.getRecentData1(user.email);
+                this.getRecentData2(user.email);
+            }
+            else {
+                // alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+                this.getRecentData1(this.state.email);
+                this.getRecentData2(this.state.email);
+            }
+        });
 
         setTimeout(()=>{
             this.setState({
               loading:false
             })
-        }, 2000)
+        }, 1500)
     }
 
     OptionChanged = (idx) => {      
         this.setState({idx});
         
         if(idx === 0)
-            this.getRecentData1();
+            this.getRecentData1(this.state.email);
         else if(idx === 1)
-            this.getRecentData2();
+            this.getRecentData2(this.state.email);
     }
     
-    getRecentData1() {
+    getRecentData1(email) {
         http.post('/like/recentData', {
-            _email: this.state.email,
+            _email: email,
             _option: 0
         })
         .then((response) => {
@@ -67,9 +73,9 @@ export default class RecentR extends Component {
         });
     }
 
-    getRecentData2() {
+    getRecentData2(email) {
         http.post('/like/recentData', {
-            _email: this.state.email,
+            _email: email,
             _option: 1
         })
         .then((response) => {
@@ -117,6 +123,18 @@ export default class RecentR extends Component {
     //     .then(res => res.json())
     //     .then(res => res.result)
     // }
+
+    getUserData()
+    {
+        // 현재 로그인되어있는 상태인지 체크한다...
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) { this.setState({email: user.email}) }
+        //     else {
+        //         alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+        //     }
+        // });
+        this.setState({email: 'elien940318@gmail.com'});
+    }
 
     render() {
         if(this.state.loading)

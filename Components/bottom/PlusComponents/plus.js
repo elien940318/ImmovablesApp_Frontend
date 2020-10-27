@@ -16,38 +16,28 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
 
   export default class plus extends Component {
 
+    state = {
+        email: 'changkeereum@gmail.com',
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             isModalVisible: false,
        //   jsonD: myData
-            uid: null,
-            email: null,
-            displayName: null,
       };
     }
+
     componentDidMount(){
         AsyncStorage.getItem('idchk').then(value =>
             this.setState({ getValue: value })
         );
         
-        // 빌드 후 오류 발생으로 아래 소스로 대체...
-        // var user = firebase.auth().currentUser;
-        // if (user != null) {
-        //     user.providerData.forEach(function (profile) {
-        //         alert(profile.uid + '\n' + profile.email + '\n' + profile.displayName );
-        //         this.setState({uid: profile.uid}); 
-        //         this.setState({email: profile.email}); 
-        //         this.setState({displayName: profile.displayName});       
-        //     });
-        // }
-        
+        // 현재 로그인되어있는 상태인지 체크한다...
         firebase.auth().onAuthStateChanged(user => {
-            if(user) {
-                this.setState({uid: user.uid}); 
-                this.setState({email: user.email}); 
-                this.setState({displayName: user.displayName});
-                alert('uid: ' + user.uid + '\nemail: ' + user.email + '\ndisplayName: ' + user.displayName );
+            if (user) { this.setState({email: user.email}) }
+            else {
+                alert("firebase로부터 user profile 가져오는 중 오류 발생.");
             }
         });
     }
@@ -58,59 +48,58 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH /5);
         )
     }
 
-  ahekf(){
+    ahekf(){
     this.setState({isModalVisible: !this.state.isModalVisible});
-  }
+    }
 
     render() {
-            const {email} = this.state;
-                return(
-                    <Container style={styles.container}>
-                        <Modal isVisible={this.state.isModalVisible}>
-                            <EditInfo ahekf={()=> this.ahekf()}/>
-                        </Modal>
-                        <ScrollView>
-                        <View style ={{  padding:10, flexDirection: 'column' }}>
-                            <View style ={{ height: 50 }}></View>
-                            <Text>{this.state.getValue}</Text>
-                            <Text>{email}</Text>
-                            <Button style ={styles.chimpormation} onPress={()=>this.ahekf()}>
-                                <Text style ={{color : '#FF5C3B'}}>정보수정</Text>
-                            </Button>
-                        </View>
-                        <View style={{flex:1,flexDirection: 'row'}}>
-                            <Button style = {styles.topbutton}><Icon name='ios-notifications-outline' style={{fontSize: 40,color: 'black'}}/><Text style={{fontSize:11, padding:5}}>알림</Text></Button>
-                            <Button style ={styles.topbutton}><Icon name='ios-redo' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>방내놓기</Text></Button>
-                            <Button style ={styles.topbutton}><Icon name='md-create' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>내가쓴리뷰</Text></Button>
-                            <Button style ={styles.topbutton}><Icon name='ios-home' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>연락한부동산</Text></Button>
-                            <Button style ={styles.topbutton}><Icon name='md-trending-up' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>입찰</Text></Button>
-                        </View>
-                        <View style={styles.rowSeparatorLine} />
+        return(
+            <Container style={styles.container}>
+                <Modal isVisible={this.state.isModalVisible}>
+                    <EditInfo ahekf={()=> this.ahekf()}/>
+                </Modal>
+                <ScrollView>
+                <View style ={{  padding:10, flexDirection: 'column' }}>
+                    <View style ={{ height: 50 }}></View>
+                    <Text>{this.state.getValue}</Text>
+                    <Text>{this.state.email}</Text>
+                    <Button style ={styles.chimpormation} onPress={()=>this.ahekf()}>
+                        <Text style ={{color : '#FF5C3B'}}>정보수정</Text>
+                    </Button>
+                </View>
+                <View style={{flex:1,flexDirection: 'row'}}>
+                    <Button style = {styles.topbutton}><Icon name='ios-notifications-outline' style={{fontSize: 40,color: 'black'}}/><Text style={{fontSize:11, padding:5}}>알림</Text></Button>
+                    <Button style ={styles.topbutton}><Icon name='ios-redo' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>방내놓기</Text></Button>
+                    <Button style ={styles.topbutton}><Icon name='md-create' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>내가쓴리뷰</Text></Button>
+                    <Button style ={styles.topbutton}><Icon name='ios-home' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>연락한부동산</Text></Button>
+                    <Button style ={styles.topbutton}><Icon name='md-trending-up' style={{fontSize: 40, color: 'black'}}/><Text style={{fontSize:11,padding:5}}>입찰</Text></Button>
+                </View>
+                <View style={styles.rowSeparatorLine} />
 
-                        <View>
-                            <View style={styles.midview}>
-                                <Button style={styles.midbutton}><Text style={{fontSize: 18}}>매물번호 조회</Text></Button>
-                                <Button style={styles.midbutton}><Text style={{fontSize: 18}}>자주 묻는 질문</Text></Button>
-                            </View>
-                            <View style={styles.bottomview}>
-                                <Button style={styles.midbutton}><Text style={{fontSize: 18}}>이벤트</Text></Button>
-                                <Button style={styles.midbutton}><Text style={{fontSize: 18}}>공지사항</Text></Button>
-                            </View>
-                            <View style={styles.bottomview}>
-                                <Button style={styles.midbutton}><Text style={{fontSize: 18}}>1:1문의</Text></Button>
-                            </View>
+                <View>
+                    <View style={styles.midview}>
+                        <Button style={styles.midbutton}><Text style={{fontSize: 18}}>매물번호 조회</Text></Button>
+                        <Button style={styles.midbutton}><Text style={{fontSize: 18}}>자주 묻는 질문</Text></Button>
+                    </View>
+                    <View style={styles.bottomview}>
+                        <Button style={styles.midbutton}><Text style={{fontSize: 18}}>이벤트</Text></Button>
+                        <Button style={styles.midbutton}><Text style={{fontSize: 18}}>공지사항</Text></Button>
+                    </View>
+                    <View style={styles.bottomview}>
+                        <Button style={styles.midbutton}><Text style={{fontSize: 18}}>1:1문의</Text></Button>
+                    </View>
 
-                        </View>
-                        <View style={styles.rowSeparatorLine} />
+                </View>
+                <View style={styles.rowSeparatorLine} />
 
-                        <View style={{flexDirection: 'row'}}>
-                            <Button style ={styles.bottombutton}><Text style={{color:'#d1cece'}}>이용약관 </Text></Button>
-                            <Button style={styles.bottombutton}><Text style={{color:'#d1cece'}}> 개인정보처리방침</Text></Button>
-                        </View>
-                        <View style={styles.rowSeparatorLine} />
-                        </ScrollView>
-                    </Container>
-                );
+                <View style={{flexDirection: 'row'}}>
+                    <Button style ={styles.bottombutton}><Text style={{color:'#d1cece'}}>이용약관 </Text></Button>
+                    <Button style={styles.bottombutton}><Text style={{color:'#d1cece'}}> 개인정보처리방침</Text></Button>
+                </View>
+                <View style={styles.rowSeparatorLine} />
+                </ScrollView>
+            </Container>
+        );
 
 
 
