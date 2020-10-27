@@ -4,7 +4,7 @@ import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, T
 import { Icon, Container, Header, } from 'native-base'; 
 import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
-import * as http from '../../../http-common'
+import http from '../../../http-common'
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
 import firebase from 'firebase';
 
