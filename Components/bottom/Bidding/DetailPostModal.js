@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from "react-native-modal";
 import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
-import DoBidding from './BiddingActiveModal/DoBidding'
+import DoRequest from './BiddingActiveModal/DoRequest'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
 import * as http from '../../../http-common'
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
@@ -42,7 +42,7 @@ export default class DetailPostModal extends Component {
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>
-          <DoBidding toggle3={() => this.toggle()}/>
+          <DoRequest toggle3={() => this.toggle()} toData={this.state.data}/>
         </Modal>
         <Header style={styles.header}>
           <Icon 
