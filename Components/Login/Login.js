@@ -180,17 +180,6 @@ w
                 onPress={()=>this.signInWithGoogle()}
                 />
           </View>
-          {/* <View style={styles.container}>
-            <GithubButton onPress={() => signInAsync()} />
-          </View> */}
-          {/* <View style={{alignItems:"center",height:150, width:'100%'}}>
-            <GoogleButton2
-                buttonColor={'#FF765B'}
-                title={'  SIGN IN WITH GOOGLE'}
-                titleColor={'white'}
-                
-                />
-          </View> */}
           <View style={{height :30}}></View>
           <View style={{height :50, flexDirection:'row'}}>
             <CustomButton
