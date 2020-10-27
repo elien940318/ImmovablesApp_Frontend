@@ -17,7 +17,7 @@ export default class More extends Component {
             <Container style={styles.container}>
              <Header style={styles.header}><Text>더보기</Text></Header>
              <View>
-                 <Text>로그인></Text>
+                 <Text>로그인</Text>
                  <Text>로그인 후 더 많은 정보를 확인해보세요.</Text>
              </View>
 

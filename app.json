@@ -33,6 +33,13 @@
       }
     },
     "ios": {
+      "bundleIdentifier": "com.gmc.jipsa.ios",      
+      "config" : {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.356463774004-ncg5gr5k1lv9qvdva1laolhkh8cfn6jv"
+        }
+      },
+      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true
     }
   }

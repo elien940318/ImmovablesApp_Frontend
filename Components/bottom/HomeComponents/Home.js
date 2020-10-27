@@ -6,9 +6,11 @@ import ColumnCardComponent  from './ColumnCardComponent';
 import Carousel2 from './Carousel2'
 import myData from '../../Util/test.json';
 import styles from '../../css/bottom/HomComponents/HomeCSS.js';
+import tokenChecker from '../../Login/tokenChecker.js';
 //const SLIDER_WIDTH = Dimensions.get('window').width;
 //const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 //const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 3 / 4);
+
 
 export default class home extends Component {
 
@@ -34,6 +36,7 @@ export default class home extends Component {
               feeds
             })
         });
+        //this.tokenChecker.bind(this);
     }
  
     fetchFeeds() {

@@ -15,7 +15,6 @@ import styles from "../css/LoginCSS.js";
 import * as GoogleSignIn from 'expo-google-sign-in'
 import * as firebase from 'firebase';
 import "firebase/auth";
-// import 'firebase/firestore';
 
 
 // key 생성
@@ -27,10 +26,11 @@ export default class Login extends Component {
       headerShown : false
       // title: <Text>어디 살래?</Text>,
     }
-    
+
     constructor(props) {  
         super(props);  
         this.state = {
+          // Login state
           id: '',
           pw: '',
           dataku: [],
@@ -38,16 +38,46 @@ export default class Login extends Component {
           getValue: '',
       };  
     }  
-
-    //state = { displayName: '', email: '', password: '', errorMessage: '', loading: false };
     
     componentDidMount() {
+      //this.initAsync();
+
+      // 현재 로그인되어있는 상태인지 체크한다...
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
-            this.setState({id: user});
-            this.props.navigation.replace('next')        
+            // OAuth 로그인이 되어있는 상태입니다. 그러니 바로 next로 넘겨줍시다.
+            this.props.navigation.replace('next');
           }
       });
+    }
+
+    // iOS 부분 주석처리함... 수정해야할 부분...
+    // async initAsync() {
+    //   try{
+    //     await GoogleSignIn.initAsync({
+    //       clientId: '356463774004-ncg5gr5k1lv9qvdva1laolhkh8cfn6jv.apps.googleusercontent.com',
+    //     });
+    //   }
+    //   catch({message}){
+    //     console.log('GoogleSignIn.initAsync(): ' + message);
+    //   }
+    // }
+
+    InsertUser(uid, email, name) {
+        http.post('/login/checkUser', {
+          _email: email,
+          _uid: uid,
+          _name: name,
+        })
+        .then((response) => {
+          if(response.data.values == -1){
+            alert(response.data.logs);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("로그인 중 db connection 에러 발생.");
+        });
     }
 
     async signInWithGoogle() {
@@ -57,20 +87,23 @@ export default class Login extends Component {
 
         if (type === 'success') 
         {
+          // 로그인은 양호하게 처리된 상태...
           await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
           
           const credential = firebase.auth.GoogleAuthProvider.credential(
             user.auth.idToken, 
             user.auth.accessToken,
           );
+          // 이건 무슨 구문인지 아직 이해가 안됩니다...
+          const googleProfileData = await firebase.auth().signInWithCredential(credential);          
           
-          const googleProfileData = await firebase.auth().signInWithCredential(credential);
-          
-          this.setState({id: user});
-          this.props.navigation.replace('next')
+          // db에 insert or update 시켜주는 구문 처리...
+          // 따로 state에 회원정보 저장해두지는 않습니다.
+          this.InsertUser(user.uid, user.email, user.displayName); 
+          this.props.navigation.replace('next');                           
         }
       } catch ({ message }) {
-        alert('login: Error:' + message);
+        alert('Error:' + message);
       }
     }
 
@@ -101,7 +134,7 @@ export default class Login extends Component {
       // do something
       this.props.navigation.replace('next')
     }   */
-
+w
     render() {    
       return (
         <View style={styles.container}>
@@ -147,17 +180,6 @@ export default class Login extends Component {
                 onPress={()=>this.signInWithGoogle()}
                 />
           </View>
-          {/* <View style={styles.container}>
-            <GithubButton onPress={() => signInAsync()} />
-          </View> */}
-          {/* <View style={{alignItems:"center",height:150, width:'100%'}}>
-            <GoogleButton2
-                buttonColor={'#FF765B'}
-                title={'  SIGN IN WITH GOOGLE'}
-                titleColor={'white'}
-                
-                />
-          </View> */}
           <View style={{height :30}}></View>
           <View style={{height :50, flexDirection:'row'}}>
             <CustomButton
