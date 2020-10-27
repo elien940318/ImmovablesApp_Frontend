@@ -4,7 +4,8 @@ import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, T
 import { Icon, Container, Header, } from 'native-base'; 
 import DoBidding from './BiddingActiveModal/DoBidding'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
-import * as http from '../../../http-common'
+import * as imageftp from '../../../http-common'
+import http from '../../../http-common'
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
 import firebase from 'firebase';
 
@@ -28,13 +29,13 @@ export default class DetailDealPostModal extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         this.setState({email: user.email})
-        this.postLikeStatus(user.email);  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
-        this.putRecentList(user.email);   // recentlist에 추가되어있는지 체크
+        this.postLikeStatus(user.email, this.state.data.idx);  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
+        this.putRecentList(user.email, this.state.data.idx);   // recentlist에 추가되어있는지 체크
       }
       else {
           // alert("firebase로부터 user profile 가져오는 중 오류 발생.");
-          this.postLikeStatus(this.state.email);  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
-          this.putRecentList(this.state.email);   // recentlist에 추가되어있는지 체크
+          this.postLikeStatus(this.state.email, this.state.data.idx);  // 현재 찜했는지 여부 확인, chkheart 값 초기화 용도.
+          this.putRecentList(this.state.email, this.state.data.idx);   // recentlist에 추가되어있는지 체크
       }
     });
   }
@@ -50,7 +51,7 @@ export default class DetailDealPostModal extends Component {
     if(this.state.chkheart===0)
     {
       this.setState({chkheart:1})
-      this.putLikeList()
+      this.putLikeList(this.state.email, this.state.data.idx)
     }
     else if(this.state.chkheart===1)
     {
@@ -61,12 +62,12 @@ export default class DetailDealPostModal extends Component {
 
 
   // 현재 해당 Component의 찜 상태를 가져옴.
-  postLikeStatus(email)
+  postLikeStatus(email, idx)
   {
     http.post('/board/postLikeStatus', {
       _email: email,
       _option: '2',
-      _idx: this.state.data.idx,
+      _idx: idx,
     })
     .then((response) => {
       var temp = Object.keys(response.data).length;
@@ -81,12 +82,12 @@ export default class DetailDealPostModal extends Component {
   }
 
   // 최근 본방에 추가
-  putRecentList(email)
+  putRecentList(email, idx)
   {
     http.put('/board/putRecentList', {
       _email: email,
       _option: '2',
-      _idx: this.state.data.idx,
+      _idx: idx,
     })
     .then((response) => {})
     .catch(function (error) {
@@ -95,12 +96,12 @@ export default class DetailDealPostModal extends Component {
   }
 
   // 찜한 방에 추가
-  putLikeList()
+  putLikeList(email, idx)
   {
     http.put('/board/putLikeList', {
-      _email: this.state.email,
+      _email: email,
       _option: '2',
-      _idx: this.state.data.idx
+      _idx: idx
     })
     .then((response) => {})
     .catch(function (error) {
@@ -133,7 +134,7 @@ export default class DetailDealPostModal extends Component {
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>
-          <DoBidding toggle3={() => this.toggle()}/>
+          <DoBidding toggle3={() => this.toggle()} toggle2={() => this.props.toggle2()} reload = {()=>this.props.reload()} toData={this.state.data}/>
         </Modal>
         <Header style={styles.header}>
           <Icon 
@@ -152,7 +153,7 @@ export default class DetailDealPostModal extends Component {
               
               this.state.imges.length > 0?
               this.state.imges.map((e, index)=>{
-                 return<Image key={index} source={{uri:http.connAPI+'/board/getDealImg/'+e}}  style={{ height:250, width:350 }}/>
+                 return<Image key={index} source={{uri:imageftp.connAPI+'/board/getDealImg/'+e}}  style={{ height:250, width:350 }}/>
                 
               }):
               <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>
@@ -183,9 +184,16 @@ export default class DetailDealPostModal extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        {this.state.data.participantCount < 5?
         <TouchableOpacity style={styles.biddingbutton} onPress={()=>{this.toggle()}}>
-          <Text style={styles.biddingfont}>입찰하기</Text>
+          <Text style={styles.biddingfont}>입찰하기  {this.state.data.participantCount} / 5</Text>
+        </TouchableOpacity>:
+        <TouchableOpacity style={{width:'100%',height:50, backgroundColor:'gray', justifyContent:'center', alignItems:'center' }}
+         disabled={true} onPress={()=>{this.toggle()}}>
+          <Text style={styles.biddingfont}>입찰만료 {this.state.data.participantCount} / 5</Text>
         </TouchableOpacity>
+        }
+        
       </Container>
     );
   }
