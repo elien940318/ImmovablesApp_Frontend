@@ -11,6 +11,7 @@ import DetailSettingModal from './DetailModal/DetailSettingModal.js'
 import styles from '../../../css/bottom/Bidding/WriteModalCSS.js' 
 import http from '../../../../http-common'
 import SellDetailWriteModal from './SellDetailWriteModal.js'  
+import firebase from 'firebase';
 export default class WriteModal extends Component {
 
     constructor(props) {  
@@ -27,11 +28,23 @@ export default class WriteModal extends Component {
         convLst:[], // 편의시설 배열
         formDataLst:[],
         sellData:null,
-        att:0
+        att:0,
+        email: 'tester'
       };  
   }
 
+    
+
   componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        this.setState({email: user.email})
+       
+      }
+      else {
+          alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+      }
+    });
     this.getPermissionAsync();
     setTimeout(()=>{
       this.sellBuyModalToggle()
@@ -157,7 +170,7 @@ export default class WriteModal extends Component {
     data.append('preference', tempStr)
     data.append('price',1000)
     data.append('location','진주')
-    data.append('user', 'tester')
+    data.append('user', this.state.email)
     data.append('att', this.state.sellbuy == 0?1:2)
     return data;
   };
@@ -202,7 +215,7 @@ export default class WriteModal extends Component {
     });
     data.append('title',this.state.title)
     data.append('contents',this.state.contents)
-    data.append('user', 'tester')
+    data.append('user', this.state.email)
     data.append('address',this.state.sellData[0].address)
     data.append('immovabletype',this.state.sellData[0].immovablesKind)
     this.state.sellData[1].tradeType !== '매매'?data.append('deposit',this.state.sellData[1].deposit):data.append('deposit',-1)
