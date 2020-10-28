@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Modal from "react-native-modal";
 import {Image,TouchableWithoutFeedback,TouchableOpacity,TextInput, StyleSheet, Text, View, Dimensions, TouchableHighlight, ScrollView} from 'react-native';
 import { Icon, Container, Header, } from 'native-base'; 
-import DoBidding from './BiddingActiveModal/DoBidding'
+import DoRequest from './BiddingActiveModal/DoRequest'
 import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
+import * as imageftp from "../../../http-common";
 import http from "../../../http-common";
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
 import firebase from 'firebase';
@@ -137,7 +138,7 @@ export default class DetailPostModal extends Component {
     return (
       <Container style={styles.container}>
         <Modal isVisible={this.state.isModalVisible}>
-          <DoBidding toggle3={() => this.toggle()}/>
+          <DoRequest toggle3={() => this.toggle()} toData={this.state.data}/>
         </Modal>
         <Header style={styles.header}>
           <Icon 
@@ -156,7 +157,7 @@ export default class DetailPostModal extends Component {
               
               this.state.imges.length > 0?
               this.state.imges.map((e, index)=>{
-                 return<Image key={index} source={{uri:http.connAPI+'/board/getWishImg/'+e}}  style={{ height:250, width:350 }}/>
+                 return<Image key={index} source={{uri:imageftp.connAPI+'/board/getWishImg/'+e}}  style={{ height:250, width:350 }}/>
                 
               }):
               <View style ={{flex:1,justifyContent:'center', alignItems:'center'}}>

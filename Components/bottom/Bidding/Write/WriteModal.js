@@ -203,7 +203,7 @@ export default class WriteModal extends Component {
     data.append('title',this.state.title)
     data.append('contents',this.state.contents)
     data.append('user', 'tester')
-    data.append('address',this.state.sellData[0].adrress)
+    data.append('address',this.state.sellData[0].address)
     data.append('immovabletype',this.state.sellData[0].immovablesKind)
     this.state.sellData[1].tradeType !== '매매'?data.append('deposit',this.state.sellData[1].deposit):data.append('deposit',-1)
     data.append('floor', this.state.sellData[1].floor)
