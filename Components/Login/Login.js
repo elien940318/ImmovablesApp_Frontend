@@ -194,8 +194,8 @@ w
               buttonColor={'white'}
               title={'회원가입'}
               titleColor={'#666666'}
-              onPress={() => this.props.navigation.navigate('Signup')}/>
-          </View> */}
+              onPress={() => this.props.navigation.navigate('Signup')}/>*/}
+          </View> 
           <View style={styles.content}></View>
       
       </View>  
