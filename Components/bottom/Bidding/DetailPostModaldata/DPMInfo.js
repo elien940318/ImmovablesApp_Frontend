@@ -27,7 +27,7 @@ class DPMInfo extends Component {
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                    {this.state.data.price/10000}(만원)
+                    {this.state.data.price}(만원)
                 </Text>
             </View>
           </View>
@@ -42,8 +42,7 @@ class DPMInfo extends Component {
                     {/** 세로로 눞힐것 */
                         this.state.preference.map((e, idx) => {
                         return <Text style={styles.ConText} key={idx}>{e} </Text>
-              })
-            }
+                    })}
                 </View>
             </View>
           </View>

@@ -77,7 +77,7 @@ export default class DetailDealPostModal extends Component {
         this.setState({chkheart: 0})
     })
     .catch(function (error) {
-        alert("## error: postLikeStatus DB접근 오류");
+        // alert("## error: postLikeStatus DB접근 오류");
     });
   }
 
@@ -91,7 +91,7 @@ export default class DetailDealPostModal extends Component {
     })
     .then((response) => {})
     .catch(function (error) {
-        alert("## error: putRecentList DB접근 오류");
+        // alert("## error: putRecentList DB접근 오류");
     });
   }
 
@@ -105,7 +105,7 @@ export default class DetailDealPostModal extends Component {
     })
     .then((response) => {})
     .catch(function (error) {
-        alert("## error: putLikeList DB접근 오류");
+        // alert("## error: putLikeList DB접근 오류");
     });
   }
 
@@ -119,7 +119,7 @@ export default class DetailDealPostModal extends Component {
     })
     .then((response) => {})
     .catch(function (error) {
-        alert("## error: deleteLikeList DB접근 오류");
+        // alert("## error: deleteLikeList DB접근 오류");
     });
   }
 

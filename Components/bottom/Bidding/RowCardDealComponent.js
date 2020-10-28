@@ -36,7 +36,7 @@ export default class RawCardComponent extends Component {
                     //new Date(data.created).toDateString()
                     }</Text>
                     <Text style={{color:'#FC510C'}}> 
-                      월세 {String(data.price).replace(/\n/g,' ').slice(0, 15)/10000 }(만원)
+                      월세 {String(data.price).replace(/\n/g,' ').slice(0, 15)}(만원)
                     </Text> 
 
                     {     
