@@ -199,6 +199,7 @@ w
           <View style={styles.content}></View>
       
       </View>  
+      </View>
       );
     }
     
