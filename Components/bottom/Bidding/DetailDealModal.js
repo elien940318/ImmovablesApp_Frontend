@@ -7,6 +7,7 @@ import styles from '../../css/bottom/Bidding/DetailPostModalCSS'
 import * as imageftp from '../../../http-common'
 import http from '../../../http-common'
 import DPMInfo from '../Bidding/DetailPostModaldata/DPMInfo.js'
+import styles2 from '../../css/bottom/Bidding/SellDetailWriteModalCSS.js'
 import firebase from 'firebase';
 
 export default class DetailDealPostModal extends Component {
@@ -167,8 +168,179 @@ export default class DetailDealPostModal extends Component {
             <View style={styles.hr}/>
           </View>  
           <View style={styles.describeback}>
-          <DPMInfo toData={this.state.data}>
-          </DPMInfo>
+          
+      <View style={styles2.EntireBox}>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    주소
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.location}
+                </Text>
+            </View>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    건물 유형
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.immovabletype}
+                </Text>
+            </View>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    해당층
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.floor} 층
+                </Text>
+            </View>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    면적
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.area} 평
+                </Text>
+            </View>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    매물 종류
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                {this.state.data.type === '매매'?'매매':'전/월세'}
+                </Text>
+            </View>
+          </View>
+          {this.state.data.type !== '매매'?
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    보증금
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                {this.state.data.deposit} 만원
+                </Text>
+            </View>
+          </View>
+          :null}
+          {this.state.data.type !== '매매'?
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    월세 
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                {this.state.data.price} 만원
+                </Text>
+            </View>
+          </View>
+          :
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    가격 
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                {this.state.data.price} 만원
+                </Text>
+            </View>
+          </View>
+          }
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    관리비
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.management}
+                </Text>
+            </View>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    주차
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.parking === 1?'가능':'불가능'}
+                </Text>
+            </View>
+          </View><View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    난방
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.heater}
+                </Text>
+            </View>
+          </View><View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    전세자금대출
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.loan==1?'가능':'불가능'}
+                </Text>
+            </View>
+          </View><View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    옵션
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.option_==1?'있음':'없음'}
+                </Text>
+            </View>
+          </View><View style={{flexDirection:'row'}}>
+            <View style={styles2.LeftBox}>
+                <Text style={{margin:10}}>
+                    애완동물
+                </Text>
+            </View>
+            <View style={styles2.RightBox}>
+                <Text style={{margin:10}}>
+                    {this.state.data.pet==1?'가능':'불가능'}
+                </Text>
+            </View>
+          </View>
+          </View>
+          
           </View>
         </ScrollView>
         <View>
