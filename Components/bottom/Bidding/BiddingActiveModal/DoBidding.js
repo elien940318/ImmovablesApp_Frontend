@@ -130,11 +130,11 @@ class DoBidding extends Component {
             </View>
             <View style={styles.RightBox}>
                 <Text style={{margin:10}}>
-                {this.state.data.deposit === -1?'매매':'전/월세'}
+                {this.state.data.type === '매매'?'매매':'전/월세'}
                 </Text>
             </View>
           </View>
-          {this.state.data.deposit !== -1?
+          {this.state.data.type !== '매매'?
           <View style={{flexDirection:'row'}}>
             <View style={styles.LeftBox}>
                 <Text style={{margin:10}}>
@@ -148,7 +148,7 @@ class DoBidding extends Component {
             </View>
           </View>
           :null}
-          {this.state.data.deposit !== -1?
+          {this.state.data.type !== '매매'?
           <View style={{flexDirection:'row'}}>
             <View style={styles.LeftBox}>
                 <Text style={{margin:10}}>

@@ -35,10 +35,14 @@ export default class RawCardComponent extends Component {
                     data.title
                     //new Date(data.created).toDateString()
                     }</Text>
+                    {data.type==='매매'?
                     <Text style={{color:'#FC510C'}}> 
-                      월세 {String(data.price).replace(/\n/g,' ').slice(0, 15)}(만원)
-                    </Text> 
-
+                      매매 {String(data.price).replace(/\n/g,' ').slice(0, 15)}(만원)
+                    </Text>:
+                    <Text style={{color:'#FC510C'}}> 
+                      전/월세 {String(data.price).replace(/\n/g,' ').slice(0, 15)}(만원)
+                    </Text>
+                    }
                     {     
                         (data.content.replace(/\n/g,' ').slice(0, 15)).length>=11 ?
                         <Text> 

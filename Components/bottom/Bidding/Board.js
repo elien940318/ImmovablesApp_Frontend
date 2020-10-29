@@ -63,7 +63,7 @@ export default class Board extends Component {
   getDB(){
     http.get(`/board/getWishPost`)
     .then(response => {
-      this.setState({DBdata1:response.data})
+      this.setState({DBdata1:response.data.reverse()})
     })
     .catch(error => {
       console.log(error); 
@@ -73,7 +73,8 @@ export default class Board extends Component {
   getDB2(){
     http.get(`/board/getDealPost`) 
     .then(response => {
-      this.setState({DBdata2: response.data})
+      
+      this.setState({DBdata2: response.data.reverse()})
     })
     .catch(error => {
       console.log(error);
@@ -84,7 +85,7 @@ export default class Board extends Component {
     if(this.state.DBdata1 != ''){
       if(this.state.activeIndex === 0){
         return (    
-          this.state.DBdata1.reverse().map((feed, index) => (
+          this.state.DBdata1.map((feed, index) => (
             <RowCardComponent data={ feed } reload={()=>this.reloading()} key={index}/>
           ))
         )            
