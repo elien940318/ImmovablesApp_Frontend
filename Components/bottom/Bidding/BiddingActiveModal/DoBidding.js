@@ -67,10 +67,10 @@ class DoBidding extends Component {
             <View style={{flex:1,justifyContent:'center', alignItems:"center"}}>
               <TouchableOpacity
                 onPress={this.props.toggle3}>
-                <Text>나갈거야 여기를</Text>
+                <Text>상세 정보</Text>
               </TouchableOpacity>
               
-              <Text> DoBidding </Text>
+              <Text> 다시 한번 확인해 주세요. </Text>
             </View>
       <ScrollView>
       <View style={styles.EntireBox}>

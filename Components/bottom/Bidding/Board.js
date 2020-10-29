@@ -73,7 +73,6 @@ export default class Board extends Component {
   getDB2(){
     http.get(`/board/getDealPost`) 
     .then(response => {
-      
       this.setState({DBdata2: response.data.reverse()})
     })
     .catch(error => {
