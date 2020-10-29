@@ -12,6 +12,7 @@ import styles from '../../../css/bottom/Bidding/WriteModalCSS.js'
 import http from '../../../../http-common'
 import SellDetailWriteModal from './SellDetailWriteModal.js'  
 import firebase from 'firebase';
+
 export default class WriteModal extends Component {
 
     constructor(props) {  
@@ -29,7 +30,7 @@ export default class WriteModal extends Component {
         formDataLst:[],
         sellData:null,
         att:0,
-        email: 'tester'
+        email: 'changkeereum@gmail.com'
       };  
   }
 
@@ -39,10 +40,9 @@ export default class WriteModal extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         this.setState({email: user.email})
-       
       }
       else {
-          alert("firebase로부터 user profile 가져오는 중 오류 발생.");
+          // alert("firebase로부터 user profile 가져오는 중 오류 발생.");
       }
     });
     this.getPermissionAsync();

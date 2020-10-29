@@ -182,13 +182,13 @@ w
           </View>
           <View style={{height :30}}></View>
           <View style={{height :50, flexDirection:'row'}}>
-            <CustomButton
+            {/* <CustomButton
               buttonColor={'#34c85a'}
               title={'로그인'}
               titleColor={'#666666'}
               onPress={this.klikPost.bind(this)}
               
-              />
+              /> */}
               <View style={{width: 10}}></View>
             {/* <CustomButton 
               buttonColor={'white'}
@@ -199,7 +199,6 @@ w
           <View style={styles.content}></View>
       
       </View>  
-      </View>
       );
     }
     
